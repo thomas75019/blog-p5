@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 02/06/2019
- * Time: 23:54
- */
 
 namespace Blog\Entity;
 
