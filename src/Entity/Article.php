@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Article
  * @ORM\Entity
- * @ORM\Table(name="articles")
+ * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"titre", "slug"})})
  */
 class Article
 {

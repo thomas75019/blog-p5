@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Class Utilisateur
  * @ORM\Entity
- * &ORM\Table(name="utilisateurs")
+ * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="user_idx", columns={"email", "pseudo"})})
  */
 class Utilisateur
 {
@@ -18,6 +18,11 @@ class Utilisateur
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $pseudo;
 
     /**
      * @ORM\Column(type="string")
