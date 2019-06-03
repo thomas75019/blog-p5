@@ -3,7 +3,9 @@
 
 namespace Blog\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Class Article
@@ -45,9 +47,23 @@ class Article
      */
     protected $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     */
+    protected $auteur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="commentaires")
+     */
+    protected $commentaires;
+
+
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->commentaires = new ArrayCollection();
+
     }
 
     public function setId($id)
@@ -88,6 +104,16 @@ class Article
     public function getDate()
     {
         return $this->date;
+    }
+
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    public function getAuteur()
+    {
+        return $this->auteur;
     }
 
 }

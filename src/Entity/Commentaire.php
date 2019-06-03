@@ -27,6 +27,25 @@ class Commentaire
      */
     protected $valide = false;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     */
+    protected $auteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Article::class)
+     */
+    protected $article;
+
+    public function __construct()
+    {
+        $this->datetime = new \DateTime();
+    }
 
     public function setId($id)
     {
@@ -56,6 +75,21 @@ class Commentaire
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+
+    /**
      * @return string
      */
     public function getContenu()
@@ -68,4 +102,10 @@ class Commentaire
     {
         $this->contenu = $contenu;
     }
+
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
 }

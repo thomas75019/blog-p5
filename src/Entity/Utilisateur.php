@@ -3,6 +3,7 @@
 namespace Blog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Utilisateur
@@ -27,6 +28,25 @@ class Utilisateur
      * @ORM\Column(type="string")
      */
     protected $mot_de_passe;
+
+    /**
+     * @ORM\OneToOne(targetEntity="TypeUtilisateur")
+     * @ORM\JoinColumn(name="type", referencedColumnName="type")
+     */
+    protected $type;
+
+    /**
+     *@ORM\OneToMany(targetEntity="Article", mappedBy="articles")
+     */
+    protected $articles;
+
+
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
 
     /**
      * @return integer
