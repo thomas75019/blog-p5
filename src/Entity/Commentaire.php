@@ -103,6 +103,11 @@ class Commentaire
         $this->contenu = $contenu;
     }
 
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur
+    }
+
     public function getAuteur()
     {
         return $this->auteur;
