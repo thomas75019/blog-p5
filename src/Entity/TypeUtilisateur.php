@@ -16,13 +16,17 @@ class TypeUtilisateur
      */
     protected $type;
 
-
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
-
+    /**
+     * @param $type string
+     */
     public function setType($type)
     {
         $this->type = $type;

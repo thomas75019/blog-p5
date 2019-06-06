@@ -105,7 +105,7 @@ class Commentaire
 
     public function setAuteur($auteur)
     {
-        $this->auteur = $auteur
+        $this->auteur = $auteur;
     }
 
     public function getAuteur()
