@@ -95,6 +95,18 @@ class Utilisateur
         $this->mot_de_passe = $mot_de_passe;
     }
 
+    public function setPseudo($pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    /**
+     * @var string
+     */
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
 
 
 }

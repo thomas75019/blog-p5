@@ -41,6 +41,10 @@ class ComposerStaticInite246d1b494d7f8b66b3a0eb864ed17ce
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
         ),
+        'B' => 
+        array (
+            'Blog\\' => 5,
+        ),
         'A' => 
         array (
             'Aura\\Router\\' => 12,
@@ -114,6 +118,10 @@ class ComposerStaticInite246d1b494d7f8b66b3a0eb864ed17ce
             1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
             2 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Common',
             3 => __DIR__ . '/..' . '/doctrine/reflection/lib/Doctrine/Common',
+        ),
+        'Blog\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Aura\\Router\\' => 
         array (

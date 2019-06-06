@@ -53,7 +53,7 @@ class Article
     protected $auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="commentaires")
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="commentaires", cascade={"persist", "remove"})
      */
     protected $commentaires;
 
@@ -111,9 +111,31 @@ class Article
         return $this->commentaires;
     }
 
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+    }
     public function getAuteur()
     {
         return $this->auteur;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    /**
+     * @param mixed $contenu
+     */
+    public function setContenu($contenu)
+    {
+        $this->contenu = $contenu;
+    }
+
+
 
 }
