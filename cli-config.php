@@ -2,8 +2,13 @@
 
 <?php
 # cli-config.php
+require_once 'vendor/autoload.php';
 
-$entityManager = require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'bootstrap.php']);
+use Blog\DoctrineLoader;
+
+$dl = new DoctrineLoader();
+
+$entityManager = $dl->entityManager;
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 

@@ -35,10 +35,10 @@ class Utilisateur
     protected $mot_de_passe;
 
     /**
-     * @ORM\OneToOne(targetEntity="TypeUtilisateur")
+     * @ORM\OneToOne(targetEntity="TypeUtilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    protected $type;
+    protected $type = 1;
 
     /**
      *@ORM\OneToMany(targetEntity="Article", mappedBy="articles")
@@ -51,6 +51,7 @@ class Utilisateur
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->type = new TypeUtilisateur();
     }
 
 

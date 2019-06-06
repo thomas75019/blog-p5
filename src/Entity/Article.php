@@ -48,7 +48,7 @@ class Article
     protected $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, cascade={"persist"})
      */
     protected $auteur;
 

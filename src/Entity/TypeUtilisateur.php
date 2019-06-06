@@ -12,6 +12,12 @@ class TypeUtilisateur
 {
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    protected $id;
+
+    /**
      * @ORM\Column(name="type", type="string")
      */
     protected $type;

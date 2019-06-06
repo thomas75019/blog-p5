@@ -8,29 +8,60 @@
 
 namespace Blog\Controller;
 
+use Blog\DoctrineLoader;
 use Blog\Entity\Article;
+use Blog\Entity\Utilisateur;
 use Doctrine\ORM\EntityManager;
+use http\Env\Response;
 
-class ArticleController
+
+class ArticleController extends DoctrineLoader
 {
 
-    public static function getAll(EntityManager $entityManager)
+
+    /**
+     * @return Article
+     */
+    public function getAll()
     {
-        $articles = $entityManager->getRepository(Article::class)->findAll();
+        $articles = $this->entityManager->getRepository(Article::class)->findAll();
+
         var_dump($articles);
     }
 
-    public static function getOneBySlug(EntityManager $entityManager, $slug)
+    /**
+     * @param $slug integer
+     * @return Article
+     */
+    public function getOneBySlug($slug)
     {
-        $article = $entityManager->getRepository(Article::class)->findBy([
+        $article = $this->entityManager->getRepository(Article::class)->findBy([
             'slug' => $slug
         ]);
         var_dump($article);
     }
 
-    protected function create(EntityManager $entityManager)
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function create()
     {
-        //todo : create forms
+        $auteur = new Utilisateur();
+        $auteur->setEmail('test');
+        $auteur->setMotDePasse('test');
+        $auteur->setPseudo('test');
+
+
+        $article = new Article();
+        $article->setAuteur($auteur);
+        $article->setSlug('test');
+        $article->setContenu('test');
+        $article->setChapo('test');
+
+
+        $this->entityManager->persist($article);
+        $this->entityManager->flush();
     }
 
     protected function update()
@@ -38,13 +69,17 @@ class ArticleController
         //todo : create forms
     }
 
-    protected function remove(EntityManager $entityManager, $slug)
+    /**
+     * @param $slug integer
+     * @throws \Doctrine\ORM\ORMException
+     */
+    protected function remove($slug)
     {
-        $article = $entityManager->getRepository(Article::class)->findBy([
+        $article = $this->entityManager->getRepository(Article::class)->findBy([
             'slug' => $slug
         ]);
 
-        $entityManager->remove($article);
+        $this->entityManager->remove($article);
     }
 
 }
