@@ -58,7 +58,9 @@ class Article
     protected $commentaires;
 
 
-
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -66,62 +68,104 @@ class Article
 
     }
 
+    /**
+     * @param $id integer
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+    /**
+     * @return integer
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param $titre string
+     */
     public function setTitre($titre)
     {
         $this->titre = $titre;
     }
 
+    /**
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param $chapo string
+     */
     public function setChapo($chapo)
     {
         $this->chapo = $chapo;
     }
 
+    /**
+     * @return string
+     */
     public function getChapo()
     {
         return $this->chapo;
     }
 
+    /**
+     * @param $slug string
+     */
     public function setSlug($slug)
     {
         $this->slug = $slug;
     }
 
+    /**
+     * @return string
+     */
     public function getSlug()
     {
         return $this->slug;
     }
 
+    /**
+     * @return \DateTime
+     */
     public function getDate()
     {
         return $this->date;
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getCommentaires()
     {
         return $this->commentaires;
     }
 
+    /**
+     * @param $auteur string
+     */
     public function setAuteur($auteur)
     {
         $this->auteur = $auteur;
     }
+
+    /**
+     * @return string
+     */
     public function getAuteur()
     {
         return $this->auteur;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getContenu()
     {
@@ -129,7 +173,7 @@ class Article
     }
 
     /**
-     * @param mixed $contenu
+     * @param $contenu string
      */
     public function setContenu($contenu)
     {

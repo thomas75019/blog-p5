@@ -45,8 +45,9 @@ class Utilisateur
      */
     protected $articles;
 
-
-
+    /**
+     * Utilisateur constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -61,7 +62,9 @@ class Utilisateur
         return $this->id;
     }
 
-
+    /**
+     * @param $id integer
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -75,7 +78,9 @@ class Utilisateur
         return $this->email;
     }
 
-
+    /**
+     * @param $email string
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -89,19 +94,24 @@ class Utilisateur
         return $this->mot_de_passe;
     }
 
-
+    /**
+     * @param $mot_de_passe string
+     */
     public function setMotDePasse($mot_de_passe)
     {
         $this->mot_de_passe = $mot_de_passe;
     }
 
+    /**
+     * @param $pseudo string
+     */
     public function setPseudo($pseudo)
     {
         $this->pseudo = $pseudo;
     }
 
     /**
-     * @var string
+     * @return string
      */
     public function getPseudo()
     {
