@@ -18,7 +18,6 @@ use http\Env\Response;
 class ArticleController extends DoctrineLoader
 {
 
-
     /**
      * @return Article
      */
