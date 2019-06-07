@@ -11,9 +11,6 @@ namespace Blog\Controller;
 use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Utilisateur;
-use Doctrine\ORM\EntityManager;
-use http\Env\Response;
-
 
 class ArticleController extends DoctrineLoader
 {
