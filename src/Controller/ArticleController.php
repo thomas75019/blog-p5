@@ -17,6 +17,7 @@ class ArticleController extends DoctrineLoader
 {
 
     /**
+     * Get all articles
      * @return Article
      */
     public function getAll()
@@ -27,6 +28,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * Get an an article with its slug
      * @param $slug integer
      * @return Article
      */
@@ -39,6 +41,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * Create an article
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -71,6 +74,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * Remove the Article
      * @param $slug integer
      * @throws \Doctrine\ORM\ORMException
      */
@@ -79,8 +83,6 @@ class ArticleController extends DoctrineLoader
         $article = $this->entityManager->getRepository(Article::class)->findBy([
             'slug' => $slug
         ]);
-
-
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();
