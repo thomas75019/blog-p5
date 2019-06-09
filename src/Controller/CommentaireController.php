@@ -6,21 +6,56 @@
  * Time: 20:34
  */
 
-use Doctrine\ORM\EntityManager;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 
-class CommentaireController
+class CommentaireController extends \Blog\DoctrineLoader
 {
-    public function create(EntityManager $entityManager, $slug_article)
+    public function create ($slug_article, $user)
     {
         //TODO : Create forms
-        $article = $entityManager->getRepository(Article::class)->findBy([
-            'slug' => 'slug'
+        $article = $this->entityManager->getRepository(Article::class)->findBy([
+            'slug' => $slug_article
         ]);
-        $id = $article->getId();
+
 
         $commentaire = new Commentaire();
-        $commentaire->setAuteur($auteur);
+        $commentaire->setAuteur($user);
+        $commentaire->setArticle($article);
+
+        $this->entityManager->persist($commentaire);
+        $this->entityManager->flush();
+    }
+
+    public function setValide($id_commentaire)
+    {
+        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
+        $commentaire = $commentaireRepo->find($id_commentaire);
+
+        $commentaire->setValide(true);
+
+        $this->entityManager->persist($commentaire);
+    }
+
+    public function getValide($article_id)
+    {
+        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
+
+        $commentaires = $commentaireRepo->findBy([
+            'valide' => true,
+            'article' => $article_id
+            ]);
+
+        return $commentaires;
+    }
+
+    public function delete($id)
+    {
+        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
+
+        $commentaire = $commentaireRepo->find($id);
+
+        $this->entityManager->remove($commentaire);
+        $this->entityManager->flush();
     }
 }

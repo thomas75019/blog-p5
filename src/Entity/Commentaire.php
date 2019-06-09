@@ -113,4 +113,9 @@ class Commentaire
         return $this->auteur;
     }
 
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
 }

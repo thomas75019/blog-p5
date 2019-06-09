@@ -38,7 +38,7 @@ class Utilisateur
      * @ORM\OneToOne(targetEntity="TypeUtilisateur", cascade={"persist"})
      * @ORM\JoinColumn(name="type", referencedColumnName="type")
      */
-    protected $type = 1;
+    protected $type;
 
     /**
      *@ORM\OneToMany(targetEntity="Article", mappedBy="articles")
@@ -119,5 +119,8 @@ class Utilisateur
         return $this->pseudo;
     }
 
-
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 }

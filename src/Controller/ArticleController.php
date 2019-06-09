@@ -10,6 +10,7 @@ namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
 use Blog\Entity\Article;
+use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
 
 class ArticleController extends DoctrineLoader
@@ -43,10 +44,13 @@ class ArticleController extends DoctrineLoader
      */
     public function create()
     {
+        $type = new TypeUtilisateur();
+        $type->setType('admin');
         $auteur = new Utilisateur();
         $auteur->setEmail('test');
         $auteur->setMotDePasse('test');
         $auteur->setPseudo('test');
+        $auteur->setType($type);
 
 
         $article = new Article();
@@ -54,13 +58,14 @@ class ArticleController extends DoctrineLoader
         $article->setSlug('test');
         $article->setContenu('test');
         $article->setChapo('test');
+        $article->setTitre('test');
 
 
         $this->entityManager->persist($article);
         $this->entityManager->flush();
     }
 
-    protected function update()
+    public function update()
     {
         //todo : create forms
     }
@@ -69,13 +74,16 @@ class ArticleController extends DoctrineLoader
      * @param $slug integer
      * @throws \Doctrine\ORM\ORMException
      */
-    protected function remove($slug)
+    public function remove($slug)
     {
         $article = $this->entityManager->getRepository(Article::class)->findBy([
             'slug' => $slug
         ]);
 
+
+
         $this->entityManager->remove($article);
+        $this->entityManager->flush();
     }
 
 }

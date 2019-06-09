@@ -48,7 +48,7 @@ class Article
     protected $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"persist"})
      */
     protected $auteur;
 
@@ -179,6 +179,8 @@ class Article
     {
         $this->contenu = $contenu;
     }
+
+
 
 
 
