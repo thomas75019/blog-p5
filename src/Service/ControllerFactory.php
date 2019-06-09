@@ -16,9 +16,21 @@ class ControllerFactory
 {
     public static function newController($controller_name)
     {
-        $controller = ucfirst($controller_name);
+        switch (strtolower($controller_name)) {
+            case 'article' :
+                $controller = new ArticleController();
+                break;
+            case 'utilisateur' :
+                $controller = new UtilisateurController();
+                break;
+            case 'commentaire':
+                $controller = new CommentaireController();
+                break;
+            default:
+                throw new \Exception('Unkown controller');
+        }
 
-        return new $controller . 'Controller';
+        return $controller;
     }
 
 }
