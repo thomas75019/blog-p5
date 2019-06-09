@@ -2,7 +2,8 @@
     "require": {
         "twig/twig": "^2.11",
         "aura/router": "^3.1",
-        "doctrine/orm": "^2.6"
+        "doctrine/orm": "^2.6",
+        "zendframework/zend-diactoros": "^2.1"
     },
     "autoload" : {
         "psr-4" : {
