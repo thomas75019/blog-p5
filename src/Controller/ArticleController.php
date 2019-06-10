@@ -27,7 +27,7 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        return $this->twig->render('index.html.twig', [
+        return $this->twig->render('front/index.html.twig', [
             'articles' => $articles
         ]);
     }
