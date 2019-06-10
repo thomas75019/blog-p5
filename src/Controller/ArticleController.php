@@ -17,14 +17,19 @@ class ArticleController extends DoctrineLoader
 {
 
     /**
-     * Get all articles
-     * @return Article
+     *
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function getAll()
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        var_dump($articles);
+        return $this->twig->render('index.html.twig', [
+            'articles' => $articles
+        ]);
     }
 
     /**
