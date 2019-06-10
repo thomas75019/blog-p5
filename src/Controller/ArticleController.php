@@ -68,9 +68,21 @@ class ArticleController extends DoctrineLoader
         $this->entityManager->flush();
     }
 
-    public function update()
+    /**
+     * @param $article_slug string
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update($article_slug)
     {
-        //todo : create forms
+        $article = $this->entityManager->getRepository(Article::class)->findBy([
+            'slug' => $article_slug
+        ]);
+
+        // Do the modifications
+
+        $this->entityManager->flush();
+
     }
 
     /**
