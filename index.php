@@ -34,7 +34,7 @@ $map->get('blog.contact', '/contact', function () {
     $response->getBody()->write("Contact form will go here");
     return $response;
 });
-$request->getBody()->getContents();
+
 
 
 // get the route matcher from the container ...
