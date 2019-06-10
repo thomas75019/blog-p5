@@ -27,22 +27,26 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        return $this->twig->render('front/index.html.twig', [
+        echo $this->twig->render('front/index.html.twig', [
             'articles' => $articles
         ]);
     }
 
     /**
-     * Get an an article with its slug
-     * @param $slug integer
-     * @return Article
+     * @param $slug
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function getOneBySlug($slug)
     {
         $article = $this->entityManager->getRepository(Article::class)->findBy([
             'slug' => $slug
         ]);
-        var_dump($article);
+
+        echo $this->twig->render('front/viewOne.html.twig', [
+            "article" => $article
+        ]);
     }
 
     /**

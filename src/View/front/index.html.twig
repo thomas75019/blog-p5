@@ -1,3 +1,7 @@
 {% for article in articles %}
     {{ article.titre }}
+    {{ article.chapo }}
+    <a href="{{ article.slug }}">Read More</a>
 {% endfor %}
+
+<a href="{{ article.slug }}">Read More</a>
