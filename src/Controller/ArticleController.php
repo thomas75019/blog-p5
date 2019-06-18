@@ -50,11 +50,22 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * Create an article
+     * Render create Article form
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function create()
+    {
+        echo $this->twig->render('forms/createArticle.html.twig');
+    }
+
+    /**
+     * Save the Article into the database
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function create()
+    public function save()
     {
         $type = new TypeUtilisateur();
         $type->setType('admin');

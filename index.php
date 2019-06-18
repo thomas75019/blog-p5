@@ -34,6 +34,17 @@ $map->get('blog.contact', '/contact', function () {
     $response->getBody()->write("Contact form will go here");
     return $response;
 });
+//Route for the creation
+$map->get('article.create', '/create/article', function () {
+    $controller = ControllerFactory::newController('article');
+    $controller->create();
+});
+//Save Article Route
+$map->post('article.save', '/save/article', function ($request) {
+    $data = $request->getParsedBody();
+    //need to be saved in controller
+    var_dump($data['slug']);
+});
 
 
 
