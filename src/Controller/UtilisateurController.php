@@ -20,7 +20,7 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * Create a user
+     * Create an user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -38,7 +38,7 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * Delete a user
+     * Delete an user
      * @param $user_id integer
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
