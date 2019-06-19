@@ -62,26 +62,19 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Save the Article into the database
+     * @param Utilisateur
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save()
+    public function save($data)
     {
-        $type = new TypeUtilisateur();
-        $type->setType('admin');
-        $auteur = new Utilisateur();
-        $auteur->setEmail('test');
-        $auteur->setMotDePasse('test');
-        $auteur->setPseudo('test');
-        $auteur->setType($type);
-
+        $auteur = $this->entityManager->getRepository(Utilisateur::class)->find(1);
 
         $article = new Article();
-        $article->setAuteur($auteur);
-        $article->setSlug('test');
-        $article->setContenu('test');
+
+        $article->hydrate($data);
         $article->setChapo('test');
-        $article->setTitre('test');
+        $article->setAuteur($auteur);
 
 
         $this->entityManager->persist($article);
