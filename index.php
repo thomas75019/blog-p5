@@ -42,8 +42,9 @@ $map->get('article.create', '/create/article', function () {
 //Save Article Route
 $map->post('article.save', '/save/article', function ($request) {
     $data = $request->getParsedBody();
-    //need to be saved in controller
-    var_dump($data['slug']);
+
+    $controller = ControllerFactory::newController('article');
+    $controller->save($data);
 });
 
 
