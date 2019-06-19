@@ -65,8 +65,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * Save the Article into the database
-     * @param Utilisateur
+     * @param $data
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -78,12 +77,13 @@ class ArticleController extends DoctrineLoader
         $article = new Article();
 
         $article->hydrate($data);
-        $article->setChapo('test');
         $article->setAuteur($auteur);
 
 
         $this->entityManager->persist($article);
         $this->entityManager->flush();
+
+        return $this->redirect('/');
     }
 
     /**

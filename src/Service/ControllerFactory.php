@@ -14,6 +14,12 @@ use Blog\Controller\UtilisateurController;
 
 class ControllerFactory
 {
+    /**
+     * @param $controller_name
+     * @return ArticleController|UtilisateurController|CommentaireController
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Exception
+     */
     public static function newController($controller_name)
     {
         switch (strtolower($controller_name)) {
