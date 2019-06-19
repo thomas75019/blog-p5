@@ -46,6 +46,11 @@ $map->post('article.save', '/save/article', function ($request) {
     $controller = ControllerFactory::newController('article');
     $controller->save($data);
 });
+$map->get('user.register', '/register', function () {
+    $controller = ControllerFactory::newController('utilisateur');
+
+    $controller->register();
+});
 
 
 
