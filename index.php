@@ -65,6 +65,12 @@ $map->get('user.login', '/login', function () {
 
     $controller->loginPage();
 });
+$map->post('user.login.action', '/login', function ($request) {
+    $data = $request->getParsedBody();
+    $controller = ControllerFactory::newController('utilisateur');
+
+    $controller->login($data);
+});
 
 
 

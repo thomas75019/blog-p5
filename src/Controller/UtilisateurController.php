@@ -52,24 +52,35 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * Login
-     * @param $pseudo string
-     * @param $password string
+     * Access to the login page
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
-    public function login($pseudo, $password)
+    public function loginPage()
     {
-        $user = $this->entityManager->getRepository(Utilisateur::class)->findBy([
-            'pseudo' => $pseudo
+        echo $this->twig->render('/forms/login.html.twig');
+    }
+
+    /**
+     * Log in the user
+     * @param $data array
+     */
+    public function login($data)
+    {
+        $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
+            'pseudo' => $data['pseudo']
         ]);
 
-        if (password_verify($password, $user->getMotDePasse()))
+        if (password_verify($data['motDePasse'], $user->getMotDePasse()))
         {
             session_start();
             $_SESSION['user'] = serialize($user);
+            header('location: /');
         }
         else
         {
-            throw new \RuntimeException('Wrong password');
+            throw new \RuntimeException('Wrong password or pseudo');
         }
     }
 
