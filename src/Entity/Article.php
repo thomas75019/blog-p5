@@ -189,9 +189,20 @@ class Article
         {
             $method = 'set'.ucfirst($key);
 
-            if (method_exists($this, $method))
+            if ($key === 'contenu')
             {
-                $this->$method($value);
+                $this->setContenu(nl2br(htmlspecialchars($value)));
+            }
+            elseif ($key === 'slug')
+            {
+                $this->setSlug(Slug::Slugger($data['titre']));
+            }
+            else
+            {
+                if (method_exists($this, $method))
+                {
+                    $this->$method($value);
+                }
             }
         }
     }
