@@ -34,18 +34,20 @@ class ArticleController extends DoctrineLoader
 
     /**
      * @param $slug
+     * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function getOneBySlug($slug)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findBy([
+        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
             'slug' => $slug
         ]);
 
+        //var_dump($article);
         echo $this->twig->render('front/viewOne.html.twig', [
-            "article" => $article
+            'article' => $article
         ]);
     }
 

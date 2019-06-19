@@ -20,42 +20,42 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $titre;
+    public $titre;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $chapo;
+    public $chapo;
 
     /**
      * @ORM\Column(type="text")
      */
-    protected $contenu;
+    public $contenu;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $slug;
+    public $slug;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $date;
+    public $date;
 
     /**
      * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"persist"})
      */
-    protected $auteur;
+    public $auteur;
 
     /**
      * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="commentaires", cascade={"persist", "remove"})
      */
-    protected $commentaires;
+    public $commentaires;
 
 
     /**
@@ -180,6 +180,9 @@ class Article
         $this->contenu = $contenu;
     }
 
+    /**
+     * @param $data
+     */
     public function hydrate($data)
     {
         foreach ($data as $key => $value)
