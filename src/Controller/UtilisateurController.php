@@ -10,11 +10,21 @@ use Blog\Entity\Utilisateur;
 class UtilisateurController extends DoctrineLoader
 {
     /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function register()
+    {
+        echo $this->twig->render('forms/register.html.twig');
+    }
+
+    /**
      * Create a user
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function create()
+    public function createUser()
     {
         $user = new Utilisateur();
         $type = $this->entityManager->getRepository(TypeUtilisateur::class)->findBy([
@@ -42,7 +52,6 @@ class UtilisateurController extends DoctrineLoader
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
-
     }
 
     /**

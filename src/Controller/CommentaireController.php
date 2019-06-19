@@ -8,10 +8,17 @@
 
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
+use Blog\DoctrineLoader;
 
-class CommentaireController extends \Blog\DoctrineLoader
+class CommentaireController extends DoctrineLoader
 {
-    public function create ($slug_article, $user)
+    /**
+     * @param $slug_article
+     * @param $user
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save($slug_article, $user)
     {
         //TODO : Create forms
         $article = $this->entityManager->getRepository(Article::class)->findBy([
@@ -27,6 +34,10 @@ class CommentaireController extends \Blog\DoctrineLoader
         $this->entityManager->flush();
     }
 
+    /**
+     * @param $id_commentaire
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function setValide($id_commentaire)
     {
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
@@ -37,6 +48,10 @@ class CommentaireController extends \Blog\DoctrineLoader
         $this->entityManager->persist($commentaire);
     }
 
+    /**
+     * @param $article_id
+     * @return array|object[]
+     */
     public function getValide($article_id)
     {
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
@@ -49,6 +64,11 @@ class CommentaireController extends \Blog\DoctrineLoader
         return $commentaires;
     }
 
+    /**
+     * @param $id
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function delete($id)
     {
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
