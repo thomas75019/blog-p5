@@ -72,7 +72,8 @@ class ArticleController extends DoctrineLoader
      */
     public function save($data)
     {
-        $auteur = $this->entityManager->getRepository(Utilisateur::class)->find(1);
+
+        $auteur = unserialize($_SESSION['user']);
 
         $article = new Article();
 
