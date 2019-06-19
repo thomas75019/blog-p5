@@ -52,12 +52,18 @@ $map->get('user.register', '/register', function () {
 
     $controller->register();
 });
-//Save new user in the databse
+//Save new user in the database
 $map->post( 'user.register.save', '/register', function ($request) {
     $data = $request->getParsedBody();
 
     $controller = ControllerFactory::newController('utilisateur');
     $controller->createUser($data);
+});
+//Login page
+$map->get('user.login', '/login', function () {
+    $controller = ControllerFactory::newController('utilisateur');
+
+    $controller->loginPage();
 });
 
 
