@@ -68,19 +68,25 @@ class UtilisateurController extends DoctrineLoader
      */
     public function login($data)
     {
-        $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
-            'pseudo' => $data['pseudo']
-        ]);
+        if (!isset($_SESSION['user']))
+        {
+            $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
+                'pseudo' => $data['pseudo']
+            ]);
 
-        if (password_verify($data['motDePasse'], $user->getMotDePasse()))
-        {
-            $_SESSION['user'] = serialize($user);
-            header('Location: /');
+            if (password_verify($data['motDePasse'], $user->getMotDePasse()))
+            {
+                $_SESSION['user'] = serialize($user);
+                header('Location: /');
+            }
+            else
+            {
+                throw new \RuntimeException('Wrong password or pseudo');
+            }
         }
-        else
-        {
-            throw new \RuntimeException('Wrong password or pseudo');
-        }
+
+        header('location: /');
+
     }
 
     /**
@@ -88,6 +94,12 @@ class UtilisateurController extends DoctrineLoader
      */
     public function logout()
     {
-        session_destroy();
+        if (isset($_SESSION['user']))
+        {
+            session_destroy();
+            header('Location: /');
+        }
+
+        header('Location: /');
     }
 }
