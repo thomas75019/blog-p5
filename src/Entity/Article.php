@@ -5,6 +5,8 @@ namespace Blog\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Blog\Service\Slug;
+use Blog\Service\Chapo;
 
 
 /**
@@ -185,24 +187,19 @@ class Article
      */
     public function hydrate($data)
     {
+        $titre = $data['titre'];
+        $contenu = $data['contenu'];
+
+        $this->setChapo(Chapo::createChapo($contenu));
+        $this->setSlug(Slug::Slugger($titre));
+
         foreach ($data as $key => $value)
         {
             $method = 'set'.ucfirst($key);
 
-            if ($key === 'contenu')
+            if (method_exists($this, $method))
             {
-                $this->setContenu(nl2br(htmlspecialchars($value)));
-            }
-            elseif ($key === 'slug')
-            {
-                $this->setSlug(Slug::Slugger($data['titre']));
-            }
-            else
-            {
-                if (method_exists($this, $method))
-                {
-                    $this->$method($value);
-                }
+                $this->$method($value);
             }
         }
     }
