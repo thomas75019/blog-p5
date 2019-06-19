@@ -74,9 +74,8 @@ class UtilisateurController extends DoctrineLoader
 
         if (password_verify($data['motDePasse'], $user->getMotDePasse()))
         {
-            session_start();
             $_SESSION['user'] = serialize($user);
-            header('location: /');
+            echo $_SESSION['user'];
         }
         else
         {
@@ -89,7 +88,8 @@ class UtilisateurController extends DoctrineLoader
      */
     public function logout()
     {
+
         session_destroy();
-        header('Location: /');
+
     }
 }

@@ -3,6 +3,8 @@
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
 
+session_start();
+
 // create a server request object
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -65,12 +67,20 @@ $map->get('user.login', '/login', function () {
 
     $controller->loginPage();
 });
+//Login the user
 $map->post('user.login.action', '/login', function ($request) {
     $data = $request->getParsedBody();
     $controller = ControllerFactory::newController('utilisateur');
 
     $controller->login($data);
 });
+//Logout
+$map->get('user.logout', '/logout', function () {
+    $controller = ControllerFactory::newController('utilisateur');
+
+    $controller->logout();
+});
+
 
 
 
