@@ -149,7 +149,7 @@ class Article
     }
 
     /**
-     * @param $auteur string
+     * @param $auteur Utilisateur
      */
     public function setAuteur($auteur)
     {
@@ -157,7 +157,7 @@ class Article
     }
 
     /**
-     * @return string
+     * @return Utilisateur
      */
     public function getAuteur()
     {

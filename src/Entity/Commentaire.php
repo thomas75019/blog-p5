@@ -42,11 +42,17 @@ class Commentaire
      */
     protected $article;
 
+    /**
+     * Commentaire constructor.
+     */
     public function __construct()
     {
         $this->datetime = new \DateTime();
     }
 
+    /**
+     * @param $id int
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -69,6 +75,9 @@ class Commentaire
     }
 
 
+    /**
+     * @param $valide bool
+     */
     public function setValide($valide)
     {
         $this->valide = $valide;
@@ -83,6 +92,9 @@ class Commentaire
     }
 
 
+    /**
+     * @param $date \DateTime
+     */
     public function setDate($date)
     {
         $this->date = $date;
@@ -98,21 +110,33 @@ class Commentaire
     }
 
 
+    /**
+     * @param $contenu string
+     */
     public function setContenu($contenu)
     {
         $this->contenu = $contenu;
     }
 
+    /**
+     * @param $auteur Utilisateur
+     */
     public function setAuteur($auteur)
     {
         $this->auteur = $auteur;
     }
 
+    /**
+     * @return Utilisateur
+     */
     public function getAuteur()
     {
         return $this->auteur;
     }
 
+    /**
+     * @param $article Article
+     */
     public function setArticle($article)
     {
         $this->article = $article;

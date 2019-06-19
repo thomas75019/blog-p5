@@ -119,11 +119,18 @@ class Utilisateur
         return $this->pseudo;
     }
 
+    /**
+     * @param $type
+     */
     public function setType($type)
     {
         $this->type = $type;
     }
 
+    /**
+     * Hydrate the object
+     * @param $data Object
+     */
     public function hydrate($data)
     {
         foreach ($data as $key => $value)
