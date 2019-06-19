@@ -137,12 +137,13 @@ class Utilisateur
         {
             $method = 'set'.ucfirst($key);
 
-            if (method_exists($this, $method))
+            if ($key === 'motDePasse')
             {
-                if ($key == 'motDePasse')
-                {
-                    $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT ));
-                }
+                $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT ));
+            }
+            else if (method_exists($this, $method))
+            {
+
                 $this->$method($value);
             }
         }

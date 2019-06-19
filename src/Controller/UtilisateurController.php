@@ -24,20 +24,17 @@ class UtilisateurController extends DoctrineLoader
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function createUser()
+    public function createUser($data)
     {
+        $em = $this->entityManager;
         $user = new Utilisateur();
-        $type = $this->entityManager->getRepository(TypeUtilisateur::class)->findBy([
-            'type' => 'admin'
-        ]);
+        //$type = $this->entityManager->getRepository(TypeUtilisateur::class)->find(1);
 
-        $user->setPseudo('thomas');
-        $user->setEmail('tlarousse3@gmail.com');
-        $user->setType($type);
-        $user->setPseudo('thomas');
+        $user->hydrate($data);
+        $user->setType(null);
 
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $em->persist($user);
+        $em->flush();
     }
 
     /**

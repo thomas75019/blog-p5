@@ -46,10 +46,18 @@ $map->post('article.save', '/save/article', function ($request) {
     $controller = ControllerFactory::newController('article');
     $controller->save($data);
 });
+//render the register form
 $map->get('user.register', '/register', function () {
     $controller = ControllerFactory::newController('utilisateur');
 
     $controller->register();
+});
+//Save new user in the databse
+$map->post( 'user.register.save', '/register', function ($request) {
+    $data = $request->getParsedBody();
+
+    $controller = ControllerFactory::newController('utilisateur');
+    $controller->createUser($data);
 });
 
 
