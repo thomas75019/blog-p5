@@ -139,6 +139,10 @@ class Utilisateur
 
             if (method_exists($this, $method))
             {
+                if ($key == 'motDePasse')
+                {
+                    $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT ));
+                }
                 $this->$method($value);
             }
         }
