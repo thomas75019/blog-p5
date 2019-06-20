@@ -2,7 +2,6 @@
 
 namespace Blog\Controller;
 
-
 use Blog\DoctrineLoader;
 use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
@@ -68,25 +67,20 @@ class UtilisateurController extends DoctrineLoader
      */
     public function login($data)
     {
-        if (!isset($_SESSION['user']))
-        {
+        if (!isset($_SESSION['user'])) {
             $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
                 'pseudo' => $data['pseudo']
             ]);
 
-            if (password_verify($data['motDePasse'], $user->getMotDePasse()))
-            {
+            if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                 $_SESSION['user'] = serialize($user);
                 header('Location: /');
-            }
-            else
-            {
+            } else {
                 throw new \RuntimeException('Wrong password or pseudo');
             }
         }
 
         header('location: /');
-
     }
 
     /**
@@ -94,8 +88,7 @@ class UtilisateurController extends DoctrineLoader
      */
     public function logout()
     {
-        if (isset($_SESSION['user']))
-        {
+        if (isset($_SESSION['user'])) {
             session_destroy();
             header('Location: /');
         }

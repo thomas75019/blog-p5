@@ -71,19 +71,24 @@ class ArticleController extends DoctrineLoader
      */
     public function save($data)
     {
+        $session = unserialize($_SESSION['user']);
 
-        $auteur = unserialize($_SESSION['user']);
+        if (!isset($_SESSION['user'])) {
+            $this->redirect('/login');
+        } else {
+            $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($session->getId());
 
-        $article = new Article();
+            $article = new Article();
 
-        $article->hydrate($data);
-        $article->setAuteur($auteur);
+            $article->hydrate($data);
+            $article->setAuteur($auteur);
 
 
-        $this->entityManager->persist($article);
-        $this->entityManager->flush();
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
 
-        return $this->redirect('/');
+            return $this->redirect('/');
+        }
     }
 
     /**
@@ -100,7 +105,6 @@ class ArticleController extends DoctrineLoader
         // Do the modifications
 
         $this->entityManager->flush();
-
     }
 
     /**
@@ -117,5 +121,4 @@ class ArticleController extends DoctrineLoader
         $this->entityManager->remove($article);
         $this->entityManager->flush();
     }
-
 }

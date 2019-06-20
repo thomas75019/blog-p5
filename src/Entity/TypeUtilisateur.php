@@ -37,6 +37,4 @@ class TypeUtilisateur
     {
         $this->type = $type;
     }
-
-
 }

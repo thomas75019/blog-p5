@@ -2,7 +2,6 @@
 
 namespace Blog\Service;
 
-
 class Slug
 {
     public static function Slugger($titre)

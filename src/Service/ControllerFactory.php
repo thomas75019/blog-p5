@@ -23,10 +23,10 @@ class ControllerFactory
     public static function newController($controller_name)
     {
         switch (strtolower($controller_name)) {
-            case 'article' :
+            case 'article':
                 $controller = new ArticleController();
                 break;
-            case 'utilisateur' :
+            case 'utilisateur':
                 $controller = new UtilisateurController();
                 break;
             case 'commentaire':
@@ -38,5 +38,4 @@ class ControllerFactory
 
         return $controller;
     }
-
 }

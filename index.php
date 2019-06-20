@@ -55,7 +55,7 @@ $map->get('user.register', '/register', function () {
     $controller->register();
 });
 //Save new user in the database
-$map->post( 'user.register.save', '/register', function ($request) {
+$map->post('user.register.save', '/register', function ($request) {
     $data = $request->getParsedBody();
 
     $controller = ControllerFactory::newController('utilisateur');
@@ -105,4 +105,3 @@ foreach ($route->attributes as $key => $val) {
 // in place of the one callable below.)
 $callable = $route->handler;
 $response = $callable($request);
-

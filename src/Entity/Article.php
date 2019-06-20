@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Blog\Service\Slug;
 use Blog\Service\Chapo;
 
-
 /**
  * Class Article
  * @ORM\Entity
@@ -67,7 +66,6 @@ class Article
     {
         $this->date = new \DateTime();
         $this->commentaires = new ArrayCollection();
-
     }
 
     /**
@@ -193,12 +191,10 @@ class Article
         $this->setChapo(Chapo::createChapo($contenu));
         $this->setSlug(Slug::Slugger($titre));
 
-        foreach ($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
 
-            if (method_exists($this, $method))
-            {
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
