@@ -49,7 +49,7 @@ class Article
     public $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Utilisateur", cascade={"persist"})
      */
     public $auteur;
 

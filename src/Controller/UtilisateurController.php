@@ -72,6 +72,8 @@ class UtilisateurController extends DoctrineLoader
             ]);
 
             if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
+                //Avoid that password being stored in session
+                $user->setMotDePasse(null);
                 $_SESSION['user'] = serialize($user);
                 return $this->redirect('/');
             } else {

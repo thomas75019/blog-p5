@@ -6,9 +6,12 @@
  * Time: 20:34
  */
 
+namespace Blog\Controller;
+
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\DoctrineLoader;
+use Blog\Entity\Utilisateur;
 
 class CommentaireController extends DoctrineLoader
 {
@@ -18,20 +21,21 @@ class CommentaireController extends DoctrineLoader
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save($slug_article, $user)
+    public function save($article_id, $auteur, $contenu)
     {
         //TODO : Create forms
-        $article = $this->entityManager->getRepository(Article::class)->findBy([
-            'slug' => $slug_article
-        ]);
-
+        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        $auteurComment = $this->entityManager->getRepository(Utilisateur::class)->find($auteur->getId());
 
         $commentaire = new Commentaire();
-        $commentaire->setAuteur($user);
+        $commentaire->setContenu($contenu);
         $commentaire->setArticle($article);
+        $commentaire->setAuteur($auteurComment);
 
         $this->entityManager->persist($commentaire);
         $this->entityManager->flush();
+
+        return $this->redirect('/read/' . $article->getSlug());
     }
 
     /**

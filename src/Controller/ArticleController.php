@@ -50,15 +50,9 @@ class ArticleController extends DoctrineLoader
             'slug' => $slug
         ]);
 
-        $commentaires = $this->entityManager->getRepository(Commentaire::class)->find([
-            'article' => $article,
-            'valide' => true
-        ]);
-
         //var_dump($article);
         echo $this->twig->render('front/viewOne.html.twig', [
-            'article' => $article,
-            'commentaires' => $commentaires
+            'article' => $article
         ]);
     }
 

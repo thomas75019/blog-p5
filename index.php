@@ -80,6 +80,15 @@ $map->get('user.logout', '/logout', function () {
 
     $controller->logout();
 });
+//Save comment
+$map->post('save.comment', '/save/comment/{article_id}', function ($request) {
+    $articleId = $request->getAttribute('article_id');
+    $auteur = unserialize($_SESSION['user']);
+    $contenu = $request->getParsedBody();
+    $controller = ControllerFactory::newController('commentaire');
+
+    $controller->save($articleId, $auteur, $contenu);
+});
 
 
 

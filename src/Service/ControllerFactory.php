@@ -9,7 +9,7 @@
 namespace Blog\Service;
 
 use Blog\Controller\ArticleController;
-use CommentaireController;
+use Blog\Controller\CommentaireController;
 use Blog\Controller\UtilisateurController;
 
 class ControllerFactory

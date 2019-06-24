@@ -33,7 +33,7 @@ class Commentaire
     protected $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class)
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
      */
     protected $auteur;
 
@@ -47,7 +47,7 @@ class Commentaire
      */
     public function __construct()
     {
-        $this->datetime = new \DateTime();
+        $this->date = new \DateTime();
     }
 
     /**

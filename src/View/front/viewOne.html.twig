@@ -2,4 +2,13 @@
 {{ article.chapo }}
 {{ article.contenu }}
 {{ article.slug }}
+<br />
+<form action="http://127.0.0.1:8000/save/comment/{{ article.id }}" method="post">
+    <label for="contenu">
+        Commentaire
+    </label>
+    <input name="contenu" type="text">
+
+    <button type="submit">Envoyer</button>
+</form>
 
