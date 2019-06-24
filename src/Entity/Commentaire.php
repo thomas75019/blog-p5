@@ -152,9 +152,4 @@ class Commentaire
             }
         }
     }
-
-    public function __toString()
-    {
-        return $this->date;
-    }
 }
