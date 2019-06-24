@@ -32,8 +32,9 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
-     * @param $slug_article
-     * @param $user
+     * @param $article_id
+     * @param $auteur
+     * @param $contenu
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
