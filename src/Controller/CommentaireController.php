@@ -28,7 +28,7 @@ class CommentaireController extends DoctrineLoader
         $auteurComment = $this->entityManager->getRepository(Utilisateur::class)->find($auteur->getId());
 
         $commentaire = new Commentaire();
-        $commentaire->setContenu($contenu);
+        $commentaire->hydrate($contenu);
         $commentaire->setArticle($article);
         $commentaire->setAuteur($auteurComment);
 

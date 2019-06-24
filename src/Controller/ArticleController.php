@@ -52,7 +52,7 @@ class ArticleController extends DoctrineLoader
 
         $commentaires = $this->entityManager->getRepository(Commentaire::class)->findBy([
             'article' => $article,
-            'valide' => true
+            'valide' => false
         ]);
 
         //var_dump($article);
