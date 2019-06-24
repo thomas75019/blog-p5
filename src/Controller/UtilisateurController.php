@@ -79,7 +79,7 @@ class UtilisateurController extends DoctrineLoader
             }
         }
 
-        return $this->$this->redirect('/');
+        $this->redirect('/');
     }
 
     /**
@@ -92,6 +92,6 @@ class UtilisateurController extends DoctrineLoader
             header('Location: /');
         }
 
-        header('Location: /');
+        $this->redirect('/');
     }
 }

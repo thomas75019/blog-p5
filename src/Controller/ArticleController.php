@@ -32,6 +32,8 @@ class ArticleController extends DoctrineLoader
             'articles' => $articles
         ]);
 
+        var_dump($_SESSION['user']);
+
 
     }
 
