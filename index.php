@@ -80,6 +80,12 @@ $map->get('user.logout', '/logout', function () {
 
     $controller->logout();
 });
+//Get comments
+$map->get('get.comments', '/admin/comments', function () {
+    $controller = ControllerFactory::newController('commentaire');
+
+    $controller->getAll();
+});
 //Save comment
 $map->post('save.comment', '/save/comment/{article_id}', function ($request) {
     $articleId = $request->getAttribute('article_id');
@@ -102,6 +108,13 @@ $map->put('invalide.comment', '/invalide/{commentaire_id}', function ($request) 
     $controller = ControllerFactory::newController('commentaire');
 
     $controller->setInvalide($commentaire_id);
+});
+//Delete comment
+$map->delete('delete.comment', '/delete/comment/{commentaire_id}', function ($request) {
+    $commentaire_id = $request->getAttribute('commentaire_id');
+    $controller = ControllerFactory::newController('commentaire');
+
+    $controller->delete($commentaire_id);
 });
 
 

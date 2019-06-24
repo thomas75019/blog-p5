@@ -1,8 +1,9 @@
 {% for commentaire in commentaires %}
 {{ commentaire.contenu }}
-{{ commentaire.auteur }}
+{{ commentaire.auteur.pseudo }}
 {% if commentaire.valide == false %}
-<a href="/valide/{{ commentaire.id }}">Valider le commentaire</a>
+<a href="/valide/{{ commentaire.id }}" methods="put">Valider le commentaire</a>
 {% endif %}
-<a href="/invalide/{{ commentaire.id }}">Invalider le commentaire</a>
-<a href="/delete/comment/{{ commentaire.id }}">Supprimer le commentaire</a>
+<a href="/invalide/{{ commentaire.id }}" methods="put">Invalider le commentaire</a>
+<a href="/delete/comment/{{ commentaire.id }}" methods="delete">Supprimer le commentaire</a>
+{% endfor %}

@@ -26,7 +26,7 @@ class CommentaireController extends DoctrineLoader
     {
         $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
 
-        return $this->twig->render('back/viewAllComments.html.twig', [
+        echo $this->twig->render('back/viewAllComments.html.twig', [
             'commentaires' => $commentaires
         ]);
     }
@@ -84,15 +84,13 @@ class CommentaireController extends DoctrineLoader
 
 
     /**
-     * @param $id
+     * @param string $commentaire_id
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function delete($id)
+    public function delete($commentaire_id)
     {
-        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
-
-        $commentaire = $commentaireRepo->find($id);
+        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
 
         $this->entityManager->remove($commentaire);
         $this->entityManager->flush();
