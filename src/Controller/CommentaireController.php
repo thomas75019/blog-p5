@@ -23,7 +23,7 @@ class CommentaireController extends DoctrineLoader
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function getAll($article_id)
+    public function getAll()
     {
         $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
 
