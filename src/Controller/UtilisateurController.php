@@ -73,13 +73,13 @@ class UtilisateurController extends DoctrineLoader
 
             if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                 $_SESSION['user'] = serialize($user);
-                header('Location: /');
+                return $this->redirect('/');
             } else {
                 throw new \RuntimeException('Wrong password or pseudo');
             }
         }
 
-        $this->redirect('/');
+        return $this->redirect('/');
     }
 
     /**
@@ -89,9 +89,9 @@ class UtilisateurController extends DoctrineLoader
     {
         if (isset($_SESSION['user'])) {
             session_destroy();
-            header('Location: /');
+            return $this->redirect('/');
         }
 
-        $this->redirect('/');
+        return $this->redirect('/');
     }
 }
