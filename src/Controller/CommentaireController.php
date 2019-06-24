@@ -56,17 +56,30 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
-     * @param $id_commentaire
+     * @param string $commentaire_id
      * @throws \Doctrine\ORM\ORMException
      */
-    public function setValide($id_commentaire)
+    public function setValide($commentaire_id)
     {
-        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
-        $commentaire = $commentaireRepo->find($id_commentaire);
+        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
 
         $commentaire->setValide(true);
 
-        $this->entityManager->persist($commentaire);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param string $commentaire_id
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setInvalide($commentaire_id)
+    {
+        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
+
+        $commentaire->setValide(false);
+
+        $this->entityManager->flush();
     }
 
 

@@ -89,6 +89,20 @@ $map->post('save.comment', '/save/comment/{article_id}', function ($request) {
 
     $controller->save($articleId, $auteur, $contenu);
 });
+//Valide comment
+$map->put('valide.comment', '/valide/{commentaire_id}', function ($request) {
+    $commentaire_id = $request->getAttribute('commentaire_id');
+    $controller = ControllerFactory::newController('commentaire');
+
+    $controller->setValide($commentaire_id);
+});
+//Invalide comment
+$map->put('invalide.comment', '/invalide/{commentaire_id}', function ($request) {
+    $commentaire_id = $request->getAttribute('commentaire');
+    $controller = ControllerFactory::newController('commentaire');
+
+    $controller->setInvalide($commentaire_id);
+});
 
 
 
