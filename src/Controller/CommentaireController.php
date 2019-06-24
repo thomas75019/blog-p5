@@ -17,7 +17,6 @@ class CommentaireController extends DoctrineLoader
 {
 
     /**
-     * @param $article_id
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
