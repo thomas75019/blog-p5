@@ -26,7 +26,7 @@ class CommentaireController extends DoctrineLoader
     {
         $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
 
-        return $this->twig->render('back/viewAll.html.twig', [
+        return $this->twig->render('back/viewAllComments.html.twig', [
             'commentaires' => $commentaires
         ]);
     }

@@ -1,0 +1,8 @@
+{% for commentaire in commentaires %}
+{{ commentaire.contenu }}
+{{ commentaire.auteur }}
+{% if commentaire.valide == false %}
+<a href="/valide/{{ commentaire.id }}">Valider le commentaire</a>
+{% endif %}
+<a href="/invaide/{{ commentaire.id }}">Invalider le commentaire</a>
+<a href="/delete/comment/{{ commentaire.id }}">Supprimer le commentaire</a>
