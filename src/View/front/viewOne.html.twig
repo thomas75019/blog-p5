@@ -3,6 +3,11 @@
 {{ article.contenu }}
 {{ article.slug }}
 <br />
+
+{% for commentaire in commentaires %}
+{{ commentaire.contenu }}
+{% endfor %}
+<br />
 <form action="http://127.0.0.1:8000/save/comment/{{ article.id }}" method="post">
     <label for="contenu">
         Commentaire
