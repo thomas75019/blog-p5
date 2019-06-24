@@ -95,7 +95,7 @@ class ArticleController extends DoctrineLoader
             $this->entityManager->persist($article);
             $this->entityManager->flush();
 
-            return $this->redirect('/');
+            return $this->redirect('/list/article');
         }
     }
 
@@ -145,5 +145,7 @@ class ArticleController extends DoctrineLoader
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();
+
+        return $this->redirect('/list/article');
     }
 }
