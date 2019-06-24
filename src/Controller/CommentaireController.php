@@ -15,6 +15,23 @@ use Blog\Entity\Utilisateur;
 
 class CommentaireController extends DoctrineLoader
 {
+
+    /**
+     * @param $article_id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getAll($article_id)
+    {
+        $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
+
+        return $this->twig->render('back/viewAll.html.twig', [
+            'commentaires' => $commentaires
+        ]);
+    }
+
     /**
      * @param $slug_article
      * @param $user
@@ -52,21 +69,6 @@ class CommentaireController extends DoctrineLoader
         $this->entityManager->persist($commentaire);
     }
 
-    /**
-     * @param $article_id
-     * @return array|object[]
-     */
-    public function getValide($article_id)
-    {
-        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
-
-        $commentaires = $commentaireRepo->findBy([
-            'valide' => true,
-            'article' => $article_id
-            ]);
-
-        return $commentaires;
-    }
 
     /**
      * @param $id
