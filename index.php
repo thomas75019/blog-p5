@@ -48,6 +48,22 @@ $map->post('article.save', '/save/article', function ($request) {
     $controller = ControllerFactory::newController('article');
     $controller->save($data);
 });
+//Render the article
+$map->get('article.update', '/update/article/{article_id}', function ($request) {
+    $article_id = $request->getAttribute('article_id');
+    $controller = ControllerFactory::newController('article');
+
+    $controller->update($article_id);
+});
+//Save the updated Article
+$map->post('article.update.save', '/update/article/{article_id}', function ($request) {
+    $article_id = $request->getAttribute('article_id');
+    $data = $request->getParsedBody();
+    $controller = ControllerFactory::newController('article');
+
+    $controller->saveUpdate($data, $article_id);
+});
+
 //render the register form
 $map->get('user.register', '/register', function () {
     $controller = ControllerFactory::newController('utilisateur');

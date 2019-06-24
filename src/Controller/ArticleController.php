@@ -100,19 +100,36 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * @param $article_slug string
+     * @param int $article_id
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function update($article_id)
+    {
+        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
+            'id' => $article_id
+        ]);
+
+        echo $this->twig->render('forms/updateArticle.html.twig', [
+            'article' => $article
+        ]);
+    }
+
+    /**
+     * @param $data
+     * @param $article_id
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function update($article_slug)
+    public function saveUpdate($data, $article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findBy([
-            'slug' => $article_slug
-        ]);
+        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
 
-        // Do the modifications
-
+        $article->hydrate($data);
         $this->entityManager->flush();
+
+        return $this->redirect('/read/' . $article->getSlug());
     }
 
     /**
