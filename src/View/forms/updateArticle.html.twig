@@ -1,0 +1,9 @@
+<form action="/save/article" method="post">
+    <label for="titre">Titre</label>
+    <input type="text" name="titre" content="{{ article.title }}">
+    <label for="contenu">Contenu de l'article</label>
+    <textarea name="contenu" content="{{ article.contenu }}">
+    </textarea>
+    <input type="submit" name="submit">
+    <input style="display: none" type="text" value="8" name="auteur">
+</form>
