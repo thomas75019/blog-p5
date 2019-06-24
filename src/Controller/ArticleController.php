@@ -10,6 +10,7 @@ namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
 use Blog\Entity\Article;
+use Blog\Entity\Commentaire;
 use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
 
@@ -31,7 +32,7 @@ class ArticleController extends DoctrineLoader
             'articles' => $articles
         ]);
 
-        var_dump($_SESSION['user']);
+
     }
 
     /**
@@ -47,9 +48,15 @@ class ArticleController extends DoctrineLoader
             'slug' => $slug
         ]);
 
+        $commentaires = $this->entityManager->getRepository(Commentaire::class)->find([
+            'article' => $article,
+            'valide' => true
+        ]);
+
         //var_dump($article);
         echo $this->twig->render('front/viewOne.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'commentaires' => $commentaires
         ]);
     }
 
@@ -82,7 +89,6 @@ class ArticleController extends DoctrineLoader
 
             $article->hydrate($data);
             $article->setAuteur($auteur);
-
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();

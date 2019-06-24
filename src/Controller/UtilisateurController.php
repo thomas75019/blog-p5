@@ -27,7 +27,6 @@ class UtilisateurController extends DoctrineLoader
     {
         $em = $this->entityManager;
         $user = new Utilisateur();
-        //$type = $this->entityManager->getRepository(TypeUtilisateur::class)->find(1);
 
         $user->hydrate($data);
         $user->setType(null);
@@ -62,8 +61,8 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * Log in the user
      * @param $data array
+     * @return mixed
      */
     public function login($data)
     {
@@ -80,7 +79,7 @@ class UtilisateurController extends DoctrineLoader
             }
         }
 
-        header('location: /');
+        return $this->$this->redirect('/');
     }
 
     /**

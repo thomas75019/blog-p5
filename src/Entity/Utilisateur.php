@@ -136,9 +136,12 @@ class Utilisateur
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
 
-            if ($key === 'motDePasse') {
+            if ($key === 'motDePasse')
+            {
                 $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT));
-            } elseif (method_exists($this, $method)) {
+            }
+            elseif (method_exists($this, $method))
+            {
                 $this->$method($value);
             }
         }
