@@ -43,7 +43,7 @@ class ArticleController extends DoctrineLoader
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render('back/articles.html.twig', [
-            'article' => $articles
+            'articles' => $articles
         ]);
     }
 
@@ -144,14 +144,18 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Remove the Article
-     * @param $slug integer
+     * @param $article_id string
      * @throws \Doctrine\ORM\ORMException
      */
-    public function remove($slug)
+    public function delete($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findBy([
-            'slug' => $slug
-        ]);
+        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        /*$commentaires = $this->entityManager->getRepository(Commentaire::class)->findOneBy([
+
+            'article' => $article
+        ]);*/
+
+        var_dump($article_id);
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();
