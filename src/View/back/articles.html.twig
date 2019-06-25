@@ -1,0 +1,10 @@
+<a href="/create/article">Ecrire un nouvel article</a>
+<br />
+{% for article in articles %}
+    {{ article.titre }}
+    <br />
+    {{ article.chapo }}
+    <br />
+    <a href="/update/article/{{ article.id }}">Editer l'article</a>
+    <a href="/delete/article/{{ article.id }}">Supprimer l'article</a>
+{% endfor %}
