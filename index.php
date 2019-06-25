@@ -36,6 +36,12 @@ $map->get('blog.contact', '/contact', function () {
     $response->getBody()->write("Contact form will go here");
     return $response;
 });
+//List article for admin
+$map->get('article.list', '/list/article', function () {
+    $controller = ControllerFactory::newController('article');
+
+    $controller->getList();
+});
 //Route for the creation
 $map->get('article.create', '/create/article', function () {
     $controller = ControllerFactory::newController('article');

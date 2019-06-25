@@ -34,6 +34,20 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getList()
+    {
+        $articles = $this->entityManager->getRepository(Article::class)->findAll();
+
+        echo $this->twig->render('back/articles.html.twig', [
+            'article' => $articles
+        ]);
+    }
+
+    /**
      * @param $slug
      * @return string
      * @throws \Twig\Error\LoaderError
