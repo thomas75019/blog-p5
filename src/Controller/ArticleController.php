@@ -104,8 +104,10 @@ class ArticleController extends DoctrineLoader
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a bien été ajouté', '/list/article' , true);
+            //$this->flashMessage->display();
 
-            return $this->redirect('/list/article');
+            //return $this->redirect('/list/article');
         }
     }
 
@@ -159,6 +161,7 @@ class ArticleController extends DoctrineLoader
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();
+        $this->flashMessage->success('L\'article a bien été supprimé');
 
         return $this->redirect('/list/article');
     }
