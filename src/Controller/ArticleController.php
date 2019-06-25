@@ -31,10 +31,6 @@ class ArticleController extends DoctrineLoader
         echo $this->twig->render('front/index.html.twig', [
             'articles' => $articles
         ]);
-
-        var_dump($_SESSION['user']);
-
-
     }
 
     /**

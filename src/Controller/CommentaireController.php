@@ -66,6 +66,8 @@ class CommentaireController extends DoctrineLoader
         $commentaire->setValide(true);
 
         $this->entityManager->flush();
+
+        return $this->redirect('/admin/comments');
     }
 
     /**
@@ -80,6 +82,8 @@ class CommentaireController extends DoctrineLoader
         $commentaire->setValide(false);
 
         $this->entityManager->flush();
+
+        return $this->redirect('/admin/comments');
     }
 
 
@@ -94,5 +98,7 @@ class CommentaireController extends DoctrineLoader
 
         $this->entityManager->remove($commentaire);
         $this->entityManager->flush();
+
+        return $this->redirect("/admin/comments");
     }
 }
