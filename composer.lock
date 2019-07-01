@@ -970,6 +970,7 @@
             "time": "2016-04-01T08:39:38+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -1019,6 +1020,8 @@
             "time": "2017-02-14T16:28:37+00:00"
         },
         {
+=======
+>>>>>>> 56faf9dc3cab0c78ec8b3f3cf4307098e3c796f3
             "name": "psr/http-factory",
             "version": "1.0.1",
             "source": {

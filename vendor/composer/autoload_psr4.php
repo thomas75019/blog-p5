@@ -15,7 +15,10 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
+<<<<<<< HEAD
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+=======
+>>>>>>> 56faf9dc3cab0c78ec8b3f3cf4307098e3c796f3
     'Plasticbrain\\FlashMessages\\' => array($vendorDir . '/plasticbrain/php-flash-messages/src'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib/Doctrine/ORM'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),

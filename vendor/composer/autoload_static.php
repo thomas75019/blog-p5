@@ -41,7 +41,9 @@ class ComposerStaticInite246d1b494d7f8b66b3a0eb864ed17ce
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+
             'Psr\\Container\\' => 14,
+
             'Plasticbrain\\FlashMessages\\' => 27,
         ),
         'D' => 

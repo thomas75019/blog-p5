@@ -36,6 +36,12 @@ $map->get('blog.contact', '/contact', function () {
     $response->getBody()->write("Contact form will go here");
     return $response;
 });
+//List article for admin
+$map->get('article.list', '/list/article', function () {
+    $controller = ControllerFactory::newController('article');
+
+    $controller->getList();
+});
 //Route for the creation
 $map->get('article.create', '/create/article', function () {
     $controller = ControllerFactory::newController('article');
@@ -63,7 +69,13 @@ $map->post('article.update.save', '/update/article/{article_id}', function ($req
 
     $controller->saveUpdate($data, $article_id);
 });
+//Delete article
+$map->get('article.delete', '/delete/article/{article_id}', function ($request) {
+    $article_id = $request->getAttribute('article_id');
+    $controller = ControllerFactory::newController('article');
 
+    $controller->delete($article_id);
+});
 //render the register form
 $map->get('user.register', '/register', function () {
     $controller = ControllerFactory::newController('utilisateur');

@@ -991,6 +991,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "name": "psr/container",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -1042,6 +1043,8 @@
         ]
     },
     {
+=======
+>>>>>>> 56faf9dc3cab0c78ec8b3f3cf4307098e3c796f3
         "name": "psr/http-factory",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",

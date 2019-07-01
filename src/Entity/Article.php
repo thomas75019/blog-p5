@@ -54,7 +54,7 @@ class Article
     public $auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="commentaires", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="contenu", cascade={"remove"})
      */
     public $commentaires;
 
