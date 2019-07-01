@@ -34,6 +34,20 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getList()
+    {
+        $articles = $this->entityManager->getRepository(Article::class)->findAll();
+
+        echo $this->twig->render('back/articles.html.twig', [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
      * @param $slug
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -90,8 +104,10 @@ class ArticleController extends DoctrineLoader
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a bien été ajouté', '/list/article' , true);
+            //$this->flashMessage->display();
 
-            return $this->redirect('/list/article');
+            //return $this->redirect('/list/article');
         }
     }
 
@@ -130,17 +146,22 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Remove the Article
-     * @param $slug integer
+     * @param $article_id string
      * @throws \Doctrine\ORM\ORMException
      */
-    public function remove($slug)
+    public function delete($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findBy([
-            'slug' => $slug
-        ]);
+        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        /*$commentaires = $this->entityManager->getRepository(Commentaire::class)->findOneBy([
+
+            'article' => $article
+        ]);*/
+
+        var_dump($article_id);
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();
+        $this->flashMessage->success('L\'article a bien été supprimé');
 
         return $this->redirect('/list/article');
     }
