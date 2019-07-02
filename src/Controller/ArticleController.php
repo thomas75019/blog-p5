@@ -83,9 +83,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * @param $data
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @param $data array
      */
     public function save($data)
     {
