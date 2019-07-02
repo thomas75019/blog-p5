@@ -104,10 +104,9 @@ class ArticleController extends DoctrineLoader
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();
-            $this->flashMessage->success('L\'article a bien été ajouté', '/list/article' , true);
-            //$this->flashMessage->display();
+            $this->flashMessage->success('L\'article a bien été ajouté');
 
-            //return $this->redirect('/list/article');
+            return $this->redirect('/list/article');
         }
     }
 
@@ -129,8 +128,8 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * @param $data
-     * @param $article_id
+     * @param $data array
+     * @param $article_id int
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -140,6 +139,7 @@ class ArticleController extends DoctrineLoader
 
         $article->hydrate($data);
         $this->entityManager->flush();
+        $this->flashMessage->success('L\'article a été mis à jour');
 
         return $this->redirect('/read/' . $article->getSlug());
     }
@@ -152,12 +152,6 @@ class ArticleController extends DoctrineLoader
     public function delete($article_id)
     {
         $article = $this->entityManager->getRepository(Article::class)->find($article_id);
-        /*$commentaires = $this->entityManager->getRepository(Commentaire::class)->findOneBy([
-
-            'article' => $article
-        ]);*/
-
-        var_dump($article_id);
 
         $this->entityManager->remove($article);
         $this->entityManager->flush();

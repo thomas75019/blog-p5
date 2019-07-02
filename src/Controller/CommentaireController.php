@@ -40,7 +40,6 @@ class CommentaireController extends DoctrineLoader
      */
     public function save($article_id, $auteur, $contenu)
     {
-        //TODO : Create forms
         $article = $this->entityManager->getRepository(Article::class)->find($article_id);
         $auteurComment = $this->entityManager->getRepository(Utilisateur::class)->find($auteur->getId());
 
@@ -51,6 +50,7 @@ class CommentaireController extends DoctrineLoader
 
         $this->entityManager->persist($commentaire);
         $this->entityManager->flush();
+        $this->flashMessage->success('Commentaire ajouté');
 
         return $this->redirect('/read/' . $article->getSlug());
     }
@@ -66,6 +66,8 @@ class CommentaireController extends DoctrineLoader
         $commentaire->setValide(true);
 
         $this->entityManager->flush();
+
+        $this->flashMessage->success('Commentaire validé');
 
         return $this->redirect('/admin/comments');
     }
@@ -83,6 +85,8 @@ class CommentaireController extends DoctrineLoader
 
         $this->entityManager->flush();
 
+        $this->flashMessage->success('Commentaire invalidé');
+
         return $this->redirect('/admin/comments');
     }
 
@@ -98,6 +102,8 @@ class CommentaireController extends DoctrineLoader
 
         $this->entityManager->remove($commentaire);
         $this->entityManager->flush();
+
+        $this->flashMessage->success('commentaire invalidé');
 
         return $this->redirect("/admin/comments");
     }

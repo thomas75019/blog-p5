@@ -75,9 +75,11 @@ class UtilisateurController extends DoctrineLoader
                 //Avoid that password being stored in session
                 $user->setMotDePasse(null);
                 $_SESSION['user'] = serialize($user);
+                $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
                 return $this->redirect('/');
             } else {
-                throw new \RuntimeException('Wrong password or pseudo');
+                $this->flashMessage->error('Mauvais pseudo ou mot de passe');
+                $this->redirect('/login');
             }
         }
 
