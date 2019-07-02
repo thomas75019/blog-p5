@@ -32,27 +32,32 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
-     * @param $article_id
-     * @param $auteur
-     * @param $contenu
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @param $article_id int
+     * @param $auteur Utilisateur
+     * @param $contenu string
      */
     public function save($article_id, $auteur, $contenu)
     {
         $article = $this->entityManager->getRepository(Article::class)->find($article_id);
         $auteurComment = $this->entityManager->getRepository(Utilisateur::class)->find($auteur->getId());
 
-        $commentaire = new Commentaire();
-        $commentaire->hydrate($contenu);
-        $commentaire->setArticle($article);
-        $commentaire->setAuteur($auteurComment);
+        try {
+            $commentaire = new Commentaire();
+            $commentaire->hydrate($contenu);
+            $commentaire->setArticle($article);
+            $commentaire->setAuteur($auteurComment);
 
-        $this->entityManager->persist($commentaire);
-        $this->entityManager->flush();
-        $this->flashMessage->success('Commentaire ajouté');
+            $this->entityManager->persist($commentaire);
+            $this->entityManager->flush();
+            $this->flashMessage->success('Commentaire ajouté');
 
-        return $this->redirect('/read/' . $article->getSlug());
+            return $this->redirect('/read/' . $article->getSlug());
+
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Erreur lors de l\'ajout du commentaire');
+            return $this->redirect('/read/' . $article->getslug());
+        }
+
     }
 
     /**
@@ -74,37 +79,45 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * @param string $commentaire_id
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function setInvalide($commentaire_id)
     {
         $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
 
-        $commentaire->setValide(false);
+        try {
+            $commentaire->setValide(false);
 
-        $this->entityManager->flush();
+            $this->entityManager->flush();
 
-        $this->flashMessage->success('Commentaire invalidé');
+            $this->flashMessage->success('Commentaire invalidé');
 
-        return $this->redirect('/admin/comments');
+            return $this->redirect('/admin/comments');
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
+            return $this->redirect('/admin/comments');
+        }
+
     }
 
 
     /**
      * @param string $commentaire_id
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete($commentaire_id)
     {
         $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
 
-        $this->entityManager->remove($commentaire);
-        $this->entityManager->flush();
+        try {
+            $this->entityManager->remove($commentaire);
+            $this->entityManager->flush();
 
-        $this->flashMessage->success('commentaire invalidé');
+            $this->flashMessage->success('commentaire supprimé');
 
-        return $this->redirect("/admin/comments");
+            return $this->redirect("/admin/comments");
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
+            return $this->redirect('/admin/comments');
+        }
+
     }
 }

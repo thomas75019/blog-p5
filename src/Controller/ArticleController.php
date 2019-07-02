@@ -65,7 +65,6 @@ class ArticleController extends DoctrineLoader
             'valide' => false
         ]);
 
-        //var_dump($article);
         echo $this->twig->render('front/viewOne.html.twig', [
             'article' => $article,
             'commentaires' => $commentaires
@@ -97,16 +96,22 @@ class ArticleController extends DoctrineLoader
         } else {
             $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($session->getId());
 
-            $article = new Article();
+            try {
+                $article = new Article();
 
-            $article->hydrate($data);
-            $article->setAuteur($auteur);
+                $article->hydrate($data);
+                $article->setAuteur($auteur);
 
-            $this->entityManager->persist($article);
-            $this->entityManager->flush();
-            $this->flashMessage->success('L\'article a bien été ajouté');
+                $this->entityManager->persist($article);
+                $this->entityManager->flush();
+                $this->flashMessage->success('L\'article a bien été ajouté');
 
-            return $this->redirect('/list/article');
+                return $this->redirect('/list/article');
+            } catch (\Exception $e) {
+                $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $e->getMessage());
+                return $this->redirect('/create/article');
+            }
+
         }
     }
 
@@ -130,33 +135,43 @@ class ArticleController extends DoctrineLoader
     /**
      * @param $data array
      * @param $article_id int
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function saveUpdate($data, $article_id)
     {
         $article = $this->entityManager->getRepository(Article::class)->find($article_id);
 
-        $article->hydrate($data);
-        $this->entityManager->flush();
-        $this->flashMessage->success('L\'article a été mis à jour');
+        try {
+            $article->hydrate($data);
+            $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a été mis à jour');
 
-        return $this->redirect('/read/' . $article->getSlug());
+            return $this->redirect('/read/' . $article->getSlug());
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Erreur lors de la mise à jour de l\'article: ' . $e->getMessage());
+
+            return $this->redirect('/update/article');
+        }
+
     }
 
     /**
      * Remove the Article
      * @param $article_id string
-     * @throws \Doctrine\ORM\ORMException
      */
     public function delete($article_id)
     {
         $article = $this->entityManager->getRepository(Article::class)->find($article_id);
 
-        $this->entityManager->remove($article);
-        $this->entityManager->flush();
-        $this->flashMessage->success('L\'article a bien été supprimé');
+        try {
+            $this->entityManager->remove($article);
+            $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a bien été supprimé');
 
-        return $this->redirect('/list/article');
+            return $this->redirect('/list/article');
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $e->getMessage());
+            return $this->redirect('/list/article');
+        }
+
     }
 }
