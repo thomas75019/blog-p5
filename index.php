@@ -35,9 +35,7 @@ $map->get('blog.viewOne', '/read/{slug}', function ($request) {
 });
 //Contact get Route
 $map->get('blog.contact', '/contact', function () {
-    $response = new Zend\Diactoros\Response();
-    $response->getBody()->write("Contact form will go here");
-    return $response;
+
 });
 //List article for admin
 $map->get('article.list', '/list/article', function () use ($user){

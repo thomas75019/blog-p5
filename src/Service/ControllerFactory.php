@@ -10,6 +10,7 @@ namespace Blog\Service;
 
 use Blog\Controller\ArticleController;
 use Blog\Controller\CommentaireController;
+use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
 
 class ControllerFactory
@@ -31,6 +32,9 @@ class ControllerFactory
                 break;
             case 'commentaire':
                 $controller = new CommentaireController();
+                break;
+            case 'contact':
+                $controller = new ContactController();
                 break;
             default:
                 throw new \Exception('Unkown controller');
