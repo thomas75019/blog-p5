@@ -52,7 +52,8 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render a single article page
-     * @param string $slug
+     * @param string  $slug
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -87,7 +88,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Save the article in database
-     * @param array $data
+     * @param array  $data
      */
     public function save($data)
     {
@@ -114,7 +115,8 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render the update article page
-     * @param int $article_id
+     * @param int  $article_id
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -132,7 +134,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Save the updates
-     * @param array $data
+     * @param array  $data
      * @param int $article_id
      */
     public function saveUpdate($data, $article_id)
@@ -154,7 +156,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Remove the Article
-     * @param $article_id string
+     * @param string  $article_id
      */
     public function delete($article_id)
     {

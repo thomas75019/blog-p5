@@ -30,7 +30,7 @@ class ContactController extends DoctrineLoader
 
     /**
      * Send the email
-     * @param array $data
+     * @param array  $data
      */
     public function contactSend($data)
     {
