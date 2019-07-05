@@ -79,6 +79,7 @@ class ArticleController extends DoctrineLoader
      */
     public function create()
     {
+
         echo $this->twig->render('forms/createArticle.html.twig');
     }
 
@@ -87,12 +88,12 @@ class ArticleController extends DoctrineLoader
      */
     public function save($data)
     {
-        $session = unserialize($_SESSION['user']);
+        $user = unserialize($_SESSION['user']);
 
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user']) && !$user->isAdmin()) {
             $this->redirect('/login');
         } else {
-            $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($session->getId());
+            $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($user->getId());
 
             try {
                 $article = new Article();

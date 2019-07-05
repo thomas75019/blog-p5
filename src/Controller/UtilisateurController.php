@@ -29,7 +29,6 @@ class UtilisateurController extends DoctrineLoader
         $user = new Utilisateur();
 
         $user->hydrate($data);
-        $user->setType(null);
 
         $em->persist($user);
         $em->flush();

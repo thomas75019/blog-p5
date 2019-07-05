@@ -5,6 +5,7 @@ use Blog\Service\ControllerFactory;
 
 session_start();
 
+$user = unserialize($_SESSION['user']);
 // create a server request object
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -13,6 +14,8 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_COOKIE,
     $_FILES
 );
+
+
 
 // create the router container and get the routing map
 $routerContainer = new Aura\Router\RouterContainer();
@@ -37,15 +40,27 @@ $map->get('blog.contact', '/contact', function () {
     return $response;
 });
 //List article for admin
-$map->get('article.list', '/list/article', function () {
+$map->get('article.list', '/list/article', function () use ($user){
     $controller = ControllerFactory::newController('article');
 
-    $controller->getList();
+    if ($user->isAdmin())
+    {
+        $controller->getList();
+    } else {
+        throw new Exception('Vous n\'avez pas accès a cette page ');
+    }
+
 });
 //Route for the creation
-$map->get('article.create', '/create/article', function () {
+$map->get('article.create', '/create/article', function () use ($user) {
     $controller = ControllerFactory::newController('article');
-    $controller->create();
+
+    if ($user->isAdmin())
+    {
+        $controller->create();
+    } else {
+        throw new Exception('Vous n\'avez pas accès a cette page ');
+    }
 });
 //Save Article Route
 $map->post('article.save', '/save/article', function ($request) {
@@ -58,7 +73,6 @@ $map->post('article.save', '/save/article', function ($request) {
 $map->get('article.update', '/update/article/{article_id}', function ($request) {
     $article_id = $request->getAttribute('article_id');
     $controller = ControllerFactory::newController('article');
-
     $controller->update($article_id);
 });
 //Save the updated Article

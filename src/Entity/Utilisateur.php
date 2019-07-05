@@ -5,6 +5,8 @@ namespace Blog\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+
+
 /**
  * Class Utilisateur
  * @ORM\Entity
@@ -12,6 +14,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Utilisateur
 {
+
+    const ADMIN = 1;
+
+    const UTILISATEUR = 0;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -35,8 +42,7 @@ class Utilisateur
     protected $mot_de_passe;
 
     /**
-     * @ORM\OneToOne(targetEntity="TypeUtilisateur", cascade={"persist"})
-     * @ORM\JoinColumn(name="type", referencedColumnName="type")
+     * @ORM\Column(type="integer")
      */
     protected $type;
 
@@ -51,7 +57,7 @@ class Utilisateur
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->type = new TypeUtilisateur();
+        $this->type = self::UTILISATEUR;
     }
 
 
@@ -145,5 +151,16 @@ class Utilisateur
                 $this->$method($value);
             }
         }
+    }
+
+    public function isAdmin()
+    {
+        if ($this->type === self::UTILISATEUR)
+        {
+            return false;
+        }
+
+        return true;
+
     }
 }
