@@ -35,7 +35,8 @@ $map->get('blog.viewOne', '/read/{slug}', function ($request) {
 });
 //Contact get Route
 $map->get('blog.contact', '/contact', function () {
-
+    $controller = ControllerFactory::newController('contact');
+    $controller->contactPage();
 });
 //List article for admin
 $map->get('article.list', '/list/article', function () use ($user){

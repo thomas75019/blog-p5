@@ -16,7 +16,7 @@ use Blog\Controller\UtilisateurController;
 class ControllerFactory
 {
     /**
-     * @param $controller_name
+     * @param $controller_name string
      * @return ArticleController|UtilisateurController|CommentaireController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Exception
