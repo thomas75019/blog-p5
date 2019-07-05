@@ -13,11 +13,15 @@ use Blog\Entity\Commentaire;
 use Blog\DoctrineLoader;
 use Blog\Entity\Utilisateur;
 
+/**
+ * Class CommentaireController
+ * @package Blog\Controller
+ */
 class CommentaireController extends DoctrineLoader
 {
 
     /**
-     * @return string
+     * Render the page with the list of comments
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -32,9 +36,10 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
-     * @param $article_id int
-     * @param $auteur Utilisateur
-     * @param $contenu string
+     * Save a comment in database
+     * @param int $article_id
+     * @param Utilisateur $auteur
+     * @param string $contenu
      */
     public function save($article_id, $auteur, $contenu)
     {
@@ -59,6 +64,7 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
+     * Set a comment as valid
      * @param string $commentaire_id
      * @throws \Doctrine\ORM\ORMException
      */
@@ -76,6 +82,7 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
+     * Set a comment as invalid
      * @param string $commentaire_id
      */
     public function setInvalide($commentaire_id)
@@ -98,6 +105,7 @@ class CommentaireController extends DoctrineLoader
 
 
     /**
+     * Delete a comment
      * @param string $commentaire_id
      */
     public function delete($commentaire_id)

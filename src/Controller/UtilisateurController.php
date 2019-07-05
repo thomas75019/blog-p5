@@ -6,9 +6,14 @@ use Blog\DoctrineLoader;
 use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
 
+/**
+ * Class UtilisateurController
+ * @package Blog\Controller
+ */
 class UtilisateurController extends DoctrineLoader
 {
     /**
+     * Render the register page
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -20,6 +25,7 @@ class UtilisateurController extends DoctrineLoader
 
     /**
      * Create an user
+     * @param array $data
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -36,7 +42,7 @@ class UtilisateurController extends DoctrineLoader
 
     /**
      * Delete an user
-     * @param $user_id integer
+     * @param int $user_id
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -49,7 +55,7 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * Access to the login page
+     * Render the login page
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -60,7 +66,8 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * @param $data array
+     * Log in the user
+     * @param array $data
      * @return mixed
      */
     public function login($data)
@@ -76,17 +83,17 @@ class UtilisateurController extends DoctrineLoader
                 $_SESSION['user'] = serialize($user);
                 $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
                 return $this->redirect('/');
-            } else {
-                $this->flashMessage->error('Mauvais pseudo ou mot de passe');
-                $this->redirect('/login');
             }
+
+            $this->flashMessage->error('Mauvais pseudo ou mot de passe');
+            $this->redirect('/login');
         }
 
         return $this->redirect('/');
     }
 
     /**
-     *Logout the user and redirect to homepage
+     * Logout the user and redirect to homepage
      */
     public function logout()
     {

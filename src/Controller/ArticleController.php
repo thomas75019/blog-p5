@@ -13,12 +13,15 @@ use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 
+/**
+ * Class ArticleController
+ * @package Blog\Controller
+ */
 class ArticleController extends DoctrineLoader
 {
 
     /**
-     *
-     * @return string
+     * Render the index page
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -33,6 +36,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * Render the page with all articles
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -41,14 +45,14 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        echo $this->twig->render('back/articles.html.twig', [
+        echo $this->twig->render('back/articles.html.twig',[
             'articles' => $articles
         ]);
     }
 
     /**
-     * @param $slug
-     * @return string
+     * Render a single article page
+     * @param string $slug
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -82,7 +86,8 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * @param $data array
+     * Save the article in database
+     * @param array $data
      */
     public function save($data)
     {
@@ -108,6 +113,7 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
+     * Render the update article page
      * @param int $article_id
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -125,8 +131,9 @@ class ArticleController extends DoctrineLoader
     }
 
     /**
-     * @param $data array
-     * @param $article_id int
+     * Save the updates
+     * @param array $data
+     * @param int $article_id
      */
     public function saveUpdate($data, $article_id)
     {

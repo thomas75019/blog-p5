@@ -2,9 +2,18 @@
 
 namespace Blog\Service;
 
+/**
+ * Class Slug
+ * @package Blog\Service
+ */
 class Slug
 {
-    public static function Slugger($titre)
+    /**
+     * Creates slug
+     * @param $titre string
+     * @return string
+     */
+    public static function slugger($titre)
     {
         return str_replace(' ', '-', $titre);
     }

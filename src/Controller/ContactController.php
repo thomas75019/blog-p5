@@ -11,6 +11,10 @@ namespace Blog\Controller;
 use Blog\DoctrineLoader;
 use Blog\Service\Mail;
 
+/**
+ * Class ContactController
+ * @package Blog\Controller
+ */
 class ContactController extends DoctrineLoader
 {
     /**
@@ -25,7 +29,8 @@ class ContactController extends DoctrineLoader
     }
 
     /**
-     * @param $data array
+     * Send the email
+     * @param array $data
      */
     public function contactSend($data)
     {
