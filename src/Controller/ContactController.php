@@ -10,6 +10,7 @@ namespace Blog\Controller;
 
 
 use Blog\DoctrineLoader;
+use Blog\Service\Mail;
 
 class ContactController extends DoctrineLoader
 {
@@ -26,11 +27,18 @@ class ContactController extends DoctrineLoader
 
     /**
      * @param $data array
-     * @return mixed
      */
     public function contactSend($data)
     {
-        return Mail::sendContact($data['message'], $data['email']);
+        try {
+            Mail::sendContact($data['message'], $data['email']);
+            $this->flashMessage->success('Le message à bien été envoyé');
+            return $this->redirect('/contact');
+        } catch (\Exception $exception)
+        {
+            $this->flashMessage->error('Une erreur est apparu' . $exception->getCode());
+            return $this->redirect('/contact');
+        }
     }
 
 }
