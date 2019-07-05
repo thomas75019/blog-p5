@@ -8,13 +8,15 @@
 
 namespace Blog\Service;
 
-
 class Mail
 {
     public static function sendContact($message, $contactEmail)
     {
-        mail('tlarousse3@gmail.com', 'Nouvelle demande de contact', $message,
-            'From: ' . $contactEmail);
+        mail(
+            'tlarousse3@gmail.com',
+            'Nouvelle demande de contact',
+            $message,
+            'From: ' . $contactEmail
+        );
     }
-
 }

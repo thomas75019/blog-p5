@@ -5,8 +5,6 @@ namespace Blog\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
-
 /**
  * Class Utilisateur
  * @ORM\Entity
@@ -14,7 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Utilisateur
 {
-
     const ADMIN = 1;
 
     const UTILISATEUR = 0;
@@ -142,12 +139,9 @@ class Utilisateur
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
 
-            if ($key === 'motDePasse')
-            {
+            if ($key === 'motDePasse') {
                 $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT));
-            }
-            elseif (method_exists($this, $method))
-            {
+            } elseif (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
@@ -159,12 +153,10 @@ class Utilisateur
      */
     public function isAdmin()
     {
-        if ($this->type === self::UTILISATEUR)
-        {
+        if ($this->type === self::UTILISATEUR) {
             return false;
         }
 
         return true;
-
     }
 }

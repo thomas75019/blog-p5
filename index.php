@@ -48,20 +48,17 @@ $map->post('blog.contact.send', '/contact/send', function ($request) {
     $controller->contactSend($data);
 });
 //List article for admin
-$map->get('article.list', '/list/article', function () use ($user){
-    if ($user->isAdmin())
-    {
+$map->get('article.list', '/list/article', function () use ($user) {
+    if ($user->isAdmin()) {
         $controller = ControllerFactory::newController('article');
         $controller->getList();
     } else {
         throw new Exception('Vous n\'avez pas accès a cette page ');
     }
-
 });
 //Route for the creation
 $map->get('article.create', '/create/article', function () use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $controller = ControllerFactory::newController('article');
         $controller->create();
     } else {
@@ -70,8 +67,7 @@ $map->get('article.create', '/create/article', function () use ($user) {
 });
 //Save Article Route
 $map->post('article.save', '/save/article', function ($request) use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $data = $request->getParsedBody();
 
         $controller = ControllerFactory::newController('article');
@@ -79,26 +75,20 @@ $map->post('article.save', '/save/article', function ($request) use ($user) {
     } else {
         throw new Exception('Vous n\'avez pas accès a cette page ');
     }
-
 });
 //Render the article
 $map->get('article.update', '/update/article/{article_id}', function ($request) use ($user) {
-
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $article_id = $request->getAttribute('article_id');
         $controller = ControllerFactory::newController('article');
         $controller->update($article_id);
-    } else
-    {
+    } else {
         throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
-
     }
 });
 //Save the updated Article
 $map->post('article.update.save', '/update/article/{article_id}', function ($request) use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $article_id = $request->getAttribute('article_id');
         $data = $request->getParsedBody();
         $controller = ControllerFactory::newController('article');
@@ -107,12 +97,10 @@ $map->post('article.update.save', '/update/article/{article_id}', function ($req
     } else {
         throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
     }
-
 });
 //Delete article
 $map->get('article.delete', '/delete/article/{article_id}', function ($request) use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $article_id = $request->getAttribute('article_id');
         $controller = ControllerFactory::newController('article');
 
@@ -120,7 +108,6 @@ $map->get('article.delete', '/delete/article/{article_id}', function ($request) 
     } else {
         throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
     }
-
 });
 //render the register form
 $map->get('user.register', '/register', function () {
@@ -155,19 +142,14 @@ $map->get('user.logout', '/logout', function () {
     $controller->logout();
 });
 //Get comments
-$map->get('get.comments', '/admin/comments', function () use ($user){
-    if ($user->isAdmin())
-    {
+$map->get('get.comments', '/admin/comments', function () use ($user) {
+    if ($user->isAdmin()) {
         $controller = ControllerFactory::newController('commentaire');
 
         $controller->getAll();
-    }
-    else
-    {
+    } else {
         throw new Exception('Vous n\'avez pas accès a cette page ');
     }
-
-
 });
 //Save comment
 $map->post('save.comment', '/save/comment/{article_id}', function ($request) {
@@ -179,49 +161,37 @@ $map->post('save.comment', '/save/comment/{article_id}', function ($request) {
     $controller->save($articleId, $auteur, $contenu);
 });
 //Valide comment
-$map->get('valide.comment', '/valide/{commentaire_id}', function ($request) use ($user){
-    if ($user->isAdmin())
-    {
+$map->get('valide.comment', '/valide/{commentaire_id}', function ($request) use ($user) {
+    if ($user->isAdmin()) {
         $commentaire_id = $request->getAttribute('commentaire_id');
         $controller = ControllerFactory::newController('commentaire');
 
         $controller->setValide($commentaire_id);
-    }
-    else
-    {
+    } else {
         throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
     }
-
 });
 //Invalide comment
 $map->get('invalide.comment', '/invalide/{commentaire_id}', function ($request) use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $commentaire_id = $request->getAttribute('commentaire_id');
         $controller = ControllerFactory::newController('commentaire');
 
         $controller->setInvalide($commentaire_id);
-    }
-    else
-    {
+    } else {
         throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
     }
-
 });
 //Delete comment
 $map->get('delete.comment', '/delete/comment/{commentaire_id}', function ($request) use ($user) {
-    if ($user->isAdmin())
-    {
+    if ($user->isAdmin()) {
         $commentaire_id = $request->getAttribute('commentaire_id');
         $controller = ControllerFactory::newController('commentaire');
 
         $controller->delete($commentaire_id);
-    }
-    else
-    {
+    } else {
         throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
     }
-
 });
 
 

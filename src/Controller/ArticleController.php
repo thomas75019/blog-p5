@@ -78,7 +78,6 @@ class ArticleController extends DoctrineLoader
      */
     public function create()
     {
-
         echo $this->twig->render('forms/createArticle.html.twig');
     }
 
@@ -144,7 +143,6 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/update/article');
         }
-
     }
 
     /**
@@ -165,6 +163,5 @@ class ArticleController extends DoctrineLoader
             $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $e->getMessage());
             return $this->redirect('/list/article');
         }
-
     }
 }

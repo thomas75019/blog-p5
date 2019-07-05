@@ -52,12 +52,10 @@ class CommentaireController extends DoctrineLoader
             $this->flashMessage->success('Commentaire ajouté');
 
             return $this->redirect('/read/' . $article->getSlug());
-
         } catch (\Exception $e) {
             $this->flashMessage->error('Erreur lors de l\'ajout du commentaire');
             return $this->redirect('/read/' . $article->getslug());
         }
-
     }
 
     /**
@@ -96,7 +94,6 @@ class CommentaireController extends DoctrineLoader
             $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
             return $this->redirect('/admin/comments');
         }
-
     }
 
 
@@ -118,6 +115,5 @@ class CommentaireController extends DoctrineLoader
             $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
             return $this->redirect('/admin/comments');
         }
-
     }
 }
