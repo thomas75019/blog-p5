@@ -11,7 +11,6 @@ namespace Blog\Controller;
 use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
-use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
 
 class ArticleController extends DoctrineLoader
@@ -90,27 +89,22 @@ class ArticleController extends DoctrineLoader
     {
         $user = unserialize($_SESSION['user']);
 
-        if (!isset($_SESSION['user']) && !$user->isAdmin()) {
-            $this->redirect('/login');
-        } else {
-            $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($user->getId());
+        $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($user->getId());
 
-            try {
-                $article = new Article();
+        try {
+            $article = new Article();
 
-                $article->hydrate($data);
-                $article->setAuteur($auteur);
+            $article->hydrate($data);
+            $article->setAuteur($auteur);
 
-                $this->entityManager->persist($article);
-                $this->entityManager->flush();
-                $this->flashMessage->success('L\'article a bien été ajouté');
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a bien été ajouté');
 
-                return $this->redirect('/list/article');
-            } catch (\Exception $e) {
-                $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $e->getMessage());
-                return $this->redirect('/create/article');
-            }
-
+            return $this->redirect('/list/article');
+        } catch (\Exception $e) {
+            $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $e->getMessage());
+            return $this->redirect('/create/article');
         }
     }
 
