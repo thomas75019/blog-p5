@@ -153,6 +153,10 @@ class Utilisateur
         }
     }
 
+    /**
+     * Check if user is Admin
+     * @return bool
+     */
     public function isAdmin()
     {
         if ($this->type === self::UTILISATEUR)
