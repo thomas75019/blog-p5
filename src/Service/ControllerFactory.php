@@ -21,7 +21,8 @@ class ControllerFactory
      */
     public static function newController($controller_name)
     {
-        switch (strtolower($controller_name)) {
+        switch (strtolower($controller_name))
+        {
             case 'article':
                 $controller = new ArticleController();
                 break;
