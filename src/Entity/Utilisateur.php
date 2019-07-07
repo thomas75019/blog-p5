@@ -22,7 +22,7 @@ class Utilisateur
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected $id_utilisateur;
 
     /**
      * @ORM\Column(type="string")
@@ -64,15 +64,15 @@ class Utilisateur
      */
     public function getId()
     {
-        return $this->id;
+        return $this->id_utilisateur;
     }
 
     /**
-     * @param int $id Id
+     * @param int $id_utilisateur Id
      */
-    public function setId($id)
+    public function setId($id_utilisateur)
     {
-        $this->id = $id;
+        $this->id_utilisateur = $id_utilisateur;
     }
 
     /**
@@ -124,6 +124,8 @@ class Utilisateur
     }
 
     /**
+     * set user type
+     *
      * @param self $type Type
      */
     public function setType($type)
@@ -135,6 +137,8 @@ class Utilisateur
      * Hydrate the object
      *
      * @param array $data Data
+     *
+     * @return void
      */
     public function hydrate($data)
     {

@@ -17,7 +17,7 @@ class Commentaire
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected $id_comment;
 
     /**
      * @ORM\Column(type="text")
@@ -53,11 +53,11 @@ class Commentaire
     }
 
     /**
-     * @param int  $id
+     * @param int $id_comment ID
      */
-    public function setId($id)
+    public function setId($id_comment)
     {
-        $this->id = $id;
+        $this->id_comment = $id_comment;
     }
 
     /**
@@ -65,7 +65,7 @@ class Commentaire
      */
     public function getId()
     {
-        return $this->id;
+        return $this->id_comment;
     }
 
     /**

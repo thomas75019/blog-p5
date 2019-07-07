@@ -21,7 +21,7 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    public $id;
+    public $id_article;
 
     /**
      * @ORM\Column(type="string")
@@ -69,11 +69,11 @@ class Article
     }
 
     /**
-     * @param int $id Article ID
+     * @param int $id_article Article ID
      */
-    public function setId($id)
+    public function setId($id_article)
     {
-        $this->id = $id;
+        $this->id_article = $id_article;
     }
 
     /**
@@ -81,7 +81,7 @@ class Article
      */
     public function getId()
     {
-        return $this->id;
+        return $this->id_article;
     }
 
     /**
@@ -174,6 +174,8 @@ class Article
 
     /**
      * @param string $contenu Contenu
+     *
+     * @return void
      */
     public function setContenu($contenu)
     {
@@ -181,9 +183,11 @@ class Article
     }
 
     /**
+     * Hydrate the object
+     *
      * @param array $data Data
      *
-     * @return Article
+     * @return void
      */
     public function hydrate($data)
     {
