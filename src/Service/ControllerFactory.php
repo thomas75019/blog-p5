@@ -19,7 +19,7 @@ class ControllerFactory
     /**
      * Creates a new Controller class instance
      *
-     * @param string  $controller_name
+     * @param string $controller_name
      *
      * @return ArticleController|UtilisateurController|CommentaireController
      *

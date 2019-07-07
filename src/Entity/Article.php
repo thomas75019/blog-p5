@@ -12,7 +12,7 @@ use Blog\Service\Chapo;
  * Entity Article
  *
  * @ORM\Entity
- * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"titre", "slug"})})
+ * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"slug"})})
  */
 class Article
 {

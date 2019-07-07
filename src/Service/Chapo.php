@@ -21,7 +21,7 @@ namespace Blog\Service;
 class Chapo
 {
     /**
-     * @param string  $contenu
+     * @param string $contenu
      *
      * @return string
      */

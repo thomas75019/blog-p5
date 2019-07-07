@@ -12,8 +12,8 @@ class Mail
     /**
      * Send an contact email
      *
-     * @param string  $message
-     * @param string  $contactEmail
+     * @param string $message
+     * @param string $contactEmail
      */
     public static function sendContact($message, $contactEmail)
     {
