@@ -39,9 +39,10 @@ class ArticleController extends DoctrineLoader
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render(
-            'front/index.html.twig', [
-            'articles' => $articles
-        ]);
+                'front/index.html.twig', [
+                'articles' => $articles
+            ]
+        );
     }
 
     /**
@@ -56,7 +57,7 @@ class ArticleController extends DoctrineLoader
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render(
-                'back/articles.html.twig', [
+            'back/articles.html.twig', [
                 'articles' => $articles
             ]
         );
