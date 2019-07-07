@@ -17,7 +17,7 @@ class Commentaire
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id_comment;
+    protected $id;
 
     /**
      * @ORM\Column(type="text")
@@ -55,9 +55,9 @@ class Commentaire
     /**
      * @param int $id_comment ID
      */
-    public function setId($id_comment)
+    public function setId($id)
     {
-        $this->id_comment = $id_comment;
+        $this->id = $id;
     }
 
     /**
@@ -65,7 +65,7 @@ class Commentaire
      */
     public function getId()
     {
-        return $this->id_comment;
+        return $this->id;
     }
 
     /**
@@ -145,7 +145,11 @@ class Commentaire
     }
 
     /**
+     * Hydrate object
+     *
      * @param array $data Data
+     *
+     * @return void
      */
     public function hydrate($data)
     {

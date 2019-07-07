@@ -71,10 +71,10 @@ class ArticleController extends DoctrineLoader
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
         $commentaires = $commentaireRepo->findBy(
-                [
-                    'article' => $article,
-                    'valide' => false
-                ]
+            [
+                'article' => $article,
+                'valide' => false
+            ]
         );
 
         echo $this->twig->render(
@@ -142,9 +142,9 @@ class ArticleController extends DoctrineLoader
         $article = $articleRep->find($article_id);
 
         echo $this->twig->render(
-                'forms/updateArticle.html.twig', [
-                    'article' => $article
-                ]
+            'forms/updateArticle.html.twig', [
+                'article' => $article
+            ]
         );
     }
 
@@ -153,6 +153,8 @@ class ArticleController extends DoctrineLoader
      *
      * @param array $data       Data
      * @param int   $article_id Article Id
+     *
+     * @return void
      */
     public function saveUpdate($data, $article_id)
     {

@@ -22,7 +22,7 @@ class Utilisateur
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id_utilisateur;
+    protected $id;
 
     /**
      * @ORM\Column(type="string")
@@ -64,15 +64,15 @@ class Utilisateur
      */
     public function getId()
     {
-        return $this->id_utilisateur;
+        return $this->id;
     }
 
     /**
      * @param int $id_utilisateur Id
      */
-    public function setId($id_utilisateur)
+    public function setId($id)
     {
-        $this->id_utilisateur = $id_utilisateur;
+        $this->id = $id;
     }
 
     /**

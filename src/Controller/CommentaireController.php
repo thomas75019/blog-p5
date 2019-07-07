@@ -114,6 +114,8 @@ class CommentaireController extends DoctrineLoader
      * Delete a comment
      *
      * @param string $commentaire_id Commentaire ID
+     *
+     * @return void
      */
     public function delete($commentaire_id)
     {

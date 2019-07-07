@@ -14,7 +14,7 @@ class ControllerFactory
      *
      * @param string $controller_name Controller name
      *
-     * @return ArticleController|UtilisateurController|CommentaireController
+     * @return ArticleController|UtilisateurController|CommentaireController|ContactController
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Exception
@@ -32,7 +32,7 @@ class ControllerFactory
                 $controller = new CommentaireController();
                 break;
             case 'contact':
-                $controller = new ContactController();
+                $controller = new ContactController(new Mail());
                 break;
             default:
                 throw new \Exception('Unkown controller');

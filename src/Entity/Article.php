@@ -21,7 +21,7 @@ class Article
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    public $id_article;
+    public $id;
 
     /**
      * @ORM\Column(type="string")
@@ -71,9 +71,9 @@ class Article
     /**
      * @param int $id_article Article ID
      */
-    public function setId($id_article)
+    public function setId($id)
     {
-        $this->id_article = $id_article;
+        $this->id = $id;
     }
 
     /**
@@ -81,7 +81,7 @@ class Article
      */
     public function getId()
     {
-        return $this->id_article;
+        return $this->$id;
     }
 
     /**

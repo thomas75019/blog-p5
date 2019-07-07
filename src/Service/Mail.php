@@ -7,12 +7,12 @@ class Mail
     /**
      * Send an contact email
      *
-     * @param string $message Message
+     * @param string $message      Message
      * @param string $contactEmail Email
      *
      * @return Mail
      */
-    public static function sendContact($message, $contactEmail)
+    public function sendContact($message, $contactEmail)
     {
         mail(
             'tlarousse3@gmail.com',

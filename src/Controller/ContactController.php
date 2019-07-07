@@ -7,6 +7,14 @@ use Blog\Service\Mail;
 
 class ContactController extends DoctrineLoader
 {
+    private $mail;
+
+    public function __construct(Mail $mail)
+    {
+        parent::__construct();
+        $this->mail = $mail;
+    }
+
     /**
      * Render contact view
      *
@@ -24,12 +32,14 @@ class ContactController extends DoctrineLoader
      *
      * @param array $data Datas
      *
+     * @return void
+     *
      * @throws \Exception
      */
     public function contactSend($data)
     {
         try {
-            Mail::sendContact($data['message'], $data['email']);
+            $this->mail->sendContact($data['message'], $data['email']);
             $this->flashMessage->success('Le message à bien été envoyé');
             return $this->redirect('/contact');
         } catch (\Exception $e) {
