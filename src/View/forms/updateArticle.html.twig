@@ -1,0 +1,8 @@
+<form action="/update/article/{{ article.id }}" method="post">
+    <label for="titre">Titre</label>
+    <input type="text" name="titre" content="{{ article.title }}" required>
+    <label for="contenu">Contenu de l'article</label>
+    <textarea name="contenu" content="{{ article.contenu }}" required>
+    </textarea>
+    <input type="submit" name="submit">
+</form>
