@@ -9,7 +9,7 @@ class Chapo
      *
      * @return string
      */
-    public static function createChapo($contenu)
+    public function createChapo($contenu)
     {
         $chapo = substr($contenu, 0, 150);
 

@@ -68,20 +68,13 @@ class Article
         $this->commentaires = new ArrayCollection();
     }
 
-    /**
-     * @param int $id_article Article ID
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return integer
      */
     public function getId()
     {
-        return $this->$id;
+        return $this->id;
     }
 
     /**
@@ -189,13 +182,13 @@ class Article
      *
      * @return void
      */
-    public function hydrate($data)
+    public function hydrate($data, Slug $sluger, Chapo $chapo)
     {
         $titre = $data['titre'];
         $contenu = $data['contenu'];
 
-        $this->setChapo(Chapo::createChapo($contenu));
-        $this->setSlug(Slug::Slugger($titre));
+        $this->setChapo($chapo->createChapo($contenu));
+        $this->setSlug($sluger->slugger($titre));
 
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);

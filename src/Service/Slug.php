@@ -11,7 +11,7 @@ class Slug
      *
      * @return string
      */
-    public static function slugger($titre)
+    public function slugger($titre)
     {
         return str_replace(' ', '-', $titre);
     }

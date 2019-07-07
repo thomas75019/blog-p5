@@ -6,6 +6,8 @@ use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
+use Blog\Service\Chapo;
+use Blog\Service\Slug;
 
 class ArticleController extends DoctrineLoader
 {
@@ -112,7 +114,7 @@ class ArticleController extends DoctrineLoader
         try {
             $article = new Article();
 
-            $article->hydrate($data);
+            $article->hydrate($data, new Slug(), new Chapo());
             $article->setAuteur($auteur);
 
             $this->entityManager->persist($article);
