@@ -18,7 +18,11 @@ use Blog\Entity\Utilisateur;
  */
 class ArticleController extends DoctrineLoader
 {
+    const ERR_ADD = 'Erreur dans l\'ajout de l\'article :';
 
+    const ERR_DEL = 'Erreur lors de la mise à jour de l\'article: ';
+
+    const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
     /**
      * Render the index page
      *
@@ -124,7 +128,7 @@ class ArticleController extends DoctrineLoader
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $msg);
+            $this->flashMessage->error(self::ERR_ADD . $msg);
             return $this->redirect('/create/article');
         }
     }
@@ -167,7 +171,8 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/read/' . $article->getSlug());
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur lors de la mise à jour de l\'article: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_UPDATE . $msg);
 
             return $this->redirect('/update/article');
         }
@@ -191,7 +196,7 @@ class ArticleController extends DoctrineLoader
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $msg);
+            $this->flashMessage->error(self::ERR_DEL . $msg);
             return $this->redirect('/list/article');
         }
     }
