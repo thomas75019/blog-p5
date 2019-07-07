@@ -21,8 +21,8 @@ $routerContainer = new Aura\Router\RouterContainer();
 $map = $routerContainer->getMap();
 
 //Home Route
-$map->get('blog.home', '/', function ()
-{
+$map->get(
+    'blog.home', '/', function () {
     $controller = ControllerFactory::newController('article');
     $controller->getAll();
 });

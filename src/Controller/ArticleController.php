@@ -9,6 +9,7 @@ use Blog\Entity\Utilisateur;
 
 /**
  * Class ArticleController
+ *
  * @package Blog\Controller
  */
 class ArticleController extends DoctrineLoader
