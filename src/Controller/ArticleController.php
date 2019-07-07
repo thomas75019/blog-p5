@@ -12,6 +12,10 @@ use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 
+/**
+ * Class ArticleController
+ * @package Blog\Controller
+ */
 class ArticleController extends DoctrineLoader
 {
 
@@ -43,7 +47,8 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        echo $this->twig->render('back/articles.html.twig',[
+        echo $this->twig->render(
+            'back/articles.html.twig', [
             'articles' => $articles
         ]);
     }
@@ -51,7 +56,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Render a single article page
      *
-     * @param string  $slug
+     * @param string  $slug Slug
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -60,21 +65,25 @@ class ArticleController extends DoctrineLoader
     public function getOneBySlug($slug)
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
-        $article = $articleRepo->findOneBy([
+        $article = $articleRepo->findOneBy(
+        [
             'slug' => $slug
         ]);
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
-        $commentaires = $commentaireRepo->findBy([
+        $commentaires = $commentaireRepo->findBy(
+        [
             'article' => $article,
             'valide' => false
-        ]);
+        ]
+        );
 
         echo $this->twig->render(
             'front/viewOne.html.twig', [
             'article' => $article,
             'commentaires' => $commentaires
-        ]);
+        ]
+        );
     }
 
     /**
@@ -92,7 +101,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Save the article in database
      *
-     * @param array  $data
+     * @param array  $data Data
      */
     public function save($data)
     {
@@ -122,7 +131,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Render the update article page
      *
-     * @param int  $article_id
+     * @param int  $article_id Article Id
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -142,8 +151,8 @@ class ArticleController extends DoctrineLoader
     /**
      * Save the updates
      *
-     * @param array  $data
-     * @param int $article_id
+     * @param array  $data Data
+     * @param int $article_id Article Id
      */
     public function saveUpdate($data, $article_id)
     {
@@ -166,7 +175,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Remove the Article
      *
-     * @param string  $article_id
+     * @param string  $article_id Article ID
      */
     public function delete($article_id)
     {
