@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class Utilisateur
+ * Entity Utilisateur
+ *
  * @ORM\Entity
  * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="user_idx", columns={"email", "pseudo"})})
  */
@@ -44,7 +45,7 @@ class Utilisateur
     protected $type;
 
     /**
-     *@ORM\OneToMany(targetEntity="Article", mappedBy="articles")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="articles")
      */
     protected $articles;
 
@@ -67,7 +68,7 @@ class Utilisateur
     }
 
     /**
-     * @param $id integer
+     * @param int  $id
      */
     public function setId($id)
     {
@@ -83,7 +84,7 @@ class Utilisateur
     }
 
     /**
-     * @param $email string
+     * @param string  $email
      */
     public function setEmail($email)
     {
@@ -99,7 +100,7 @@ class Utilisateur
     }
 
     /**
-     * @param $mot_de_passe string
+     * @param string  $mot_de_passe
      */
     public function setMotDePasse($mot_de_passe)
     {
@@ -107,7 +108,7 @@ class Utilisateur
     }
 
     /**
-     * @param $pseudo string
+     * @param string  $pseudo
      */
     public function setPseudo($pseudo)
     {
@@ -123,7 +124,7 @@ class Utilisateur
     }
 
     /**
-     * @param $type
+     * @param self  $type
      */
     public function setType($type)
     {
@@ -132,7 +133,8 @@ class Utilisateur
 
     /**
      * Hydrate the object
-     * @param $data Object
+     *
+     * @param array  $data
      */
     public function hydrate($data)
     {
@@ -149,6 +151,7 @@ class Utilisateur
 
     /**
      * Check if user is Admin
+     *
      * @return bool
      */
     public function isAdmin()

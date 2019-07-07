@@ -1,15 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 05/07/2019
- * Time: 19:13
- */
 
 namespace Blog\Service;
 
+/**
+ * Class Mail
+ * @package Blog\Service
+ */
 class Mail
 {
+    /**
+     * Send an contact email
+     *
+     * @param string  $message
+     * @param string  $contactEmail
+     */
     public static function sendContact($message, $contactEmail)
     {
         mail(

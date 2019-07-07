@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 06/06/2019
- * Time: 15:30
- */
 
 namespace Blog\Controller;
 
@@ -22,6 +16,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render the index page
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -37,6 +32,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render the page with all articles
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -52,6 +48,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render a single article page
+     *
      * @param string  $slug
      *
      * @throws \Twig\Error\LoaderError
@@ -77,6 +74,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render create Article form
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -88,6 +86,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Save the article in database
+     *
      * @param array  $data
      */
     public function save($data)
@@ -115,6 +114,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Render the update article page
+     *
      * @param int  $article_id
      *
      * @throws \Twig\Error\LoaderError
@@ -134,6 +134,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Save the updates
+     *
      * @param array  $data
      * @param int $article_id
      */
@@ -156,6 +157,7 @@ class ArticleController extends DoctrineLoader
 
     /**
      * Remove the Article
+     *
      * @param string  $article_id
      */
     public function delete($article_id)

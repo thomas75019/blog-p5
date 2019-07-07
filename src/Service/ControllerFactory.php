@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 09/06/2019
- * Time: 19:12
- */
 
 namespace Blog\Service;
 
@@ -13,11 +7,19 @@ use Blog\Controller\CommentaireController;
 use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
 
+/**
+ * Class ControllerFactory
+ * @package Blog\Service
+ */
 class ControllerFactory
 {
     /**
-     * @param $controller_name string
+     * Creates a new Controller class instance
+     *
+     * @param string  $controller_name
+     *
      * @return ArticleController|UtilisateurController|CommentaireController
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Exception
      */

@@ -5,6 +5,8 @@ namespace Blog\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Entity Commentaire
+ *
  * @ORM\Entity
  * @ORM\Table(name="commentaires")
  */
@@ -51,7 +53,7 @@ class Commentaire
     }
 
     /**
-     * @param $id int
+     * @param int  $id
      */
     public function setId($id)
     {
@@ -69,14 +71,14 @@ class Commentaire
     /**
      * @return bool
      */
-    public function getValide()
+    public function isValide()
     {
         return $this->valide;
     }
 
 
     /**
-     * @param $valide bool
+     * @param bool  $valide
      */
     public function setValide($valide)
     {
@@ -93,7 +95,7 @@ class Commentaire
 
 
     /**
-     * @param $date \DateTime
+     * @param \DateTime  $date
      */
     public function setDate($date)
     {
@@ -111,7 +113,7 @@ class Commentaire
 
 
     /**
-     * @param $contenu string
+     * @param string  $contenu
      */
     public function setContenu($contenu)
     {
@@ -119,7 +121,7 @@ class Commentaire
     }
 
     /**
-     * @param $auteur Utilisateur
+     * @param object  $auteur
      */
     public function setAuteur($auteur)
     {
@@ -135,13 +137,16 @@ class Commentaire
     }
 
     /**
-     * @param $article Article
+     * @param object  $article
      */
     public function setArticle($article)
     {
         $this->article = $article;
     }
 
+    /**
+     * @param array  $data
+     */
     public function hydrate($data)
     {
         foreach ($data as $key => $value) {

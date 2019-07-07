@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 06/06/2019
- * Time: 20:34
- */
 
 namespace Blog\Controller;
 
@@ -15,6 +9,7 @@ use Blog\Entity\Utilisateur;
 
 /**
  * Class CommentaireController
+ *
  * @package Blog\Controller
  */
 class CommentaireController extends DoctrineLoader
@@ -22,6 +17,7 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * Render the page with the list of comments
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -37,6 +33,7 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * Save a comment in database
+     *
      * @param int $article_id
      * @param Utilisateur $auteur
      * @param string $contenu
@@ -65,7 +62,9 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * Set a comment as valid
-     * @param string $commentaire_id
+     *
+     * @param string  $commentaire_id
+     *
      * @throws \Doctrine\ORM\ORMException
      */
     public function setValide($commentaire_id)
@@ -83,7 +82,8 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * Set a comment as invalid
-     * @param string $commentaire_id
+     *
+     * @param string  $commentaire_id
      */
     public function setInvalide($commentaire_id)
     {
@@ -106,7 +106,8 @@ class CommentaireController extends DoctrineLoader
 
     /**
      * Delete a comment
-     * @param string $commentaire_id
+     *
+     * @param string  $commentaire_id
      */
     public function delete($commentaire_id)
     {

@@ -4,13 +4,15 @@ namespace Blog\Service;
 
 /**
  * Class Slug
+ *
  * @package Blog\Service
  */
 class Slug
 {
     /**
      * Creates slug
-     * @param $titre string
+     *
+     * @param string  $titre
      * @return string
      */
     public static function slugger($titre)

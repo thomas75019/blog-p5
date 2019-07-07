@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 05/07/2019
- * Time: 18:57
- */
 
 namespace Blog\Controller;
 
@@ -13,12 +7,14 @@ use Blog\Service\Mail;
 
 /**
  * Class ContactController
+ *
  * @package Blog\Controller
  */
 class ContactController extends DoctrineLoader
 {
     /**
      * Render contact view
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -30,6 +26,7 @@ class ContactController extends DoctrineLoader
 
     /**
      * Send the email
+     *
      * @param array  $data
      */
     public function contactSend($data)

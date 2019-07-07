@@ -9,7 +9,8 @@ use Blog\Service\Slug;
 use Blog\Service\Chapo;
 
 /**
- * Class Article
+ * Entity Article
+ *
  * @ORM\Entity
  * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"titre", "slug"})})
  */
@@ -85,7 +86,7 @@ class Article
     }
 
     /**
-     * @param $titre string
+     * @param string  $titre
      */
     public function setTitre($titre)
     {
@@ -101,7 +102,7 @@ class Article
     }
 
     /**
-     * @param $chapo string
+     * @param string  $chapo
      */
     public function setChapo($chapo)
     {
@@ -117,7 +118,7 @@ class Article
     }
 
     /**
-     * @param $slug string
+     * @param string  $slug
      */
     public function setSlug($slug)
     {
@@ -149,7 +150,7 @@ class Article
     }
 
     /**
-     * @param $auteur Utilisateur
+     * @param object  $auteur
      */
     public function setAuteur($auteur)
     {
@@ -173,7 +174,7 @@ class Article
     }
 
     /**
-     * @param $contenu string
+     * @param string  $contenu
      */
     public function setContenu($contenu)
     {
@@ -181,7 +182,7 @@ class Article
     }
 
     /**
-     * @param $data
+     * @param array  $data
      */
     public function hydrate($data)
     {
