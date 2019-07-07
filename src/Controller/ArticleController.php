@@ -56,7 +56,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Render a single article page
      *
-     * @param string  $slug Slug
+     * @param string $slug Slug
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -66,16 +66,17 @@ class ArticleController extends DoctrineLoader
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->findOneBy(
-        [
-            'slug' => $slug
-        ]);
+            [
+                'slug' => $slug
+            ]
+        );
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
         $commentaires = $commentaireRepo->findBy(
-        [
-            'article' => $article,
-            'valide' => false
-        ]
+            [
+                'article' => $article,
+                'valide' => false
+            ]
         );
 
         echo $this->twig->render(
@@ -101,7 +102,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Save the article in database
      *
-     * @param array  $data Data
+     * @param array $data Data
      */
     public function save($data)
     {
@@ -131,7 +132,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Render the update article page
      *
-     * @param int  $article_id Article Id
+     * @param int $article_id Article Id
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -151,8 +152,8 @@ class ArticleController extends DoctrineLoader
     /**
      * Save the updates
      *
-     * @param array  $data Data
-     * @param int $article_id Article Id
+     * @param array  $data       Data
+     * @param int    $article_id Article Id
      */
     public function saveUpdate($data, $article_id)
     {
@@ -175,7 +176,7 @@ class ArticleController extends DoctrineLoader
     /**
      * Remove the Article
      *
-     * @param string  $article_id Article ID
+     * @param string $article_id Article ID
      */
     public function delete($article_id)
     {
