@@ -21,11 +21,11 @@ $routerContainer = new Aura\Router\RouterContainer();
 $map = $routerContainer->getMap();
 
 //Home Route
-$map->get('blog.home', '/', function () {
+$map->get('blog.home', '/', function ()
+{
     $controller = ControllerFactory::newController('article');
     $controller->getAll();
-}
-);
+});
 //View One route
 $map->get('blog.viewOne', '/read/{slug}', function ($request) {
     $slug = (string) $request->getAttribute('slug');
