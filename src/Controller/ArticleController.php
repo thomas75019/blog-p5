@@ -3,7 +3,8 @@
  * ArticleController
  *
  * @package Blog\Controller
- * @see \Blog\DoctrineLoader
+ *
+ * @see     \Blog\DoctrineLoader
  */
 
 namespace Blog\Controller;
@@ -12,7 +13,6 @@ use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
-use Zend\Diactoros\Response\RedirectResponse;
 
 /**
  * Class ArticleController
@@ -26,6 +26,7 @@ class ArticleController extends DoctrineLoader
     const ERR_DEL = 'Erreur lors de la mise à jour de l\'article: ';
 
     const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
+
     /**
      * Render the index page
      *
@@ -55,9 +56,10 @@ class ArticleController extends DoctrineLoader
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render(
-            'back/articles.html.twig', [
-            'articles' => $articles
-        ]);
+                'back/articles.html.twig', [
+                'articles' => $articles
+            ]
+        );
     }
 
     /**
@@ -73,9 +75,9 @@ class ArticleController extends DoctrineLoader
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->findOneBy(
-            [
-                'slug' => $slug
-            ]
+                [
+                    'slug' => $slug
+                ]
         );
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
@@ -87,10 +89,10 @@ class ArticleController extends DoctrineLoader
         );
 
         echo $this->twig->render(
-                'front/viewOne.html.twig', [
-                'article' => $article,
-                'commentaires' => $commentaires
-            ]
+                    'front/viewOne.html.twig', [
+                        'article' => $article,
+                        'commentaires' => $commentaires
+                    ]
         );
     }
 
@@ -152,8 +154,8 @@ class ArticleController extends DoctrineLoader
 
         echo $this->twig->render(
                 'forms/updateArticle.html.twig', [
-                'article' => $article
-            ]
+                    'article' => $article
+                ]
         );
     }
 

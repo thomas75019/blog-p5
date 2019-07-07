@@ -3,7 +3,7 @@
  * Blog Index
  *
  * @author Thomas Larousse <tlarousse3@gmail.com>
- * @link undefined
+ * @link   undefined
  */
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
@@ -90,7 +90,9 @@ $map->post(
     });
 //Render the article
 $map->get(
-    'article.update', '/update/article/{article_id}', function ($request, $user) {
+    'article.update',
+    '/update/article/{article_id}',
+    function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
@@ -101,7 +103,9 @@ $map->get(
     });
 //Save the updated Article
 $map->post(
-    'article.update.save', '/update/article/{article_id}', function ($request, $user) {
+    'article.update.save',
+    '/update/article/{article_id}',
+    function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $data = $request->getParsedBody();
@@ -114,7 +118,9 @@ $map->post(
     });
 //Delete article
 $map->get(
-    'article.delete', '/delete/article/{article_id}', function ($request, $user) {
+    'article.delete',
+    '/delete/article/{article_id}',
+    function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
@@ -183,7 +189,9 @@ $map->post(
     });
 //Valide comment
 $map->get(
-    'valide.comment', '/valide/{commentaire_id}', function ($request) use ($user) {
+    'valide.comment',
+    '/valide/{commentaire_id}',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $commentaire_id = $request->getAttribute('commentaire_id');
             $controller = ControllerFactory::newController('commentaire');
@@ -195,7 +203,9 @@ $map->get(
     });
 //Invalide comment
 $map->get(
-    'invalide.comment', '/invalide/{commentaire_id}', function ($request) use ($user) {
+    'invalide.comment',
+    '/invalide/{commentaire_id}',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $commentaire_id = $request->getAttribute('commentaire_id');
             $controller = ControllerFactory::newController('commentaire');
@@ -207,7 +217,9 @@ $map->get(
     });
 //Delete comment
 $map->get(
-    'delete.comment', '/delete/comment/{commentaire_id}', function ($request) use ($user) {
+    'delete.comment',
+    '/delete/comment/{commentaire_id}',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $commentaire_id = $request->getAttribute('commentaire_id');
             $controller = ControllerFactory::newController('commentaire');

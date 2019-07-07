@@ -4,6 +4,7 @@ namespace Blog\Service;
 
 /**
  * Class Mail
+ *
  * @package Blog\Service
  */
 class Mail

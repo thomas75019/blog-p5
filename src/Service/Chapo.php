@@ -5,6 +5,7 @@
  * Creates a chapo
  *
  * @package Blog\Service
+ *
  * @see \Blog\Entity\Article::hydrate()
  */
 
