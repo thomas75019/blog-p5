@@ -1,20 +1,7 @@
 <?php
-/**
- * Class Slug
- *
- * @see  \Blog\Entity\Article::hydrate()
- * @link undefined
- */
 
 namespace Blog\Service;
 
-/**
- * Class Slug
- *
- * @package Blog\Service
- *
- * @link undefined
- */
 class Slug
 {
     /**

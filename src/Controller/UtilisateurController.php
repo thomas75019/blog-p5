@@ -1,22 +1,11 @@
 <?php
-/**
- * Class UtilisateurController
- *
- * @package Blog\Controller
- *
- * @see \Blog\DoctrineLoader
- */
 
 namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
 use Blog\Entity\Utilisateur;
+use http\Env\Response;
 
-/**
- * Class UtilisateurController
- *
- * @package Blog\Controller
- */
 class UtilisateurController extends DoctrineLoader
 {
     /**
@@ -41,13 +30,13 @@ class UtilisateurController extends DoctrineLoader
      */
     public function createUser($data)
     {
-        $em = $this->entityManager;
+        $entityManager = $this->entityManager;
         $user = new Utilisateur();
 
         $user->hydrate($data);
 
-        $em->persist($user);
-        $em->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
     }
 
     /**
@@ -60,7 +49,8 @@ class UtilisateurController extends DoctrineLoader
      */
     public function delete($user_id)
     {
-        $user = $this->entityManager->getRepository(Utilisateur::class)->find($user_id);
+        $userRepo = $this->entityManager->getRepository(Utilisateur::class);
+        $user = $userRepo->find($user_id);
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
@@ -110,6 +100,8 @@ class UtilisateurController extends DoctrineLoader
 
     /**
      * Logout the user and redirect to homepage
+     *
+     * @return redirect
      */
     public function logout()
     {

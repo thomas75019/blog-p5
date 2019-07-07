@@ -1,11 +1,4 @@
 <?php
-/**
- * CommentaireController
- *
- * @package Blog\Controller
- *
- * @see \Blog\DoctrineLoader
- */
 
 namespace Blog\Controller;
 
@@ -14,11 +7,6 @@ use Blog\Entity\Commentaire;
 use Blog\DoctrineLoader;
 use Blog\Entity\Utilisateur;
 
-/**
- * Class CommentaireController
- *
- * @package Blog\Controller
- */
 class CommentaireController extends DoctrineLoader
 {
 
@@ -37,7 +25,7 @@ class CommentaireController extends DoctrineLoader
         $comments = $commentRepo->findAll();
 
         echo $this->twig->render(
-                'back/viewAllComments.html.twig', [
+            'back/viewAllComments.html.twig', [
                 'commentaires' => $comments
             ]
         );

@@ -1,11 +1,4 @@
 <?php
-/**
- * ArticleController
- *
- * @package Blog\Controller
- *
- * @see     \Blog\DoctrineLoader
- */
 
 namespace Blog\Controller;
 
@@ -14,11 +7,6 @@ use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 
-/**
- * Class ArticleController
- *
- * @package Blog\Controller
- */
 class ArticleController extends DoctrineLoader
 {
     const ERR_ADD = 'Erreur dans l\'ajout de l\'article :';
@@ -90,10 +78,10 @@ class ArticleController extends DoctrineLoader
         );
 
         echo $this->twig->render(
-                    'front/viewOne.html.twig', [
-                        'article' => $article,
-                        'commentaires' => $commentaires
-                    ]
+            'front/viewOne.html.twig', [
+                'article' => $article,
+                'commentaires' => $commentaires
+            ]
         );
     }
 

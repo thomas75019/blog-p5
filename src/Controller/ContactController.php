@@ -1,22 +1,10 @@
 <?php
-/**
- * Class ContactController
- *
- * @package Blog\Controller
- *
- * @see \Blog\DoctrineLoader
- */
 
 namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
 use Blog\Service\Mail;
 
-/**
- * Class ContactController
- *
- * @package Blog\Controller
- */
 class ContactController extends DoctrineLoader
 {
     /**
@@ -35,6 +23,8 @@ class ContactController extends DoctrineLoader
      * Send the email
      *
      * @param array $data Datas
+     *
+     * @throws \Exception
      */
     public function contactSend($data)
     {

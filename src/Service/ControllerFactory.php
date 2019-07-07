@@ -7,19 +7,12 @@ use Blog\Controller\CommentaireController;
 use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
 
-/**
- * Class ControllerFactory
- *
- * @package Blog\Service
- *
- * @see Index
- */
 class ControllerFactory
 {
     /**
      * Creates a new Controller class instance
      *
-     * @param string $controller_name
+     * @param string $controller_name Controller name
      *
      * @return ArticleController|UtilisateurController|CommentaireController
      *

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Blog\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -70,7 +69,7 @@ class Article
     }
 
     /**
-     * @param $id integer Id
+     * @param int $id Article ID
      */
     public function setId($id)
     {
@@ -183,6 +182,8 @@ class Article
 
     /**
      * @param array $data Data
+     *
+     * @return Article
      */
     public function hydrate($data)
     {
