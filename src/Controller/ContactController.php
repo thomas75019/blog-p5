@@ -27,7 +27,7 @@ class ContactController extends DoctrineLoader
     /**
      * Send the email
      *
-     * @param array  $data
+     * @param array $data
      */
     public function contactSend($data)
     {
@@ -35,8 +35,9 @@ class ContactController extends DoctrineLoader
             Mail::sendContact($data['message'], $data['email']);
             $this->flashMessage->success('Le message à bien été envoyé');
             return $this->redirect('/contact');
-        } catch (\Exception $exception) {
-            $this->flashMessage->error('Une erreur est apparu' . $exception->getCode());
+        } catch (\Exception $e) {
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_GENERIC . $msg);
             return $this->redirect('/contact');
         }
     }

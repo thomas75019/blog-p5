@@ -27,7 +27,7 @@ class UtilisateurController extends DoctrineLoader
     /**
      * Create an user
      *
-     * @param array  $data
+     * @param array $data Datas
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -46,7 +46,7 @@ class UtilisateurController extends DoctrineLoader
     /**
      * Delete an user
      *
-     * @param int  $user_id
+     * @param int $user_id User Id
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -74,7 +74,7 @@ class UtilisateurController extends DoctrineLoader
     /**
      * Log in the user
      *
-     * @param array  $data
+     * @param array $data Datas
      */
     public function login($data)
     {
