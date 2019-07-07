@@ -1,4 +1,9 @@
 <?php
+/**
+ * Index
+ *
+ * @author Thomas Larousse
+ */
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
 
@@ -25,7 +30,7 @@ $map->get(
     'blog.home', '/', function () {
         $controller = ControllerFactory::newController('article');
         $controller->getAll();
-});
+    });
 //View One route
 $map->get(
     'blog.viewOne', '/read/{slug}', function ($request) {
@@ -33,14 +38,14 @@ $map->get(
         $controller = ControllerFactory::newController('article');
 
         $controller->getOneBySlug($slug);
-});
+    });
 //Contact get Route
 $map->get(
     'blog.contact', '/contact', function () {
         $controller = ControllerFactory::newController('contact');
 
         $controller->contactPage();
-});
+    });
 //Send demand from the article controller
 $map->post(
     'blog.contact.send', '/contact/send', function ($request) {
@@ -52,7 +57,7 @@ $map->post(
     });
 //List article for admin
 $map->get(
-    'article.list', '/list/article', function () use ($user) {
+    'article.list', '/list/article', function ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->getList();
@@ -62,7 +67,7 @@ $map->get(
     });
 //Route for the creation
 $map->get(
-    'article.create', '/create/article', function () use ($user) {
+    'article.create', '/create/article', function ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->create();
@@ -72,7 +77,7 @@ $map->get(
     });
 //Save Article Route
 $map->post(
-    'article.save', '/save/article', function ($request) use ($user) {
+    'article.save', '/save/article', function ($request, $user) {
         if ($user->isAdmin()) {
             $data = $request->getParsedBody();
 
@@ -84,7 +89,7 @@ $map->post(
     });
 //Render the article
 $map->get(
-    'article.update', '/update/article/{article_id}', function ($request) use ($user) {
+    'article.update', '/update/article/{article_id}', function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
@@ -95,7 +100,7 @@ $map->get(
     });
 //Save the updated Article
 $map->post(
-    'article.update.save', '/update/article/{article_id}', function ($request) use ($user) {
+    'article.update.save', '/update/article/{article_id}', function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $data = $request->getParsedBody();
@@ -108,7 +113,7 @@ $map->post(
     });
 //Delete article
 $map->get(
-    'article.delete', '/delete/article/{article_id}', function ($request) use ($user) {
+    'article.delete', '/delete/article/{article_id}', function ($request, $user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
@@ -127,7 +132,7 @@ $map->get(
     });
 //Save new user in the database
 $map->post(
-    'user.register.save', '/register', function($request) {
+    'user.register.save', '/register', function ($request) {
         $data = $request->getParsedBody();
         $controller = ControllerFactory::newController('utilisateur');
         $controller->createUser($data);
@@ -156,7 +161,7 @@ $map->get(
     });
 //Get comments
 $map->get(
-    'get.comments', '/admin/comments', function () use ($user) {
+    'get.comments', '/admin/comments', function ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('commentaire');
 

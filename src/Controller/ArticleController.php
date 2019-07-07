@@ -1,4 +1,9 @@
 <?php
+/**
+ * Class ArticleController
+ *
+ * @package Blog\Controller
+ */
 
 namespace Blog\Controller;
 
@@ -7,11 +12,6 @@ use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 
-/**
- * Class ArticleController
- *
- * @package Blog\Controller
- */
 class ArticleController extends DoctrineLoader
 {
 
@@ -26,7 +26,8 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        echo $this->twig->render('front/index.html.twig', [
+        echo $this->twig->render(
+            'front/index.html.twig', [
             'articles' => $articles
         ]);
     }
@@ -58,16 +59,19 @@ class ArticleController extends DoctrineLoader
      */
     public function getOneBySlug($slug)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->findOneBy([
             'slug' => $slug
         ]);
 
-        $commentaires = $this->entityManager->getRepository(Commentaire::class)->findBy([
+        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
+        $commentaires = $commentaireRepo->findBy([
             'article' => $article,
             'valide' => false
         ]);
 
-        echo $this->twig->render('front/viewOne.html.twig', [
+        echo $this->twig->render(
+            'front/viewOne.html.twig', [
             'article' => $article,
             'commentaires' => $commentaires
         ]);
@@ -94,7 +98,8 @@ class ArticleController extends DoctrineLoader
     {
         $user = unserialize($_SESSION['user']);
 
-        $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($user->getId());
+        $auteurRepo = $this->entityManager->getRepository(Utilisateur::class);
+        $auteur = $auteurRepo->find($user->getId());
 
         try {
             $article = new Article();
@@ -108,7 +113,8 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $msg);
             return $this->redirect('/create/article');
         }
     }
@@ -124,11 +130,11 @@ class ArticleController extends DoctrineLoader
      */
     public function update($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
-            'id' => $article_id
-        ]);
+        $articleRep = $this->entityManager->getRepository(Article::class);
+        $article = $articleRep->find($article_id);
 
-        echo $this->twig->render('forms/updateArticle.html.twig', [
+        echo $this->twig->render(
+            'forms/updateArticle.html.twig', [
             'article' => $article
         ]);
     }
@@ -141,7 +147,8 @@ class ArticleController extends DoctrineLoader
      */
     public function saveUpdate($data, $article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->find($article_id);
 
         try {
             $article->hydrate($data);
@@ -163,7 +170,8 @@ class ArticleController extends DoctrineLoader
      */
     public function delete($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->find($article_id);
 
         try {
             $this->entityManager->remove($article);
@@ -172,7 +180,8 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $msg);
             return $this->redirect('/list/article');
         }
     }
