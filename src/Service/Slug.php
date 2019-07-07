@@ -4,7 +4,14 @@ namespace Blog\Service;
 
 class Slug
 {
-    public static function Slugger($titre)
+    /**
+     * Creates slug
+     *
+     * @param string $titre Titre
+     *
+     * @return string
+     */
+    public static function slugger($titre)
     {
         return str_replace(' ', '-', $titre);
     }

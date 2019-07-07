@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Blog\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,9 +8,10 @@ use Blog\Service\Slug;
 use Blog\Service\Chapo;
 
 /**
- * Class Article
+ * Entity Article
+ *
  * @ORM\Entity
- * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"titre", "slug"})})
+ * @ORM\Table(name="articles", indexes={@ORM\Index(name="article_idx", columns={"slug"})})
  */
 class Article
 {
@@ -69,7 +69,7 @@ class Article
     }
 
     /**
-     * @param $id integer
+     * @param int $id_article Article ID
      */
     public function setId($id)
     {
@@ -81,11 +81,11 @@ class Article
      */
     public function getId()
     {
-        return $this->id;
+        return $this->$id;
     }
 
     /**
-     * @param $titre string
+     * @param string $titre Titre
      */
     public function setTitre($titre)
     {
@@ -101,7 +101,7 @@ class Article
     }
 
     /**
-     * @param $chapo string
+     * @param string $chapo Chapo
      */
     public function setChapo($chapo)
     {
@@ -117,7 +117,7 @@ class Article
     }
 
     /**
-     * @param $slug string
+     * @param string $slug Slug
      */
     public function setSlug($slug)
     {
@@ -149,7 +149,7 @@ class Article
     }
 
     /**
-     * @param $auteur Utilisateur
+     * @param object $auteur Auteur
      */
     public function setAuteur($auteur)
     {
@@ -173,7 +173,9 @@ class Article
     }
 
     /**
-     * @param $contenu string
+     * @param string $contenu Contenu
+     *
+     * @return void
      */
     public function setContenu($contenu)
     {
@@ -181,7 +183,11 @@ class Article
     }
 
     /**
-     * @param $data
+     * Hydrate the object
+     *
+     * @param array $data Data
+     *
+     * @return void
      */
     public function hydrate($data)
     {

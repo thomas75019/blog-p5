@@ -1,25 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 06/06/2019
- * Time: 15:30
- */
 
 namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
-use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
 
 class ArticleController extends DoctrineLoader
 {
+    const ERR_ADD = 'Erreur dans l\'ajout de l\'article :';
+
+    const ERR_DEL = 'Erreur lors de la mise à jour de l\'article: ';
+
+    const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
 
     /**
+     * Render the index page
      *
-     * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -28,12 +26,16 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        echo $this->twig->render('front/index.html.twig', [
-            'articles' => $articles
-        ]);
+        echo $this->twig->render(
+            'front/index.html.twig', [
+                'articles' => $articles
+            ]
+        );
     }
 
     /**
+     * Render the page with all articles
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -42,102 +44,122 @@ class ArticleController extends DoctrineLoader
     {
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
-        echo $this->twig->render('back/articles.html.twig', [
-            'articles' => $articles
-        ]);
+        echo $this->twig->render(
+            'back/articles.html.twig', [
+                'articles' => $articles
+            ]
+        );
     }
 
     /**
-     * @param $slug
-     * @return string
+     * Render a single article page
+     *
+     * @param string $slug Slug
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function getOneBySlug($slug)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
-            'slug' => $slug
-        ]);
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->findOneBy(
+                [
+                    'slug' => $slug
+                ]
+        );
 
-        $commentaires = $this->entityManager->getRepository(Commentaire::class)->findBy([
-            'article' => $article,
-            'valide' => false
-        ]);
+        $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
+        $commentaires = $commentaireRepo->findBy(
+            [
+                'article' => $article,
+                'valide' => false
+            ]
+        );
 
-        echo $this->twig->render('front/viewOne.html.twig', [
-            'article' => $article,
-            'commentaires' => $commentaires
-        ]);
+        echo $this->twig->render(
+            'front/viewOne.html.twig', [
+                'article' => $article,
+                'commentaires' => $commentaires
+            ]
+        );
     }
 
     /**
      * Render create Article form
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function create()
     {
-
         echo $this->twig->render('forms/createArticle.html.twig');
     }
 
     /**
-     * @param $data array
+     * Save the article in database
+     *
+     * @param array $data Data
      */
     public function save($data)
     {
         $user = unserialize($_SESSION['user']);
 
-        if (!isset($_SESSION['user']) && !$user->isAdmin()) {
-            $this->redirect('/login');
-        } else {
-            $auteur = $this->entityManager->getRepository(Utilisateur::class)->find($user->getId());
+        $auteurRepo = $this->entityManager->getRepository(Utilisateur::class);
+        $auteur = $auteurRepo->find($user->getId());
 
-            try {
-                $article = new Article();
+        try {
+            $article = new Article();
 
-                $article->hydrate($data);
-                $article->setAuteur($auteur);
+            $article->hydrate($data);
+            $article->setAuteur($auteur);
 
-                $this->entityManager->persist($article);
-                $this->entityManager->flush();
-                $this->flashMessage->success('L\'article a bien été ajouté');
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
+            $this->flashMessage->success('L\'article a bien été ajouté');
 
-                return $this->redirect('/list/article');
-            } catch (\Exception $e) {
-                $this->flashMessage->error('Erreur dans l\'ajout de l\'article :' . $e->getMessage());
-                return $this->redirect('/create/article');
-            }
-
+            return $this->redirect('/list/article');
+        } catch (\Exception $e) {
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_ADD . $msg);
+            return $this->redirect('/create/article');
         }
     }
 
     /**
-     * @param int $article_id
+     * Render the update article page
+     *
+     * @param int $article_id Article Id
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function update($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->findOneBy([
-            'id' => $article_id
-        ]);
+        $articleRep = $this->entityManager->getRepository(Article::class);
+        $article = $articleRep->find($article_id);
 
-        echo $this->twig->render('forms/updateArticle.html.twig', [
-            'article' => $article
-        ]);
+        echo $this->twig->render(
+            'forms/updateArticle.html.twig', [
+                'article' => $article
+            ]
+        );
     }
 
     /**
-     * @param $data array
-     * @param $article_id int
+     * Save the updates
+     *
+     * @param array $data       Data
+     * @param int   $article_id Article Id
+     *
+     * @return void
      */
     public function saveUpdate($data, $article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->find($article_id);
 
         try {
             $article->hydrate($data);
@@ -146,20 +168,24 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/read/' . $article->getSlug());
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur lors de la mise à jour de l\'article: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_UPDATE . $msg);
 
             return $this->redirect('/update/article');
         }
-
     }
 
     /**
      * Remove the Article
-     * @param $article_id string
+     *
+     * @param string $article_id Article ID
+     *
+     * @return void
      */
     public function delete($article_id)
     {
-        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->find($article_id);
 
         try {
             $this->entityManager->remove($article);
@@ -168,9 +194,9 @@ class ArticleController extends DoctrineLoader
 
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur lors de la suppression de l\'article: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_DEL . $msg);
             return $this->redirect('/list/article');
         }
-
     }
 }

@@ -5,16 +5,14 @@ namespace Blog\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-
-
 /**
- * Class Utilisateur
+ * Entity Utilisateur
+ *
  * @ORM\Entity
  * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="user_idx", columns={"email", "pseudo"})})
  */
 class Utilisateur
 {
-
     const ADMIN = 1;
 
     const UTILISATEUR = 0;
@@ -47,7 +45,7 @@ class Utilisateur
     protected $type;
 
     /**
-     *@ORM\OneToMany(targetEntity="Article", mappedBy="articles")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="articles")
      */
     protected $articles;
 
@@ -70,7 +68,7 @@ class Utilisateur
     }
 
     /**
-     * @param $id integer
+     * @param int $id_utilisateur Id
      */
     public function setId($id)
     {
@@ -86,7 +84,7 @@ class Utilisateur
     }
 
     /**
-     * @param $email string
+     * @param string $email Email
      */
     public function setEmail($email)
     {
@@ -102,7 +100,7 @@ class Utilisateur
     }
 
     /**
-     * @param $mot_de_passe string
+     * @param string $mot_de_passe MotDePasse
      */
     public function setMotDePasse($mot_de_passe)
     {
@@ -110,7 +108,7 @@ class Utilisateur
     }
 
     /**
-     * @param $pseudo string
+     * @param string $pseudo Pseudo
      */
     public function setPseudo($pseudo)
     {
@@ -126,7 +124,9 @@ class Utilisateur
     }
 
     /**
-     * @param $type
+     * set user type
+     *
+     * @param self $type Type
      */
     public function setType($type)
     {
@@ -135,19 +135,19 @@ class Utilisateur
 
     /**
      * Hydrate the object
-     * @param $data Object
+     *
+     * @param array $data Data
+     *
+     * @return void
      */
     public function hydrate($data)
     {
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
 
-            if ($key === 'motDePasse')
-            {
+            if ($key === 'motDePasse') {
                 $this->setMotDePasse(password_hash($value, PASSWORD_BCRYPT));
-            }
-            elseif (method_exists($this, $method))
-            {
+            } elseif (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
@@ -155,16 +155,15 @@ class Utilisateur
 
     /**
      * Check if user is Admin
+     *
      * @return bool
      */
     public function isAdmin()
     {
-        if ($this->type === self::UTILISATEUR)
-        {
+        if ($this->type === self::UTILISATEUR) {
             return false;
         }
 
         return true;
-
     }
 }

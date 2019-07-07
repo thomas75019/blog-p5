@@ -1,22 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 09/06/2019
- * Time: 19:12
- */
 
 namespace Blog\Service;
 
 use Blog\Controller\ArticleController;
 use Blog\Controller\CommentaireController;
+use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
 
 class ControllerFactory
 {
     /**
-     * @param $controller_name
-     * @return ArticleController|UtilisateurController|CommentaireController
+     * Creates a new Controller class instance
+     *
+     * @param string $controller_name Controller name
+     *
+     * @return ArticleController|UtilisateurController|CommentaireController|ContactController
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Exception
      */
@@ -31,6 +30,9 @@ class ControllerFactory
                 break;
             case 'commentaire':
                 $controller = new CommentaireController();
+                break;
+            case 'contact':
+                $controller = new ContactController(new Mail());
                 break;
             default:
                 throw new \Exception('Unkown controller');

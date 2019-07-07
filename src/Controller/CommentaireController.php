@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: thomaslarousse
- * Date: 06/06/2019
- * Time: 20:34
- */
 
 namespace Blog\Controller;
 
@@ -16,59 +10,72 @@ use Blog\Entity\Utilisateur;
 class CommentaireController extends DoctrineLoader
 {
 
+    const ERR_ADD = 'Erreur lors de l\'ajout du commentaire';
+
     /**
-     * @return string
+     * Render the page with the list of comments
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function getAll()
     {
-        $commentaires = $this->entityManager->getRepository(Commentaire::class)->findAll();
+        $commentRepo = $this->entityManager->getRepository(Commentaire::class);
+        $comments = $commentRepo->findAll();
 
-        echo $this->twig->render('back/viewAllComments.html.twig', [
-            'commentaires' => $commentaires
-        ]);
+        echo $this->twig->render(
+            'back/viewAllComments.html.twig', [
+                'commentaires' => $comments
+            ]
+        );
     }
 
     /**
-     * @param $article_id int
-     * @param $auteur Utilisateur
-     * @param $contenu string
+     * Save a comment in database
+     *
+     * @param int         $article_id Article ID
+     * @param Utilisateur $auteur     Auteur
+     * @param string      $contenu    Contenu
      */
     public function save($article_id, $auteur, $contenu)
     {
-        $article = $this->entityManager->getRepository(Article::class)->find($article_id);
-        $auteurComment = $this->entityManager->getRepository(Utilisateur::class)->find($auteur->getId());
+        $articleRepo = $this->entityManager->getRepository(Article::class);
+        $article = $articleRepo->find($article_id);
+
+        $auteurRepo = $this->entityManager->getRepository(Utilisateur::class);
+        $auteur = $auteurRepo->find($auteur->getId());
 
         try {
             $commentaire = new Commentaire();
             $commentaire->hydrate($contenu);
             $commentaire->setArticle($article);
-            $commentaire->setAuteur($auteurComment);
+            $commentaire->setAuteur($auteur);
 
             $this->entityManager->persist($commentaire);
             $this->entityManager->flush();
             $this->flashMessage->success('Commentaire ajouté');
 
             return $this->redirect('/read/' . $article->getSlug());
-
         } catch (\Exception $e) {
-            $this->flashMessage->error('Erreur lors de l\'ajout du commentaire');
+            $this->flashMessage->error(self::ERR_ADD);
             return $this->redirect('/read/' . $article->getslug());
         }
-
     }
 
     /**
-     * @param string $commentaire_id
+     * Set a comment as valid
+     *
+     * @param string $commentaire_id Commentaire Id
+     *
      * @throws \Doctrine\ORM\ORMException
      */
     public function setValide($commentaire_id)
     {
-        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
+        $commentRepo = $this->entityManager->getRepository(Commentaire::class);
+        $comment = $commentRepo->find($commentaire_id);
 
-        $commentaire->setValide(true);
+        $comment->setValide(true);
 
         $this->entityManager->flush();
 
@@ -78,14 +85,17 @@ class CommentaireController extends DoctrineLoader
     }
 
     /**
-     * @param string $commentaire_id
+     * Set a comment as invalid
+     *
+     * @param string $commentaire_id Commentaire Id
      */
     public function setInvalide($commentaire_id)
     {
-        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
+        $commentRepo = $this->entityManager->getRepository(Commentaire::class);
+        $comment = $commentRepo->find($commentaire_id);
 
         try {
-            $commentaire->setValide(false);
+            $comment->setValide(false);
 
             $this->entityManager->flush();
 
@@ -93,31 +103,36 @@ class CommentaireController extends DoctrineLoader
 
             return $this->redirect('/admin/comments');
         } catch (\Exception $e) {
-            $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_GENERIC . $msg);
             return $this->redirect('/admin/comments');
         }
-
     }
 
 
     /**
-     * @param string $commentaire_id
+     * Delete a comment
+     *
+     * @param string $commentaire_id Commentaire ID
+     *
+     * @return void
      */
     public function delete($commentaire_id)
     {
-        $commentaire = $this->entityManager->getRepository(Commentaire::class)->find($commentaire_id);
+        $commentRepo = $this->entityManager->getRepository(Commentaire::class);
+        $comment = $commentRepo->find($commentaire_id);
 
         try {
-            $this->entityManager->remove($commentaire);
+            $this->entityManager->remove($comment);
             $this->entityManager->flush();
 
             $this->flashMessage->success('commentaire supprimé');
 
             return $this->redirect("/admin/comments");
         } catch (\Exception $e) {
-            $this->flashMessage->error('Une erreur c\'est produite: ' . $e->getMessage());
+            $msg = $e->getMessage();
+            $this->flashMessage->error(self::ERR_GENERIC . $msg);
             return $this->redirect('/admin/comments');
         }
-
     }
 }

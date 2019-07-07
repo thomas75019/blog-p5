@@ -3,12 +3,14 @@
 namespace Blog\Controller;
 
 use Blog\DoctrineLoader;
-use Blog\Entity\TypeUtilisateur;
 use Blog\Entity\Utilisateur;
+use http\Env\Response;
 
 class UtilisateurController extends DoctrineLoader
 {
     /**
+     * Render the register page
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -20,36 +22,43 @@ class UtilisateurController extends DoctrineLoader
 
     /**
      * Create an user
+     *
+     * @param array $data Datas
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function createUser($data)
     {
-        $em = $this->entityManager;
+        $entityManager = $this->entityManager;
         $user = new Utilisateur();
 
         $user->hydrate($data);
 
-        $em->persist($user);
-        $em->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
     }
 
     /**
      * Delete an user
-     * @param $user_id integer
+     *
+     * @param int $user_id User Id
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete($user_id)
     {
-        $user = $this->entityManager->getRepository(Utilisateur::class)->find($user_id);
+        $userRepo = $this->entityManager->getRepository(Utilisateur::class);
+        $user = $userRepo->find($user_id);
 
         $this->entityManager->remove($user);
         $this->entityManager->flush();
     }
 
     /**
-     * Access to the login page
+     * Render the login page
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
@@ -60,15 +69,19 @@ class UtilisateurController extends DoctrineLoader
     }
 
     /**
-     * @param $data array
-     * @return mixed
+     * Log in the user
+     *
+     * @param array $data Datas
      */
     public function login($data)
     {
         if (!isset($_SESSION['user'])) {
-            $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
-                'pseudo' => $data['pseudo']
-            ]);
+            $userRepo = $this->entityManager->getRepository(Utilisateur::class);
+            $user = $userRepo->findOneBy(
+                [
+                    'pseudo' => $data['pseudo']
+                ]
+            );
 
             if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                 //Avoid that password being stored in session
@@ -76,17 +89,19 @@ class UtilisateurController extends DoctrineLoader
                 $_SESSION['user'] = serialize($user);
                 $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
                 return $this->redirect('/');
-            } else {
-                $this->flashMessage->error('Mauvais pseudo ou mot de passe');
-                $this->redirect('/login');
             }
+
+            $this->flashMessage->error('Mauvais pseudo ou mot de passe');
+            $this->redirect('/login');
         }
 
         return $this->redirect('/');
     }
 
     /**
-     *Logout the user and redirect to homepage
+     * Logout the user and redirect to homepage
+     *
+     * @return redirect
      */
     public function logout()
     {
