@@ -1,4 +1,12 @@
 <?php
+/**
+ * Class Chapo
+ *
+ * Creates a chapo
+ *
+ * @package Blog\Service
+ * @see \Blog\Entity\Article::hydrate()
+ */
 
 namespace Blog\Service;
 
@@ -13,6 +21,7 @@ class Chapo
 {
     /**
      * @param string  $contenu
+     *
      * @return string
      */
     public static function createChapo($contenu)

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Class Slug
+ *
+ * @see \Blog\Entity\Article::hydrate()
+ */
 
 namespace Blog\Service;
 
@@ -12,7 +17,8 @@ class Slug
     /**
      * Creates slug
      *
-     * @param string  $titre
+     * @param string $titre Titre
+     *
      * @return string
      */
     public static function slugger($titre)

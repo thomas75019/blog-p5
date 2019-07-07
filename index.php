@@ -1,8 +1,9 @@
 <?php
 /**
- * Index
+ * Blog Index
  *
- * @author Thomas Larousse
+ * @author Thomas Larousse <tlarousse3@gmail.com>
+ * @link undefined
  */
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;

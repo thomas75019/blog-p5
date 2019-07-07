@@ -1,4 +1,11 @@
 <?php
+/**
+ * CommentaireController
+ *
+ * @package Blog\Controller
+ *
+ * @see \Blog\DoctrineLoader
+ */
 
 namespace Blog\Controller;
 
@@ -30,9 +37,10 @@ class CommentaireController extends DoctrineLoader
         $comments = $commentRepo->findAll();
 
         echo $this->twig->render(
-            'back/viewAllComments.html.twig', [
-            'commentaires' => $comments
-        ]);
+                'back/viewAllComments.html.twig', [
+                'commentaires' => $comments
+            ]
+        );
     }
 
     /**
@@ -132,7 +140,6 @@ class CommentaireController extends DoctrineLoader
 
             return $this->redirect("/admin/comments");
         } catch (\Exception $e) {
-
             $msg = $e->getMessage();
             $this->flashMessage->error(self::ERR_GENERIC . $msg);
             return $this->redirect('/admin/comments');

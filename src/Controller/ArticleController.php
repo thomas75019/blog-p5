@@ -1,8 +1,9 @@
 <?php
 /**
- * Class ArticleController
+ * ArticleController
  *
  * @package Blog\Controller
+ * @see \Blog\DoctrineLoader
  */
 
 namespace Blog\Controller;
@@ -11,9 +12,11 @@ use Blog\DoctrineLoader;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
+use Zend\Diactoros\Response\RedirectResponse;
 
 /**
  * Class ArticleController
+ *
  * @package Blog\Controller
  */
 class ArticleController extends DoctrineLoader
@@ -77,17 +80,17 @@ class ArticleController extends DoctrineLoader
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
         $commentaires = $commentaireRepo->findBy(
-            [
-                'article' => $article,
-                'valide' => false
-            ]
+                [
+                    'article' => $article,
+                    'valide' => false
+                ]
         );
 
         echo $this->twig->render(
-            'front/viewOne.html.twig', [
-            'article' => $article,
-            'commentaires' => $commentaires
-        ]
+                'front/viewOne.html.twig', [
+                'article' => $article,
+                'commentaires' => $commentaires
+            ]
         );
     }
 
@@ -148,16 +151,17 @@ class ArticleController extends DoctrineLoader
         $article = $articleRep->find($article_id);
 
         echo $this->twig->render(
-            'forms/updateArticle.html.twig', [
-            'article' => $article
-        ]);
+                'forms/updateArticle.html.twig', [
+                'article' => $article
+            ]
+        );
     }
 
     /**
      * Save the updates
      *
-     * @param array  $data       Data
-     * @param int    $article_id Article Id
+     * @param array $data       Data
+     * @param int   $article_id Article Id
      */
     public function saveUpdate($data, $article_id)
     {
@@ -182,6 +186,8 @@ class ArticleController extends DoctrineLoader
      * Remove the Article
      *
      * @param string $article_id Article ID
+     *
+     * @return void
      */
     public function delete($article_id)
     {

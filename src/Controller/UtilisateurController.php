@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class UtilisateurController
+ *
+ * @package Blog\Controller
+ *
+ * @see \Blog\DoctrineLoader
+ */
 
 namespace Blog\Controller;
 
@@ -79,9 +86,12 @@ class UtilisateurController extends DoctrineLoader
     public function login($data)
     {
         if (!isset($_SESSION['user'])) {
-            $user = $this->entityManager->getRepository(Utilisateur::class)->findOneBy([
-                'pseudo' => $data['pseudo']
-            ]);
+            $userRepo = $this->entityManager->getRepository(Utilisateur::class);
+            $user = $userRepo->findOneBy(
+                [
+                    'pseudo' => $data['pseudo']
+                ]
+            );
 
             if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                 //Avoid that password being stored in session

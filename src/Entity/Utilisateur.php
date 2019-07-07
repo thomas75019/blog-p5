@@ -68,7 +68,7 @@ class Utilisateur
     }
 
     /**
-     * @param int  $id
+     * @param int $id Id
      */
     public function setId($id)
     {
@@ -84,7 +84,7 @@ class Utilisateur
     }
 
     /**
-     * @param string  $email
+     * @param string $email Email
      */
     public function setEmail($email)
     {
@@ -100,7 +100,7 @@ class Utilisateur
     }
 
     /**
-     * @param string  $mot_de_passe
+     * @param string $mot_de_passe MotDePasse
      */
     public function setMotDePasse($mot_de_passe)
     {
@@ -108,7 +108,7 @@ class Utilisateur
     }
 
     /**
-     * @param string  $pseudo
+     * @param string $pseudo Pseudo
      */
     public function setPseudo($pseudo)
     {
@@ -124,7 +124,7 @@ class Utilisateur
     }
 
     /**
-     * @param self  $type
+     * @param self $type Type
      */
     public function setType($type)
     {
@@ -134,7 +134,7 @@ class Utilisateur
     /**
      * Hydrate the object
      *
-     * @param array  $data
+     * @param array $data Data
      */
     public function hydrate($data)
     {

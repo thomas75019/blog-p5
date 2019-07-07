@@ -70,7 +70,7 @@ class Article
     }
 
     /**
-     * @param $id integer
+     * @param $id integer Id
      */
     public function setId($id)
     {
@@ -86,7 +86,7 @@ class Article
     }
 
     /**
-     * @param string  $titre
+     * @param string $titre Titre
      */
     public function setTitre($titre)
     {
@@ -102,7 +102,7 @@ class Article
     }
 
     /**
-     * @param string  $chapo
+     * @param string $chapo Chapo
      */
     public function setChapo($chapo)
     {
@@ -118,7 +118,7 @@ class Article
     }
 
     /**
-     * @param string  $slug
+     * @param string $slug Slug
      */
     public function setSlug($slug)
     {
@@ -150,7 +150,7 @@ class Article
     }
 
     /**
-     * @param object  $auteur
+     * @param object $auteur Auteur
      */
     public function setAuteur($auteur)
     {
@@ -174,7 +174,7 @@ class Article
     }
 
     /**
-     * @param string  $contenu
+     * @param string $contenu Contenu
      */
     public function setContenu($contenu)
     {
@@ -182,7 +182,7 @@ class Article
     }
 
     /**
-     * @param array  $data
+     * @param array $data Data
      */
     public function hydrate($data)
     {

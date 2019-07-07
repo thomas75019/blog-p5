@@ -11,6 +11,7 @@ use Blog\Controller\UtilisateurController;
  * Class ControllerFactory
  *
  * @package Blog\Service
+ * @see Index
  */
 class ControllerFactory
 {

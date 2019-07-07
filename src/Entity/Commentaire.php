@@ -78,7 +78,7 @@ class Commentaire
 
 
     /**
-     * @param bool  $valide
+     * @param bool $valide Valide
      */
     public function setValide($valide)
     {
@@ -95,7 +95,7 @@ class Commentaire
 
 
     /**
-     * @param \DateTime  $date
+     * @param \DateTime $date Date
      */
     public function setDate($date)
     {
@@ -113,7 +113,7 @@ class Commentaire
 
 
     /**
-     * @param string  $contenu
+     * @param string $contenu Contenu
      */
     public function setContenu($contenu)
     {
@@ -121,7 +121,7 @@ class Commentaire
     }
 
     /**
-     * @param object  $auteur
+     * @param object $auteur Auteur
      */
     public function setAuteur($auteur)
     {
@@ -137,7 +137,7 @@ class Commentaire
     }
 
     /**
-     * @param object  $article
+     * @param object $article Article
      */
     public function setArticle($article)
     {
@@ -145,7 +145,7 @@ class Commentaire
     }
 
     /**
-     * @param array  $data
+     * @param array $data Data
      */
     public function hydrate($data)
     {
