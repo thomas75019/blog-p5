@@ -168,7 +168,9 @@ $map->get(
     });
 //Get comments
 $map->get(
-    'get.comments', '/admin/comments', function ($user) {
+    'get.comments',
+    '/admin/comments',
+    function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('commentaire');
 

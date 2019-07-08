@@ -39,7 +39,7 @@ class ContactController extends DoctrineLoader
     public function contactSend($data)
     {
         try {
-            $this->mail->sendContact($data['message'], $data['email']);
+            $this->mail->sendSmtp($data['message'], $data['email']);
             $this->flashMessage->success('Le message à bien été envoyé');
             return $this->redirect('/contact');
         } catch (\Exception $e) {

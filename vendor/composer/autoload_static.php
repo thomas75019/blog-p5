@@ -41,10 +41,9 @@ class ComposerStaticInite246d1b494d7f8b66b3a0eb864ed17ce
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
-
             'Psr\\Container\\' => 14,
-
             'Plasticbrain\\FlashMessages\\' => 27,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'D' => 
         array (
@@ -113,6 +112,10 @@ class ComposerStaticInite246d1b494d7f8b66b3a0eb864ed17ce
         'Plasticbrain\\FlashMessages\\' => 
         array (
             0 => __DIR__ . '/..' . '/plasticbrain/php-flash-messages/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Doctrine\\ORM\\' => 
         array (
