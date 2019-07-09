@@ -2,14 +2,14 @@
 
 namespace Blog\Controller;
 
-use Blog\DoctrineLoader;
+use Blog\Controller\Controller;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 use Blog\Service\Chapo;
 use Blog\Service\Slug;
 
-class ArticleController extends DoctrineLoader
+class ArticleController extends Controller
 {
     const ERR_ADD = 'Erreur dans l\'ajout de l\'article :';
 

@@ -2,11 +2,11 @@
 
 namespace Blog\Controller;
 
-use Blog\DoctrineLoader;
+use Blog\Controller\Controller;
 use Blog\Entity\Utilisateur;
 use http\Env\Response;
 
-class UtilisateurController extends DoctrineLoader
+class UtilisateurController extends Controller
 {
     /**
      * Render the register page

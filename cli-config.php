@@ -3,9 +3,9 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Blog\DoctrineLoader;
+use Blog\Controller;
 
-$dl = new DoctrineLoader();
+$dl = new Controller();
 
 $entityManager = $dl->entityManager;
 
