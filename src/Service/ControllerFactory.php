@@ -8,8 +8,8 @@ use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
 use Blog\Dependencies\Twig;
 use Blog\Dependencies\Doctrine;
-use Blog\Dependencies\FlashMessage;
 use Blog\Service\UserSession;
+use Blog\Dependencies\FlashMessage;
 
 class ControllerFactory
 {
@@ -28,18 +28,18 @@ class ControllerFactory
         $session = new UserSession();
         $twig = new Twig($session);
         $entityManager = new Doctrine();
-        $flash = new FlashMessage();
+        //$flash = new FlashMessage();
 
         switch (strtolower($controller_name))
         {
             case 'article':
-                $controller = new ArticleController($twig, $entityManager, $flash);
+                $controller = new ArticleController($twig, $entityManager, new FlashMessage());
                 break;
             case 'utilisateur':
-                $controller = new UtilisateurController($twig, $entityManager, $flash);
+                $controller = new UtilisateurController($twig, $entityManager, new FlashMessage());
                 break;
             case 'commentaire':
-                $controller = new CommentaireController($twig, $entityManager, $flash);
+                $controller = new CommentaireController($twig, $entityManager, new FlashMessage());
                 break;
             case 'contact':
                 $controller = new ContactController(new Mail());
