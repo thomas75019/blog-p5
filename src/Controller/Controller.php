@@ -23,7 +23,7 @@ class Controller
     /**
      * @var array
      */
-    public $entitiesPath = [__DIR__ . '/Entity'];
+    public $entitiesPath = [__DIR__ . '../Entity'];
 
     /**
      * @var bool
@@ -90,7 +90,7 @@ class Controller
 
         $this->entityManager = EntityManager::create($this->params, $this->config);
 
-        $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/View');
+        $this->loader = new \Twig\Loader\FilesystemLoader('/Users/thomaslarousse/Desktop/Projet5/src/View');
 
         $this->twig = new \Twig\Environment($this->loader, [
             'cache' => false
@@ -110,7 +110,7 @@ class Controller
 
     /**
      * @param string $url
-     * @param int $statusCode
+     * @param int    $statusCode
      */
     protected function redirect($url, $statusCode = 302)
     {

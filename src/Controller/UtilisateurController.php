@@ -4,10 +4,11 @@ namespace Blog\Controller;
 
 use Blog\Controller\Controller;
 use Blog\Entity\Utilisateur;
-use http\Env\Response;
+use Blog\Service\UserSession;
 
 class UtilisateurController extends Controller
 {
+
     /**
      * Render the register page
      *
@@ -71,11 +72,12 @@ class UtilisateurController extends Controller
     /**
      * Log in the user
      *
-     * @param array $data Datas
+     * @param array       $data    Datas
+     * @param UserSession $session User session object
      */
-    public function login($data)
+    public function login($data, UserSession $session)
     {
-        if (!isset($_SESSION['user'])) {
+        if (!$session->isStored()) {
             $userRepo = $this->entityManager->getRepository(Utilisateur::class);
             $user = $userRepo->findOneBy(
                 [
@@ -86,7 +88,7 @@ class UtilisateurController extends Controller
             if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                 //Avoid that password being stored in session
                 $user->setMotDePasse(null);
-                $_SESSION['user'] = serialize($user);
+                $session->set($user);
                 $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
                 return $this->redirect('/');
             }
@@ -101,12 +103,12 @@ class UtilisateurController extends Controller
     /**
      * Logout the user and redirect to homepage
      *
-     * @return redirect
+     * @param UserSession $session Session object
      */
-    public function logout()
+    public function logout(UserSession $session)
     {
-        if (isset($_SESSION['user'])) {
-            session_destroy();
+        if ($session->isStored()) {
+            $session->destroy();
             return $this->redirect('/');
         }
 
