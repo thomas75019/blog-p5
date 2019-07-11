@@ -6,6 +6,10 @@ use Blog\Controller\ArticleController;
 use Blog\Controller\CommentaireController;
 use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
+use Blog\Dependencies\Twig;
+use Blog\Dependencies\Doctrine;
+use Blog\Dependencies\FlashMessage;
+use Blog\Service\UserSession;
 
 class ControllerFactory
 {
@@ -21,16 +25,21 @@ class ControllerFactory
      */
     public static function newController($controller_name)
     {
+        $session = new UserSession();
+        $twig = new Twig($session);
+        $entityManager = new Doctrine();
+        $flash = new FlashMessage();
+
         switch (strtolower($controller_name))
         {
             case 'article':
-                $controller = new ArticleController();
+                $controller = new ArticleController($twig, $entityManager, $flash);
                 break;
             case 'utilisateur':
-                $controller = new UtilisateurController();
+                $controller = new UtilisateurController($twig, $entityManager, $flash);
                 break;
             case 'commentaire':
-                $controller = new CommentaireController();
+                $controller = new CommentaireController($twig, $entityManager, $flash);
                 break;
             case 'contact':
                 $controller = new ContactController(new Mail());

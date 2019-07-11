@@ -3,7 +3,11 @@
 namespace Blog\Controller;
 
 use Blog\Controller\Controller;
+use Blog\Dependencies\Doctrine;
+use Blog\Dependencies\FlashMessage;
+use Blog\Dependencies\Twig;
 use Blog\Service\Mail;
+use Blog\Service\UserSession;
 
 class ContactController extends Controller
 {
@@ -11,7 +15,7 @@ class ContactController extends Controller
 
     public function __construct(Mail $mail)
     {
-        parent::__construct();
+        parent::__construct(new Twig(new UserSession()), new Doctrine(), new FlashMessage());
         $this->mail = $mail;
     }
 
