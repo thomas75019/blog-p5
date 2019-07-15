@@ -1,7 +1,9 @@
 <?php
 
 namespace Blog\Dependencies;
+
 use Blog\Service\UserSession;
+
 
 /**
  * Class Twig

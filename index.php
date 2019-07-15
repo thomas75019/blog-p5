@@ -186,9 +186,9 @@ $map->get(
     });
 //Save comment
 $map->post(
-    'save.comment', '/save/comment/{article_id}', function ($request) {
+    'save.comment', '/save/comment/{article_id}', function ($request) use ($user) {
         $articleId = $request->getAttribute('article_id');
-        $auteur = unserialize($_SESSION['user']);
+        $auteur = $user;
         $contenu = $request->getParsedBody();
         $controller = ControllerFactory::newController('commentaire');
 

@@ -52,6 +52,8 @@ class Doctrine
 
     /**
      * Doctrine constructor.
+     *
+     * @throws \Doctrine\ORM\ORMException
      */
     public function __construct()
     {
@@ -64,6 +66,8 @@ class Doctrine
             $this->cache,
             $this->useSimpleAnnotationReader
         );
+
+        $this->entityManager = EntityManager::create($this->params, $this->config);
     }
 
     /**
