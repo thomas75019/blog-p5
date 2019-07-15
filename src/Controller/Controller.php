@@ -38,6 +38,7 @@ class Controller
      * @param Twig         $twig          Twig
      * @param Doctrine     $entityManager Entity Manager
      * @param FlashMessage $flash         Flash messages
+     * @param CrsfToken    $token         Crsf Token
      */
     public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash, CrsfToken $token)
     {
