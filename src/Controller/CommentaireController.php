@@ -117,10 +117,15 @@ class CommentaireController extends Controller
      *
      * @return void
      */
-    public function delete($commentaire_id)
+    public function delete($commentaire_id, $token)
     {
         $commentRepo = $this->entityManager->getRepository(Commentaire::class);
         $comment = $commentRepo->find($commentaire_id);
+
+        if ($token !== $this->CrsfToken)
+        {
+            die();
+        }
 
         try {
             $this->entityManager->remove($comment);

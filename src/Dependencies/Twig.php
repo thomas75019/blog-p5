@@ -25,6 +25,8 @@ class Twig
      */
     public $twig;
 
+    public $token;
+
     /**
      * Twig constructor.
      *
@@ -40,9 +42,17 @@ class Twig
             ]
         );
 
+        $this->token = new CrsfToken();
+
         if ($session->isStored()) {
             $this->twig->addGlobal('user', $session->get());
         }
+
+        if ($this->token->isStored())
+        {
+            $this->twig->addGlobal('token', $_SESSION['token']);
+        }
+
     }
 
     /**

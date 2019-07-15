@@ -2,6 +2,7 @@
 
 namespace Blog\Controller;
 
+use Blog\Dependencies\CrsfToken;
 use Blog\Dependencies\Doctrine;
 use Blog\Dependencies\FlashMessage;
 use Blog\Dependencies\Twig;
@@ -29,6 +30,8 @@ class Controller
 
     protected $flashMessage;
 
+    protected $CrsfToken;
+
     /**
      * Controller constructor.
      *
@@ -36,7 +39,7 @@ class Controller
      * @param Doctrine     $entityManager Entity Manager
      * @param FlashMessage $flash         Flash messages
      */
-    public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash)
+    public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash, CrsfToken $token)
     {
 
         $this->twig = $twig->getTwig();
@@ -44,6 +47,8 @@ class Controller
         $this->entityManager = $entityManager->getEm();
 
         $this->flashMessage = $flash->getFlashMessage();
+
+        $this->CrsfToken = $token->getStoredToken();
 
     }
 

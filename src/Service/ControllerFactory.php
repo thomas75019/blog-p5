@@ -6,6 +6,7 @@ use Blog\Controller\ArticleController;
 use Blog\Controller\CommentaireController;
 use Blog\Controller\ContactController;
 use Blog\Controller\UtilisateurController;
+use Blog\Dependencies\CrsfToken;
 use Blog\Dependencies\Twig;
 use Blog\Dependencies\Doctrine;
 use Blog\Service\UserSession;
@@ -30,17 +31,18 @@ class ControllerFactory
         $entityManager = new Doctrine();
         $flash = new FlashMessage();
         $mail = new Mail();
+        $token = new CrsfToken();
 
         switch (strtolower($controller_name))
         {
             case 'article':
-                $controller = new ArticleController($twig, $entityManager, $flash);
+                $controller = new ArticleController($twig, $entityManager, $flash, $token);
                 break;
             case 'utilisateur':
-                $controller = new UtilisateurController($twig, $entityManager, $flash);
+                $controller = new UtilisateurController($twig, $entityManager, $flash, $token);
                 break;
             case 'commentaire':
-                $controller = new CommentaireController($twig, $entityManager, $flash);
+                $controller = new CommentaireController($twig, $entityManager, $flash, $token);
                 break;
             case 'contact':
                 $controller = new ContactController($mail);

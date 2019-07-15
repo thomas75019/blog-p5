@@ -3,6 +3,7 @@
 namespace Blog\Controller;
 
 use Blog\Controller\Controller;
+use Blog\Dependencies\CrsfToken;
 use Blog\Entity\Utilisateur;
 use Blog\Service\UserSession;
 
@@ -89,6 +90,13 @@ class UtilisateurController extends Controller
                 //Avoid that password being stored in session
                 $user->setMotDePasse(null);
                 $session->set($user);
+
+                if ($user->isAdmin())
+                {
+                    $token = new CrsfToken();
+                    $token->store();
+                }
+
                 $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
                 return $this->redirect('/');
             }
