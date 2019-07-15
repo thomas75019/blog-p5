@@ -23,11 +23,11 @@ class Controller
 {
     const ERR_GENERIC = "Une erreur est apparu: ";
 
-    public $twig;
+    protected $twig;
 
-    public $entityManager;
+    protected $entityManager;
 
-    public $flashMessage;
+    protected $flashMessage;
 
     public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash)
     {

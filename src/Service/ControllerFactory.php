@@ -28,21 +28,22 @@ class ControllerFactory
         $session = new UserSession();
         $twig = new Twig($session);
         $entityManager = new Doctrine();
-        //$flash = new FlashMessage();
+        $flash = new FlashMessage();
+        $mail = new Mail();
 
         switch (strtolower($controller_name))
         {
             case 'article':
-                $controller = new ArticleController($twig, $entityManager, new FlashMessage());
+                $controller = new ArticleController($twig, $entityManager, $flash);
                 break;
             case 'utilisateur':
-                $controller = new UtilisateurController($twig, $entityManager, new FlashMessage());
+                $controller = new UtilisateurController($twig, $entityManager, $flash);
                 break;
             case 'commentaire':
-                $controller = new CommentaireController($twig, $entityManager, new FlashMessage());
+                $controller = new CommentaireController($twig, $entityManager, $flash);
                 break;
             case 'contact':
-                $controller = new ContactController(new Mail());
+                $controller = new ContactController($mail);
                 break;
             default:
                 throw new \Exception('Unkown controller');
