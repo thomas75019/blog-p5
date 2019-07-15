@@ -11,11 +11,26 @@ use Blog\Service\UserSession;
 
 class ContactController extends Controller
 {
+    /**
+     * @var Mail
+     */
     private $mail;
 
+    /**
+     * ContactController constructor.
+     *
+     * @param Mail $mail Mailer
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function __construct(Mail $mail)
     {
-        parent::__construct(new Twig(new UserSession()), new Doctrine(), new FlashMessage());
+        $session = new UserSession();
+        $twig = new Twig($session);
+        $doctrine = new Doctrine();
+        $flash = new FlashMessage();
+
+        parent::__construct($twig, $doctrine, $flash);
         $this->mail = $mail;
     }
 

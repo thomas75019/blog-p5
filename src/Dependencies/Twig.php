@@ -3,6 +3,7 @@
 namespace Blog\Dependencies;
 
 use Blog\Service\UserSession;
+use Twig\Loader\FilesystemLoader;
 
 
 /**
@@ -31,11 +32,13 @@ class Twig
      */
     public function __construct(UserSession $session)
     {
-        $this->loader = new \Twig\Loader\FilesystemLoader('/Users/thomaslarousse/Desktop/Projet5/src/View');
+        $this->loader = new FilesystemLoader('/Users/thomaslarousse/Desktop/Projet5/src/View');
 
-        $this->twig = new \Twig\Environment($this->loader, [
+        $this->twig = new \Twig\Environment(
+            $this->loader, [
             'cache' => false
-        ]);
+            ]
+        );
 
         if ($session->isStored()) {
             $this->twig->addGlobal('user', $session->get());

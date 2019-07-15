@@ -13,37 +13,37 @@ class Doctrine
     /**
      * @var array
      */
-    private $entitiesPath = [__DIR__ . '../Entity'];
+    private $_entitiesPath = [__DIR__ . '../Entity'];
 
     /**
      * @var bool
      */
-    private $isDevMode = true;
+    private $_isDevMode = true;
 
     /**
      * @var null
      */
-    private $proxyDir = null;
+    private $_proxyDir = null;
 
     /**
      * @var null
      */
-    private $cache = null;
+    private $_cache = null;
 
     /**
      * @var bool
      */
-    private $useSimpleAnnotationReader = false;
+    private $_useSimpleAnnotationReader = false;
 
     /**
      * @var array
      */
-    private $params;
+    private $_params;
 
     /**
      * @var \Doctrine\ORM\Configuration
      */
-    private $config;
+    private $_config;
 
     /**
      * @var EntityManager
@@ -57,17 +57,17 @@ class Doctrine
      */
     public function __construct()
     {
-        $this->params = DbConfig::DbInfo();
+        $this->_params = DbConfig::DbInfo();
 
-        $this->config = Setup::createAnnotationMetadataConfiguration(
-            $this->entitiesPath,
-            $this->isDevMode,
-            $this->proxyDir,
-            $this->cache,
-            $this->useSimpleAnnotationReader
+        $this->_config = Setup::createAnnotationMetadataConfiguration(
+            $this->_entitiesPath,
+            $this->_isDevMode,
+            $this->_proxyDir,
+            $this->_cache,
+            $this->_useSimpleAnnotationReader
         );
 
-        $this->entityManager = EntityManager::create($this->params, $this->config);
+        $this->entityManager = EntityManager::create($this->_params, $this->_config);
     }
 
     /**

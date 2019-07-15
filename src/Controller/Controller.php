@@ -29,6 +29,13 @@ class Controller
 
     protected $flashMessage;
 
+    /**
+     * Controller constructor.
+     *
+     * @param Twig         $twig          Twig
+     * @param Doctrine     $entityManager Entity Manager
+     * @param FlashMessage $flash         Flash messages
+     */
     public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash)
     {
 
@@ -41,8 +48,10 @@ class Controller
     }
 
     /**
-     * @param string $url
-     * @param int    $statusCode
+     * @param string $url        URL
+     * @param int    $statusCode Status Code
+     *
+     * @return void
      */
     protected function redirect($url, $statusCode = 302)
     {
