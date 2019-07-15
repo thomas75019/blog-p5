@@ -24,6 +24,8 @@ class Twig
 
     /**
      * Twig constructor.
+     *
+     * @param UserSession $session UserSession injection
      */
     public function __construct(UserSession $session)
     {
