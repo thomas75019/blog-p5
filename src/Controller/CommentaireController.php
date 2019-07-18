@@ -114,6 +114,7 @@ class CommentaireController extends Controller
      * Delete a comment
      *
      * @param string $commentaire_id Commentaire ID
+     * @param string $token          CrsfToken
      *
      * @return void
      */

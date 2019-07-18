@@ -181,13 +181,20 @@ class ArticleController extends Controller
      * Remove the Article
      *
      * @param string $article_id Article ID
+     * @param string $token      CRSF Token
      *
      * @return void
      */
-    public function delete($article_id)
+    public function delete($article_id, $token)
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->find($article_id);
+
+        if ($token !== $this->CrsfToken)
+        {
+
+            die();
+        }
 
         try {
             $this->entityManager->remove($article);

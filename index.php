@@ -58,7 +58,7 @@ $map->post(
     });
 //List article for admin
 $map->get(
-    'article.list', '/list/article', function ($user) {
+    'article.list', '/list/article', function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->getList();
@@ -68,7 +68,7 @@ $map->get(
     });
 //Route for the creation
 $map->get(
-    'article.create', '/create/article', function ($user) {
+    'article.create', '/create/article', function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->create();
@@ -78,7 +78,7 @@ $map->get(
     });
 //Save Article Route
 $map->post(
-    'article.save', '/save/article', function ($request, $user) {
+    'article.save', '/save/article', function ($request) use ($user) {
         if ($user->isAdmin()) {
             $data = $request->getParsedBody();
 
@@ -119,13 +119,14 @@ $map->post(
 //Delete article
 $map->get(
     'article.delete',
-    '/delete/article/{article_id}',
-    function ($request, $user) {
+    '/delete/article/{article_id}/{token}',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
+            $token = $request->getAttribute('token');
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
 
-            $controller->delete($article_id);
+            $controller->delete($article_id, $token);
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
         }
