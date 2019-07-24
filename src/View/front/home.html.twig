@@ -1,0 +1,22 @@
+{% extends './base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+                <h3 style="text-align: center;">Qui suis-je?</h3>
+                <p>
+                    Dévelopeur Backend actuellement en formation avec OpenClassrooms. Spécialisé dans la conception d'applications
+                    web PHP et Symfony, mais aussi intéréssé par d'autres technologies comme Python, Javascript et NodeJS.
+                </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div id="contactHomepage">
+        <h3 style="text-align: center;">Vous Souhaitez me contacter ?</h3>
+        {% include 'forms/contact.html.twig' %}
+    </div>
+{% endblock %}
