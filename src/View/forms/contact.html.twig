@@ -1,9 +1,33 @@
-<form action="/contact/send" method="post">
-    <label for="email">Votre email</label>
-    <input type="email" name="email"/>
 
-    <label for="message">Votre demande</label>
-    <textarea name="message"></textarea>
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p>N'hésitez pas à me contacter via ce formulaire pour tout type de demande, je me ferais un plaisir de répondre dans les plus brefs délais.</p>
 
-    <button type="submit">Envoyer</button>
-</form>
+    <form name="sentMessage" id="contactForm" action="/contact/send" method="post">
+        <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+                <label>Adresse email</label>
+                <input type="email" class="form-control" placeholder="Adresse Email" id="email" name="email" required data-validation-required-message="Rentrez une adresse email valide">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+                <label>Votre demande</label>
+                <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" required data-validation-required-message="Entrez un message."></textarea>
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <br>
+        <div id="success"></div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
+        </div>
+    </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

@@ -54,11 +54,11 @@ class CommentaireController extends Controller
 
             $this->entityManager->persist($commentaire);
             $this->entityManager->flush();
-            $this->flashMessage->success('Commentaire ajouté');
+            //$this->flashMessage->success('Commentaire ajouté');
 
             return $this->redirect('/read/' . $article->getSlug());
         } catch (\Exception $e) {
-            $this->flashMessage->error(self::ERR_ADD);
+            //$this->flashMessage->error(self::ERR_ADD);
             return $this->redirect('/read/' . $article->getslug());
         }
     }
@@ -132,12 +132,12 @@ class CommentaireController extends Controller
             $this->entityManager->remove($comment);
             $this->entityManager->flush();
 
-            $this->flashMessage->success('commentaire supprimé');
+            //$this->flashMessage->success('commentaire supprimé');
 
             return $this->redirect("/admin/comments");
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_GENERIC . $msg);
+            //$this->flashMessage->error(self::ERR_GENERIC . $msg);
             return $this->redirect('/admin/comments');
         }
     }

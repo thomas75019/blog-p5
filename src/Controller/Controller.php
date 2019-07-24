@@ -46,6 +46,12 @@ class Controller
 
         $this->CrsfToken = $token->getStoredToken();
 
+        /*if (isset($flash->flashMessage))
+        {
+
+            $this->flashMessage->display();
+        }*/
+
     }
 
     /**

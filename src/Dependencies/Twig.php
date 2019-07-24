@@ -3,6 +3,7 @@
 namespace Blog\Dependencies;
 
 use Blog\Service\UserSession;
+use Plasticbrain\FlashMessages\FlashMessages;
 use Twig\Loader\FilesystemLoader;
 
 
@@ -27,6 +28,8 @@ class Twig
 
     public $token;
 
+    public $flash;
+
     /**
      * Twig constructor.
      *
@@ -50,8 +53,14 @@ class Twig
 
         if ($this->token->isStored())
         {
-            $this->twig->addGlobal('token', $_SESSION['token']);
+            $this->twig->addGlobal('token', $this->token->getStoredToken());
         }
+
+        /*$this->flash = $_SESSION['flash_messages'];
+        if (isset($this->flash))
+        {
+            $this->twig->addGlobal('message', [$this->flash['message']]);
+        }*/
 
     }
 

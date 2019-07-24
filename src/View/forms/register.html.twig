@@ -1,12 +1,37 @@
-<form action="/register" method="post">
-    <label for="pseudo">Entrez votre pseudo</label>
-    <input type="text" name="pseudo" required>
+{% extends './base.html.twig' %}
 
-    <label for="email">Entrez votre email</label>
-    <input type="email" name="email" required>
-
-    <label for="motDePasse">Entrez votre mot de passe</label>
-    <input type="password" name="motDePasse" required>
-
-    <input type="submit" value="S'inscrire">
-</form>
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <form name="login" id="loginFrom" action="/register" method="post">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Choisisez un pseudo</label>
+                        <input type="text" class="form-control" placeholder="Votre pseudo" id="pseudo" name="pseudo" required>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Votre adresse E-mail</label>
+                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" required data-validation-required-message="Rentrez une adresse email valide">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Mot de passe</label>
+                        <input type="password" class="form-control" placeholder="Mot de Passe" id="motDePasse" name="motDePasse" required>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="InscriptionButton">S'Inscrire</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+{% endblock %}

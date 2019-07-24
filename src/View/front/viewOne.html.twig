@@ -1,21 +1,78 @@
-{{ article.titre }}
-{{ article.chapo }}
-{{ article.contenu }}
-{{ article.slug }}
-<br />
+{% extends './base.html.twig' %}
 
-{% for commentaire in commentaires %}
-    {{ commentaire.contenu }}
-    {{ commentaire.date|date('d/m/Y') }}
-    {{ commentaire.auteur.pseudo }}
-{% endfor %}
-<br />
-<form action="http://127.0.0.1:8000/save/comment/{{ article.id }}" method="post">
-    <label for="contenu">
-        Commentaire
-    </label>
-    <input name="contenu" type="text">
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/Assets/css/single.css" rel="stylesheet">
+{% endblock %}
 
-    <button type="submit">Envoyer</button>
-</form>
+{% block title %}
+    <title>{{ article.titre }}</title>
+{% endblock %}
+
+{% block header %}
+    <header class="masthead">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>{{ article.titre }}</h1>
+                        <span class="meta">Posté par {{ article.auteur.pseudo }} le {{ article.date|date('d/m/Y') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>
+                            {{ article.contenu|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+    <h2>Commentaires</h2>
+    {% for commentaire in commentaires %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4>{{ commentaire.auteur.pseudo }}</h4>
+                    <p>
+                        {{ commentaire.contenu }}
+                    </p>
+                </div>
+                <div class="col-sm-2">
+                    <em>
+                        Le {{ commentaire.date|date('d/m/Y') }}
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+    {% endfor %}
+
+    {% if user is defined %}
+        <form action="/save/comment/{{ article.id }}" method="post">
+            <div class="form-group">
+                <label for="contenu-commentaire" class="label">Poster un Commentaire</label>
+                <textarea class="form-control" name="contenu" id="contenu-commentaire" rows="5" cols="8"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Envoyer</button>
+        </form>
+    {% else %}
+        <p><a href="/login">Connectez vous</a> ou <a href="/register">inscrivez-vous</a> pour pouvoir poster un commentaire </p>
+    {% endif %}
+
+{% endblock %}
+
+
+
+
 

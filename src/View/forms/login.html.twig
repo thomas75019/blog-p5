@@ -1,9 +1,34 @@
-<form action="/login" method="post">
-    <label for="pseudo">Pseudo</label>
-    <input type="text" name="pseudo" required>
+{% extends './base.html.twig' %}
 
-    <label for="motDePasse">Mot de Passe</label>
-    <input type="password" name="motDePasse" required>
+{% block body %}
+    <p style="text-align: center;">
+        <em>Pas encore inscrit? Inscrivez-vous <a href="/register" style="color: #0f6674; text-decoration: underline;">ici</a></em>
+    </p>
+    <div class="container">
+        <div class="row">
+            <form name="login" id="loginFrom" action="/login" method="post">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Votre Pseudo</label>
+                        <input type="text" class="form-control" placeholder="Votre pseudo" id="pseudo" name="pseudo" required>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Mot de passe</label>
+                        <input type="password" class="form-control" placeholder="Mot de Passe" id="motDePasse" name="motDePasse" required>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="ConnectionButton">Se Connecter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+{% endblock %}
 
-    <input type="submit" name="submit" value="Se connecter">
-</form>

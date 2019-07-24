@@ -23,12 +23,14 @@ class FlashMessage
      */
     public function __construct()
     {
-        $this->flashMessage = new FlashMessages();
+        //$this->flashMessage = new FlashMessages();
 
-        if(isset($_SESSION['flash_messages']))
+        /*if(isset($_SESSION['flash_messages']))
         {
+            $this->flashMessage->setMsgWrapper("<div class='%s'>%s</div>");
             $this->flashMessage->display();
-        }
+        }*/
+
     }
 
     /**
