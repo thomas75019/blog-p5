@@ -4,12 +4,13 @@ namespace Blog\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\UniqueConstraint as UniqueConstraint;
 
 /**
  * Entity Utilisateur
  *
  * @ORM\Entity
- * @ORM\Table(name="utilisateur", indexes={@ORM\Index(name="user_idx", columns={"email", "pseudo"})})
+ * @ORM\Table(name="utilisateur", uniqueConstraints={@UniqueConstraint(name="user_idx", columns={"email", "pseudo"})})
  */
 class Utilisateur
 {
