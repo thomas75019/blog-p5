@@ -31,7 +31,6 @@ class HomeController
     public function homePage()
     {
         echo $this->twig->render('front/home.html.twig');
-
     }
 
     public function homeAdmin()

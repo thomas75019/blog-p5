@@ -34,8 +34,7 @@ class ControllerFactory
         $mail = new Mail();
         $token = new CrsfToken();
 
-        switch (strtolower($controller_name))
-        {
+        switch (strtolower($controller_name)) {
             case 'article':
                 $controller = new ArticleController($twig, $entityManager, $flash, $token);
                 break;

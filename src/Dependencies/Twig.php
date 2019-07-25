@@ -6,7 +6,6 @@ use Blog\Service\UserSession;
 use Plasticbrain\FlashMessages\FlashMessages;
 use Twig\Loader\FilesystemLoader;
 
-
 /**
  * Class Twig
  *
@@ -40,7 +39,8 @@ class Twig
         $this->loader = new FilesystemLoader('/Users/thomaslarousse/Desktop/Projet5/src/View');
 
         $this->twig = new \Twig\Environment(
-            $this->loader, [
+            $this->loader,
+            [
             'cache' => false
             ]
         );
@@ -51,8 +51,7 @@ class Twig
             $this->twig->addGlobal('user', $session->get());
         }
 
-        if ($this->token->isStored())
-        {
+        if ($this->token->isStored()) {
             $this->twig->addGlobal('token', $this->token->getStoredToken());
         }
 
@@ -61,7 +60,6 @@ class Twig
         {
             $this->twig->addGlobal('message', [$this->flash['message']]);
         }*/
-
     }
 
     /**

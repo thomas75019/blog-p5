@@ -7,7 +7,6 @@ use Blog\Dependencies\CrsfToken;
 use Blog\Entity\Utilisateur;
 use Blog\Service\UserSession;
 
-
 class UtilisateurController extends Controller
 {
     /**
@@ -96,8 +95,7 @@ class UtilisateurController extends Controller
                 $user->setMotDePasse(null);
                 $session->set($user);
 
-                if ($user->isAdmin())
-                {
+                if ($user->isAdmin()) {
                     $token = new CrsfToken();
                     $token->store();
                 }
@@ -108,8 +106,6 @@ class UtilisateurController extends Controller
 
                 //$this->flashMessage->success('Bienvenue, ' . $user->getPseudo(), '/');
                 //$this->flashMessage->display();
-
-
             }
 
 

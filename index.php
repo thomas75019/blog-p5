@@ -34,37 +34,50 @@ $map->get(
     function () {
         $controller = ControllerFactory::newController('home');
         $controller->homePage();
-    });
+    }
+);
 //list article
 $map->get(
-    'blog.articles', '/articles', function () {
+    'blog.articles',
+    '/articles',
+    function () {
         $controller = ControllerFactory::newController('article');
         $controller->getAll();
-    });
+    }
+);
 //View One route
 $map->get(
-    'blog.viewOne', '/read/{slug}', function ($request) {
+    'blog.viewOne',
+    '/read/{slug}',
+    function ($request) {
         $slug = (string) $request->getAttribute('slug');
         $controller = ControllerFactory::newController('article');
 
         $controller->getOneBySlug($slug);
-    });
+    }
+);
 //Contact get Route
 $map->get(
-    'blog.contact', '/contact', function () {
+    'blog.contact',
+    '/contact',
+    function () {
         $controller = ControllerFactory::newController('contact');
 
         $controller->contactPage();
-    });
+    }
+);
 //Send demand from the article controller
 $map->post(
-    'blog.contact.send', '/contact/send', function ($request) {
+    'blog.contact.send',
+    '/contact/send',
+    function ($request) {
         $controller = ControllerFactory::newController('contact');
 
         $data = $request->getParsedBody();
 
         $controller->contactSend($data);
-    });
+    }
+);
 //Admin Homepag
 $map->get(
     'admin.home',
@@ -80,27 +93,35 @@ $map->get(
 );
 //List article for admin
 $map->get(
-    'article.list', '/list/article', function () use ($user) {
+    'article.list',
+    '/list/article',
+    function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->getList();
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }
-    });
+    }
+);
 //Route for the creation
 $map->get(
-    'article.create', '/create/article', function () use ($user)  {
+    'article.create',
+    '/create/article',
+    function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->create();
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }
-    });
+    }
+);
 //Save Article Route
 $map->post(
-    'article.save', '/save/article', function ($request) use ($user) {
+    'article.save',
+    '/save/article',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $data = $request->getParsedBody();
 
@@ -109,7 +130,8 @@ $map->post(
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }
-    });
+    }
+);
 //Render the article
 $map->get(
     'article.update',
@@ -122,7 +144,8 @@ $map->get(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
         }
-    });
+    }
+);
 //Save the updated Article
 $map->post(
     'article.update.save',
@@ -137,7 +160,8 @@ $map->post(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
         }
-    });
+    }
+);
 //Delete article
 $map->get(
     'article.delete',
@@ -152,43 +176,59 @@ $map->get(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
         }
-    });
+    }
+);
 //render the register form
 $map->get(
-    'user.register', '/register', function () {
+    'user.register',
+    '/register',
+    function () {
         $controller = ControllerFactory::newController('utilisateur');
 
         $controller->register();
-    });
+    }
+);
 //Save new user in the database
 $map->post(
-    'user.register.save', '/register', function ($request) {
+    'user.register.save',
+    '/register',
+    function ($request) {
         $data = $request->getParsedBody();
         $controller = ControllerFactory::newController('utilisateur');
         $controller->createUser($data);
-    });
+    }
+);
 //Login page
 $map->get(
-    'user.login', '/login', function () {
+    'user.login',
+    '/login',
+    function () {
         $controller = ControllerFactory::newController('utilisateur');
 
         $controller->loginPage();
-    });
+    }
+);
 //Login the user
 $map->post(
-    'user.login.action', '/login', function ($request) use ($session) {
+    'user.login.action',
+    '/login',
+    function ($request) use ($session) {
         $data = $request->getParsedBody();
         $controller = ControllerFactory::newController('utilisateur');
 
         $controller->login($data, $session);
-    });
+    }
+);
 //Logout
 $map->get(
-    'user.logout', '/logout', function () use ($session) {
+    'user.logout',
+    '/logout',
+    function () use ($session) {
         $controller = ControllerFactory::newController('utilisateur');
 
         $controller->logout($session);
-    });
+    }
+);
 //Get comments
 $map->get(
     'admin.comments',
@@ -201,17 +241,21 @@ $map->get(
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }
-    });
+    }
+);
 //Save comment
 $map->post(
-    'save.comment', '/save/comment/{article_id}', function ($request) use ($user) {
+    'save.comment',
+    '/save/comment/{article_id}',
+    function ($request) use ($user) {
         $articleId = $request->getAttribute('article_id');
         $auteur = $user;
         $contenu = $request->getParsedBody();
         $controller = ControllerFactory::newController('commentaire');
 
         $controller->save($articleId, $auteur, $contenu);
-    });
+    }
+);
 //Valide comment
 $map->get(
     'valide.comment',
@@ -225,7 +269,8 @@ $map->get(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
-    });
+    }
+);
 //Invalide comment
 $map->get(
     'invalide.comment',
@@ -239,7 +284,8 @@ $map->get(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
-    });
+    }
+);
 //Delete comment
 $map->get(
     'delete.comment',
@@ -255,7 +301,8 @@ $map->get(
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
-    });
+    }
+);
 //CV
 $map->get(
     'cv',

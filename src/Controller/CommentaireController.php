@@ -9,7 +9,6 @@ use Blog\Entity\Utilisateur;
 
 class CommentaireController extends Controller
 {
-
     const ERR_ADD = 'Erreur lors de l\'ajout du commentaire';
 
     /**
@@ -25,7 +24,8 @@ class CommentaireController extends Controller
         $comments = $commentRepo->findAll();
 
         echo $this->twig->render(
-            'back/viewAllComments.html.twig', [
+            'back/viewAllComments.html.twig',
+            [
                 'commentaires' => $comments
             ]
         );
@@ -123,8 +123,7 @@ class CommentaireController extends Controller
         $commentRepo = $this->entityManager->getRepository(Commentaire::class);
         $comment = $commentRepo->find($commentaire_id);
 
-        if ($token !== $this->CrsfToken)
-        {
+        if ($token !== $this->CrsfToken) {
             die();
         }
 

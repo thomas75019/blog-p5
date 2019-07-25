@@ -11,8 +11,7 @@ class CrsfToken
      */
     public function __construct()
     {
-        if (!isset($token))
-        {
+        if (!isset($token)) {
             $this->token = md5(bin2hex(openssl_random_pseudo_bytes(6)));
         }
     }
@@ -24,8 +23,7 @@ class CrsfToken
      */
     public function store()
     {
-        if (!isset($_SESSION['token']))
-        {
+        if (!isset($_SESSION['token'])) {
             $_SESSION['token'] =  $this->token;
         }
 
@@ -50,8 +48,7 @@ class CrsfToken
      */
     public function getStoredToken()
     {
-        if ($this->isStored())
-        {
+        if ($this->isStored()) {
             return $_SESSION['token'];
         }
 
@@ -73,8 +70,7 @@ class CrsfToken
      */
     public function isStored()
     {
-        if (isset($_SESSION['token']))
-        {
+        if (isset($_SESSION['token'])) {
             return true;
         }
 

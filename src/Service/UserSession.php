@@ -27,8 +27,7 @@ class UserSession
      */
     public function get()
     {
-        if (!isset($_SESSION['user']))
-        {
+        if (!isset($_SESSION['user'])) {
             return null;
         }
 
@@ -37,8 +36,7 @@ class UserSession
 
     public function isStored()
     {
-        if (isset($_SESSION['user']))
-        {
+        if (isset($_SESSION['user'])) {
             return true;
         }
 

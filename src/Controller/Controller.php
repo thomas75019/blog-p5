@@ -37,7 +37,6 @@ class Controller
      */
     public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash, CrsfToken $token)
     {
-
         $this->twig = $twig->getTwig();
 
         $this->entityManager = $entityManager->getEm();
@@ -51,7 +50,6 @@ class Controller
 
             $this->flashMessage->display();
         }*/
-
     }
 
     /**

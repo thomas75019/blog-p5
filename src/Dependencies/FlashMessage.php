@@ -30,7 +30,6 @@ class FlashMessage
             $this->flashMessage->setMsgWrapper("<div class='%s'>%s</div>");
             $this->flashMessage->display();
         }*/
-
     }
 
     /**

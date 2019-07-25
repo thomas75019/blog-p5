@@ -25,8 +25,12 @@ class ArticleController extends Controller
 
     public $slugger;
 
-    public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash, CrsfToken $token)
-    {
+    public function __construct(
+        Twig $twig,
+        Doctrine $entityManager,
+        FlashMessage $flash,
+        CrsfToken $token
+    ) {
         parent::__construct($twig, $entityManager, $flash, $token);
         $this->chapo = new Chapo();
         $this->slugger = new Slug();
@@ -44,7 +48,8 @@ class ArticleController extends Controller
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render(
-            'front/index.html.twig', [
+            'front/index.html.twig',
+            [
                 'articles' => $articles
             ]
         );
@@ -62,7 +67,8 @@ class ArticleController extends Controller
         $articles = $this->entityManager->getRepository(Article::class)->findAll();
 
         echo $this->twig->render(
-            'back/articles.html.twig', [
+            'back/articles.html.twig',
+            [
                 'articles' => $articles
             ]
         );
@@ -81,7 +87,7 @@ class ArticleController extends Controller
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->findOneBy(
-                [
+            [
                     'slug' => $slug
                 ]
         );
@@ -95,7 +101,8 @@ class ArticleController extends Controller
         );
 
         echo $this->twig->render(
-            'front/viewOne.html.twig', [
+            'front/viewOne.html.twig',
+            [
                 'article' => $article,
                 'commentaires' => $commentaires
             ]
@@ -159,7 +166,8 @@ class ArticleController extends Controller
         $article = $articleRep->find($article_id);
 
         echo $this->twig->render(
-            'forms/updateArticle.html.twig', [
+            'forms/updateArticle.html.twig',
+            [
                 'article' => $article
             ]
         );
@@ -205,9 +213,7 @@ class ArticleController extends Controller
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->find($article_id);
 
-        if ($token !== $this->CrsfToken)
-        {
-
+        if ($token !== $this->CrsfToken) {
             die();
         }
 

@@ -36,7 +36,7 @@ class Mail
         $mail->addAddress('tlarousse3@gmail.com', 'Thomas Larousse');
         $mail->msgHTML($message);
 
-        if(!$mail->Send()) {
+        if (!$mail->Send()) {
             return 'Mail error: '.$mail->ErrorInfo;
         } else {
             return true;
