@@ -2,6 +2,13 @@
 
 namespace Blog\Service;
 
+/**
+ * Class Slug
+ *
+ * Create a slug
+ *
+ * @package Blog\Service
+ */
 class Slug
 {
     /**

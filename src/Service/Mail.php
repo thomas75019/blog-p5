@@ -6,6 +6,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Blog\Config\MailConfig;
 
+/**
+ * Class Mail
+ *
+ * Send a contact email with gmail
+ *
+ * @package Blog\Service
+ */
 class Mail
 {
     /**

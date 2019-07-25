@@ -2,6 +2,13 @@
 
 namespace Blog\Service;
 
+/**
+ * Class Chapo
+ *
+ * Create a Chapo
+ *
+ * @package Blog\Service
+ */
 class Chapo
 {
     /**

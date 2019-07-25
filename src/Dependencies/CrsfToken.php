@@ -2,6 +2,13 @@
 
 namespace Blog\Dependencies;
 
+/**
+ * Class CrsfToken
+ *
+ * Implement CRSF protection
+ *
+ * @package Blog\Dependencies
+ */
 class CrsfToken
 {
     public $token;

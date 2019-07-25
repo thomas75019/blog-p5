@@ -2,6 +2,13 @@
 
 namespace Blog\Service;
 
+/**
+ * Class UserSession
+ *
+ * Instanciate and manage session for user
+ *
+ * @package Blog\Service
+ */
 class UserSession
 {
     /**

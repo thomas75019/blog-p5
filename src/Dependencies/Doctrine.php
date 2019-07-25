@@ -8,6 +8,13 @@ use Blog\Config\DbConfig;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Class Doctrine
+ *
+ * Set up doctrine and entity manager
+ *
+ * @package Blog\Dependencies
+ */
 class Doctrine
 {
     /**

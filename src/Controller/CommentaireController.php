@@ -116,6 +116,7 @@ class CommentaireController extends Controller
      * @param string $commentaire_id Commentaire ID
      * @param string $token          CrsfToken
      *
+     * @throws \Exception
      * @return void
      */
     public function delete($commentaire_id, $token)
@@ -124,7 +125,7 @@ class CommentaireController extends Controller
         $comment = $commentRepo->find($commentaire_id);
 
         if ($token !== $this->CrsfToken) {
-            die();
+            throw new \Exception('Something went wrong, please retry or try to reconnect');
         }
 
         try {

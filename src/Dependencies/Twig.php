@@ -25,8 +25,14 @@ class Twig
      */
     public $twig;
 
+    /**
+     * @var CrsfToken
+     */
     public $token;
 
+    /**
+     * @var $flash
+     */
     public $flash;
 
     /**

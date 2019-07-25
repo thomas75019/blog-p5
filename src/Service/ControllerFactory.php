@@ -13,6 +13,13 @@ use Blog\Dependencies\Doctrine;
 use Blog\Service\UserSession;
 use Blog\Dependencies\FlashMessage;
 
+/**
+ * Class ControllerFactory
+ *
+ * Factory which instanciate controllers used in index.php
+ *
+ * @package Blog\Service
+ */
 class ControllerFactory
 {
     /**
