@@ -3,14 +3,19 @@
  * Blog Index
  *
  * @author Thomas Larousse <tlarousse3@gmail.com>
- * @link   undefined
  */
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
 
-session_start();
+//session_start();
 
-$user = unserialize($_SESSION['user']);
+//$user = unserialize($_SESSION['user']);
+
+$session = new \Blog\Service\UserSession();
+$session->start();
+
+$user = $session->get();
+
 // create a server request object
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -153,18 +158,18 @@ $map->get(
     });
 //Login the user
 $map->post(
-    'user.login.action', '/login', function ($request) {
+    'user.login.action', '/login', function ($request) use ($session) {
         $data = $request->getParsedBody();
         $controller = ControllerFactory::newController('utilisateur');
 
-        $controller->login($data);
+        $controller->login($data, $session);
     });
 //Logout
 $map->get(
-    'user.logout', '/logout', function () {
+    'user.logout', '/logout', function () use ($session) {
         $controller = ControllerFactory::newController('utilisateur');
 
-        $controller->logout();
+        $controller->logout($session);
     });
 //Get comments
 $map->get(
@@ -181,9 +186,9 @@ $map->get(
     });
 //Save comment
 $map->post(
-    'save.comment', '/save/comment/{article_id}', function ($request) {
+    'save.comment', '/save/comment/{article_id}', function ($request) use ($user) {
         $articleId = $request->getAttribute('article_id');
-        $auteur = unserialize($_SESSION['user']);
+        $auteur = $user;
         $contenu = $request->getParsedBody();
         $controller = ControllerFactory::newController('commentaire');
 

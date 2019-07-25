@@ -3,11 +3,9 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use Blog\DoctrineLoader;
+$doctrine = new \Blog\Dependencies\Doctrine();
 
-$dl = new DoctrineLoader();
-
-$entityManager = $dl->entityManager;
+$entityManager = $doctrine->entityManager;
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 

@@ -2,16 +2,35 @@
 
 namespace Blog\Controller;
 
-use Blog\DoctrineLoader;
+use Blog\Controller\Controller;
+use Blog\Dependencies\Doctrine;
+use Blog\Dependencies\FlashMessage;
+use Blog\Dependencies\Twig;
 use Blog\Service\Mail;
+use Blog\Service\UserSession;
 
-class ContactController extends DoctrineLoader
+class ContactController extends Controller
 {
+    /**
+     * @var Mail
+     */
     private $mail;
 
+    /**
+     * ContactController constructor.
+     *
+     * @param Mail $mail Mailer
+     *
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function __construct(Mail $mail)
     {
-        parent::__construct();
+        $session = new UserSession();
+        $twig = new Twig($session);
+        $doctrine = new Doctrine();
+        $flash = new FlashMessage();
+
+        parent::__construct($twig, $doctrine, $flash);
         $this->mail = $mail;
     }
 
@@ -31,10 +50,6 @@ class ContactController extends DoctrineLoader
      * Send the email
      *
      * @param array $data Datas
-     *
-     * @return void
-     *
-     * @throws \Exception
      */
     public function contactSend($data)
     {

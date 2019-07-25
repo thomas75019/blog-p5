@@ -4,10 +4,10 @@ namespace Blog\Controller;
 
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
-use Blog\DoctrineLoader;
+use Blog\Controller\Controller;
 use Blog\Entity\Utilisateur;
 
-class CommentaireController extends DoctrineLoader
+class CommentaireController extends Controller
 {
 
     const ERR_ADD = 'Erreur lors de l\'ajout du commentaire';
