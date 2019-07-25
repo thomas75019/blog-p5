@@ -7,9 +7,9 @@ use Blog\Dependencies\CrsfToken;
 use Blog\Entity\Utilisateur;
 use Blog\Service\UserSession;
 
+
 class UtilisateurController extends Controller
 {
-
     /**
      * Render the register page
      *
@@ -29,6 +29,8 @@ class UtilisateurController extends Controller
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @return void
      */
     public function createUser($data)
     {
@@ -39,6 +41,8 @@ class UtilisateurController extends Controller
 
         $entityManager->persist($user);
         $entityManager->flush();
+
+        return $this->redirect('/');
     }
 
     /**
@@ -78,6 +82,7 @@ class UtilisateurController extends Controller
      */
     public function login($data, UserSession $session)
     {
+        $_SESSION['id'] = 0;
         if (!$session->isStored()) {
             $userRepo = $this->entityManager->getRepository(Utilisateur::class);
             $user = $userRepo->findOneBy(
@@ -97,11 +102,18 @@ class UtilisateurController extends Controller
                     $token->store();
                 }
 
-                $this->flashMessage->success('Bienvenue, ' . $user->getPseudo());
+                $_SESSION['id'] = 1;
+
                 return $this->redirect('/');
+
+                //$this->flashMessage->success('Bienvenue, ' . $user->getPseudo(), '/');
+                //$this->flashMessage->display();
+
+
             }
 
-            $this->flashMessage->error('Mauvais pseudo ou mot de passe');
+
+            //$this->flashMessage->error('Mauvais pseudo ou mot de passe');
             $this->redirect('/login');
         }
 

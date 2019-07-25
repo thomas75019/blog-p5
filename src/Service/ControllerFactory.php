@@ -5,6 +5,7 @@ namespace Blog\Service;
 use Blog\Controller\ArticleController;
 use Blog\Controller\CommentaireController;
 use Blog\Controller\ContactController;
+use Blog\Controller\HomeController;
 use Blog\Controller\UtilisateurController;
 use Blog\Dependencies\CrsfToken;
 use Blog\Dependencies\Twig;
@@ -46,6 +47,9 @@ class ControllerFactory
                 break;
             case 'contact':
                 $controller = new ContactController($mail);
+                break;
+            case 'home':
+                $controller = new HomeController($twig);
                 break;
             default:
                 throw new \Exception('Unkown controller');

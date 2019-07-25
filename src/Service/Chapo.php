@@ -11,7 +11,9 @@ class Chapo
      */
     public function createChapo($contenu)
     {
-        $chapo = substr($contenu, 0, 150);
+        $sanitizedConetnu = preg_replace('/<\/?[a-z0-9]+>/', '', $contenu);
+
+        $chapo = substr(html_entity_decode($sanitizedConetnu), 0, 150);
 
         return $chapo . '...';
     }

@@ -1,8 +1,32 @@
-<form action="/update/article/{{ article.id }}" method="post">
-    <label for="titre">Titre</label>
-    <input type="text" name="titre" content="{{ article.title }}" required>
-    <label for="contenu">Contenu de l'article</label>
-    <textarea name="contenu" content="{{ article.contenu }}" required>
-    </textarea>
-    <input type="submit" name="submit">
-</form>
+
+{% extends './base.html.twig' %}
+
+{% block scriptHead %}
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+{% endblock %}
+
+{% block body %}
+    <p class="text-muted" style="text-align: center;"><a href="/admin">Retour à la page d'administration</a></p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-11">
+                <form action="/update/article/{{ article.id }}" method="post" class="form-group">
+                    <label for="titre">Titre</label>
+                    <br/>
+                    <input type="text" name="titre" class="form-control" placeholder="{{ article.titre }}" required>
+                    <br />
+                    <label for="contenu">Contenu de l'article</label>
+                    <textarea name="contenu" id="contenu" class="contenu" required>{{ article.contenu }}</textarea>
+                    <input type="submit" name="submit" class="btn btn-primary" style="margin-top: 20px;">
+                    <script>
+                        CKEDITOR.replace( 'contenu' );
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

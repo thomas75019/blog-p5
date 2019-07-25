@@ -6,11 +6,6 @@ use Blog\Dependencies\CrsfToken;
 use Blog\Dependencies\Doctrine;
 use Blog\Dependencies\FlashMessage;
 use Blog\Dependencies\Twig;
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-use Blog\Config\DbConfig;
-use Plasticbrain\FlashMessages\FlashMessages;
-use Blog\Service\Mail;
 
 /**
  * Class Controller
@@ -50,6 +45,12 @@ class Controller
         $this->flashMessage = $flash->getFlashMessage();
 
         $this->CrsfToken = $token->getStoredToken();
+
+        /*if (isset($flash->flashMessage))
+        {
+
+            $this->flashMessage->display();
+        }*/
 
     }
 

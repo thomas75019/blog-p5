@@ -3,11 +3,13 @@
 namespace Blog\Controller;
 
 use Blog\Controller\Controller;
+use Blog\Dependencies\CrsfToken;
 use Blog\Dependencies\Doctrine;
 use Blog\Dependencies\FlashMessage;
 use Blog\Dependencies\Twig;
 use Blog\Service\Mail;
 use Blog\Service\UserSession;
+use Twig\Token;
 
 class ContactController extends Controller
 {
@@ -29,8 +31,9 @@ class ContactController extends Controller
         $twig = new Twig($session);
         $doctrine = new Doctrine();
         $flash = new FlashMessage();
+        $token = new CrsfToken();
 
-        parent::__construct($twig, $doctrine, $flash);
+        parent::__construct($twig, $doctrine, $flash, $token);
         $this->mail = $mail;
     }
 
@@ -43,7 +46,7 @@ class ContactController extends Controller
      */
     public function contactPage()
     {
-        echo $this->twig->render('forms/contact.html.twig');
+        echo $this->twig->render('front/contactPage.html.twig');
     }
 
     /**
@@ -55,7 +58,7 @@ class ContactController extends Controller
     {
         try {
             $this->mail->sendSmtp($data['message'], $data['email']);
-            $this->flashMessage->success('Le message à bien été envoyé');
+            //$this->flashMessage->success('Le message à bien été envoyé');
             return $this->redirect('/contact');
         } catch (\Exception $e) {
             $msg = $e->getMessage();

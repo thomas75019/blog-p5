@@ -42,9 +42,20 @@ class CrsfToken
         return $this->token;
     }
 
+    /**
+     * Return stored Token
+     *
+     * @return string
+     * @return null
+     */
     public function getStoredToken()
     {
-        return $_SESSION['token'];
+        if ($this->isStored())
+        {
+            return $_SESSION['token'];
+        }
+
+        return null;
     }
 
     /**

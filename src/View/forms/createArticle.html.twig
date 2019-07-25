@@ -1,9 +1,33 @@
-<form action="/save/article" method="post">
-    <label for="titre">Titre</label>
-    <input type="text" name="titre">
-    <label for="contenu">Contenu de l'article</label>
-    <textarea name="contenu">
-    </textarea>
-    <input type="submit" name="submit">
-    <input style="display: none" type="text" value="8" name="auteur">
-</form>
+{% extends './base.html.twig' %}
+
+{% block scriptHead %}
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+
+{% endblock %}
+
+{% block body %}
+    <p class="text-muted" style="text-align: center;"><a href="/admin">Retour à la page d'administration</a></p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-11">
+                <form action="/save/article" method="post" class="form-group">
+                    <label for="titre">Titre</label>
+                    <br/>
+                    <input type="text" name="titre" class="form-control">
+                    <br />
+                    <label for="contenu">Contenu de l'article</label>
+                    <textarea name="contenu" id="contenu" class="contenu"></textarea>
+                    <input type="submit" name="submit" class="btn btn-primary" style="margin-top: 20px;">
+                    <script>
+                        CKEDITOR.replace( 'contenu' );
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

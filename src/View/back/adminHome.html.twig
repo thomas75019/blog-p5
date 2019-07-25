@@ -1,0 +1,18 @@
+{% extends './base.html.twig' %}
+
+{% block body %}
+        <ul class="nav" style="margin: 0 0 0 25%">
+            <li class="nav-item">
+                <a class="nav-link active" href="/create/article">Ecrire un article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list/article">Voir la liste des articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/list/comments">Voir les commentaires</a>
+            </li>
+        </ul>
+{% endblock %}
+
+{% block footer %}<p class="text-muted"><a href="/admin">Page d'administration</a></p>{% endblock %}
+

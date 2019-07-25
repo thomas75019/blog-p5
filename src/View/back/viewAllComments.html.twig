@@ -1,10 +1,47 @@
-{% for commentaire in commentaires %}
-    {{ commentaire.contenu }}
-    {{ commentaire.auteur.pseudo }}
-{% if commentaire.valide == false %}
-    <a href="/valide/{{ commentaire.id }}"><button content="Valider">Valider</button></a>
-{% else %}
-    <a href="/invalide/{{ commentaire.id }}"><button content="Invalider">Invalider</button></a>
-{% endif %}
-    <a href="/delete/comment/{{ commentaire.id }}/{{ token }}"><button content="Supprimer">Supprimer</button> </a>
-{% endfor %}
+{% extends './base.html.twig' %}
+
+{% block body %}
+    <p class="text-muted" style="text-align: center;"><a href="/admin">Retour à la page d'administration</a></p>
+
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col">Auteur</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaires %}
+        <tr>
+            <td>
+                {{ commentaire.auteur.pseudo }}
+            </td>
+            <td>
+                {{ commentaire.contenu }}
+            </td>
+            <td>
+                {{ commentaire.date|date('d/m/Y') }}
+            </td>
+
+            {% if commentaire.valide == false %}
+                <td>
+                    <a href="/valide/{{ commentaire.id }}" class="btn btn-success">Valider</a>
+                </td>
+            {% else %}
+                <td>
+                    <a href="/invalide/{{ commentaire.id }}" class="btn btn-danger">Invalider</a>
+                </td>
+            {% endif %}
+            <td>
+                <a href="/delete/comment/{{ commentaire.id }}/{{ token }}" class="btn btn-danger">Supprimer</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -3,6 +3,10 @@
 namespace Blog\Controller;
 
 use Blog\Controller\Controller;
+use Blog\Dependencies\CrsfToken;
+use Blog\Dependencies\Doctrine;
+use Blog\Dependencies\FlashMessage;
+use Blog\Dependencies\Twig;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
@@ -16,6 +20,17 @@ class ArticleController extends Controller
     const ERR_DEL = 'Erreur lors de la mise à jour de l\'article: ';
 
     const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
+
+    public $chapo;
+
+    public $slugger;
+
+    public function __construct(Twig $twig, Doctrine $entityManager, FlashMessage $flash, CrsfToken $token)
+    {
+        parent::__construct($twig, $entityManager, $flash, $token);
+        $this->chapo = new Chapo();
+        $this->slugger = new Slug();
+    }
 
     /**
      * Render the index page
@@ -75,7 +90,7 @@ class ArticleController extends Controller
         $commentaires = $commentaireRepo->findBy(
             [
                 'article' => $article,
-                'valide' => false
+                'valide' => true
             ]
         );
 
@@ -119,7 +134,7 @@ class ArticleController extends Controller
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();
-            $this->flashMessage->success('L\'article a bien été ajouté');
+            //$this->flashMessage->success('L\'article a bien été ajouté');
 
             return $this->redirect('/list/article');
         } catch (\Exception $e) {
@@ -164,9 +179,9 @@ class ArticleController extends Controller
         $article = $articleRepo->find($article_id);
 
         try {
-            $article->hydrate($data);
+            $article->hydrate($data, $this->slugger, $this->chapo);
             $this->entityManager->flush();
-            $this->flashMessage->success('L\'article a été mis à jour');
+            //$this->flashMessage->success('L\'article a été mis à jour');
 
             return $this->redirect('/read/' . $article->getSlug());
         } catch (\Exception $e) {
@@ -181,18 +196,25 @@ class ArticleController extends Controller
      * Remove the Article
      *
      * @param string $article_id Article ID
+     * @param string $token      CRSF Token
      *
      * @return void
      */
-    public function delete($article_id)
+    public function delete($article_id, $token)
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->find($article_id);
 
+        if ($token !== $this->CrsfToken)
+        {
+
+            die();
+        }
+
         try {
             $this->entityManager->remove($article);
             $this->entityManager->flush();
-            $this->flashMessage->success('L\'article a bien été supprimé');
+            //$this->flashMessage->success('L\'article a bien été supprimé');
 
             return $this->redirect('/list/article');
         } catch (\Exception $e) {

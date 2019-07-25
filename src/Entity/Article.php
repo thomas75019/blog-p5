@@ -178,17 +178,19 @@ class Article
     /**
      * Hydrate the object
      *
-     * @param array $data Data
+     * @param array $data    Data
+     * @param Slug  $slugger Slugger
+     * @param Chapo $chapo   Chapo
      *
      * @return void
      */
-    public function hydrate($data, Slug $sluger, Chapo $chapo)
+    public function hydrate($data, Slug $slugger, Chapo $chapo)
     {
         $titre = $data['titre'];
         $contenu = $data['contenu'];
 
         $this->setChapo($chapo->createChapo($contenu));
-        $this->setSlug($sluger->slugger($titre));
+        $this->setSlug($slugger->slugger($titre));
 
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);

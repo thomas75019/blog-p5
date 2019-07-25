@@ -2,7 +2,6 @@
 /**
  * Blog Index
  *
- * @author Thomas Larousse <tlarousse3@gmail.com>
  */
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
@@ -11,6 +10,9 @@ $session = new \Blog\Service\UserSession();
 $session->start();
 
 $user = $session->get();
+
+$flash = new \Plasticbrain\FlashMessages\FlashMessages();
+
 
 // create a server request object
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
@@ -26,9 +28,16 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 $routerContainer = new Aura\Router\RouterContainer();
 $map = $routerContainer->getMap();
 
-//Home Route
 $map->get(
-    'blog.home', '/', function () {
+    'blog.home',
+    '/',
+    function () {
+        $controller = ControllerFactory::newController('home');
+        $controller->homePage();
+    });
+//list article
+$map->get(
+    'blog.articles', '/articles', function () {
         $controller = ControllerFactory::newController('article');
         $controller->getAll();
     });
@@ -56,9 +65,22 @@ $map->post(
 
         $controller->contactSend($data);
     });
+//Admin Homepag
+$map->get(
+    'admin.home',
+    '/admin',
+    function () use ($user) {
+        if ($user->isAdmin() && $user->isAdmin() !== null) {
+            $controller = ControllerFactory::newController('home');
+            $controller->homeAdmin();
+        } else {
+            throw new Exception('Vous n\'avez pas accès a cette page ');
+        }
+    }
+);
 //List article for admin
 $map->get(
-    'article.list', '/list/article', function ($user) {
+    'article.list', '/list/article', function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->getList();
@@ -68,7 +90,7 @@ $map->get(
     });
 //Route for the creation
 $map->get(
-    'article.create', '/create/article', function ($user) {
+    'article.create', '/create/article', function () use ($user)  {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
             $controller->create();
@@ -78,7 +100,7 @@ $map->get(
     });
 //Save Article Route
 $map->post(
-    'article.save', '/save/article', function ($request, $user) {
+    'article.save', '/save/article', function ($request) use ($user) {
         if ($user->isAdmin()) {
             $data = $request->getParsedBody();
 
@@ -92,7 +114,7 @@ $map->post(
 $map->get(
     'article.update',
     '/update/article/{article_id}',
-    function ($request, $user) {
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
@@ -105,7 +127,7 @@ $map->get(
 $map->post(
     'article.update.save',
     '/update/article/{article_id}',
-    function ($request, $user) {
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
             $article_id = $request->getAttribute('article_id');
             $data = $request->getParsedBody();
@@ -119,13 +141,14 @@ $map->post(
 //Delete article
 $map->get(
     'article.delete',
-    '/delete/article/{article_id}',
-    function ($request, $user) {
+    '/delete/article/{article_id}/{token}',
+    function ($request) use ($user) {
         if ($user->isAdmin()) {
+            $token = $request->getAttribute('token');
             $article_id = $request->getAttribute('article_id');
             $controller = ControllerFactory::newController('article');
 
-            $controller->delete($article_id);
+            $controller->delete($article_id, $token);
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectué cette action');
         }
@@ -168,8 +191,8 @@ $map->get(
     });
 //Get comments
 $map->get(
-    'get.comments',
-    '/admin/comments',
+    'admin.comments',
+    '/list/comments',
     function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('commentaire');
@@ -233,6 +256,15 @@ $map->get(
             throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
     });
+//CV
+$map->get(
+    'cv',
+    '/cv',
+    function () {
+        header("Content-type:application/pdf");
+        readfile("Assets/img/cvThomasLarousse2.pdf");
+    }
+);
 
 
 
