@@ -6,5 +6,5 @@
 {% else %}
     <a href="/invalide/{{ commentaire.id }}"><button content="Invalider">Invalider</button></a>
 {% endif %}
-    <a href="/delete/comment/{{ commentaire.id }}"><button content="Supprimer">Supprimer</button> </a>
+    <a href="/delete/comment/{{ commentaire.id }}/{{ token }}"><button content="Supprimer">Supprimer</button> </a>
 {% endfor %}

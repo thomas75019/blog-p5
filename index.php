@@ -7,10 +7,6 @@
 require __DIR__ . '/vendor/autoload.php';
 use Blog\Service\ControllerFactory;
 
-//session_start();
-
-//$user = unserialize($_SESSION['user']);
-
 $session = new \Blog\Service\UserSession();
 $session->start();
 
@@ -24,7 +20,6 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_COOKIE,
     $_FILES
 );
-
 
 
 // create the router container and get the routing map
@@ -225,13 +220,15 @@ $map->get(
 //Delete comment
 $map->get(
     'delete.comment',
-    '/delete/comment/{commentaire_id}',
+    '/delete/comment/{commentaire_id}/{token}',
     function ($request) use ($user) {
         if ($user->isAdmin()) {
             $commentaire_id = $request->getAttribute('commentaire_id');
             $controller = ControllerFactory::newController('commentaire');
 
-            $controller->delete($commentaire_id);
+            $token = $request->getAttribute('token');
+
+            $controller->delete($commentaire_id, $token);
         } else {
             throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
