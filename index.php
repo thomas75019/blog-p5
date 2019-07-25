@@ -124,9 +124,8 @@ $map->post(
     function ($request) use ($user) {
         if ($user->isAdmin()) {
             $data = $request->getParsedBody();
-
             $controller = ControllerFactory::newController('article');
-            $controller->save($data);
+            $controller->save($data, $user);
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }

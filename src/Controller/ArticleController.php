@@ -124,12 +124,11 @@ class ArticleController extends Controller
     /**
      * Save the article in database
      *
-     * @param array $data Data
+     * @param array       $data Data
+     * @param Utilisateur $user Auteur
      */
-    public function save($data)
+    public function save($data, $user)
     {
-        $user = unserialize($_SESSION['user']);
-
         $auteurRepo = $this->entityManager->getRepository(Utilisateur::class);
         $auteur = $auteurRepo->find($user->getId());
 
@@ -206,6 +205,7 @@ class ArticleController extends Controller
      * @param string $article_id Article ID
      * @param string $token      CRSF Token
      *
+     * @throws \Exception
      * @return void
      */
     public function delete($article_id, $token)
@@ -214,7 +214,7 @@ class ArticleController extends Controller
         $article = $articleRepo->find($article_id);
 
         if ($token !== $this->CrsfToken) {
-            die();
+            throw new \Exception('Something went wrong, please retry or try to reconnect');
         }
 
         try {

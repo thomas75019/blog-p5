@@ -138,7 +138,7 @@ class CommentaireController extends Controller
         } catch (\Exception $e) {
             $msg = $e->getMessage();
             //$this->flashMessage->error(self::ERR_GENERIC . $msg);
-            return $this->redirect('/admin/comments');
+            throw new \Exception($msg);
         }
     }
 }

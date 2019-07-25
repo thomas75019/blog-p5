@@ -11,6 +11,9 @@ namespace Blog\Dependencies;
  */
 class CrsfToken
 {
+    /**
+     * @var string
+     */
     public $token;
 
     /**
@@ -18,7 +21,7 @@ class CrsfToken
      */
     public function __construct()
     {
-        if (!isset($token)) {
+        if (!isset($this->token)) {
             $this->token = md5(bin2hex(openssl_random_pseudo_bytes(6)));
         }
     }

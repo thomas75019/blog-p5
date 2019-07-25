@@ -45,8 +45,8 @@ class Mail
 
         if (!$mail->Send()) {
             return 'Mail error: '.$mail->ErrorInfo;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }
