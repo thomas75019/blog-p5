@@ -21,10 +21,24 @@ class ArticleController extends Controller
 
     const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
 
+    /**
+     * @var Chapo
+     */
     public $chapo;
 
+    /**
+     * @var Slug
+     */
     public $slugger;
 
+    /**
+     * ArticleController constructor.
+     *
+     * @param Twig $twig
+     * @param Doctrine $entityManager
+     * @param FlashMessage $flash
+     * @param CrsfToken $token
+     */
     public function __construct(
         Twig $twig,
         Doctrine $entityManager,
