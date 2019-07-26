@@ -11,16 +11,11 @@ $session->start();
 
 $user = $session->get();
 
-$flash = new \Plasticbrain\FlashMessages\FlashMessages();
-
 
 // create a server request object
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
-    $_SERVER,
     $_GET,
-    $_POST,
-    $_COOKIE,
-    $_FILES
+    $_POST
 );
 
 
