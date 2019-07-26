@@ -33,6 +33,11 @@ class HomeController
         echo $this->twig->render('front/home.html.twig');
     }
 
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function homeAdmin()
     {
         echo $this->twig->render('back/adminHome.html.twig');
