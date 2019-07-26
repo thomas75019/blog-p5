@@ -37,7 +37,7 @@ $map->get(
     '/articles',
     function () {
         $controller = ControllerFactory::newController('article');
-        $controller->getAll();
+        $controller->getListFront();
     }
 );
 //View One route
@@ -93,7 +93,7 @@ $map->get(
     function () use ($user) {
         if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('article');
-            $controller->getList();
+            $controller->getListAdmin();
         } else {
             throw new Exception('Vous n\'avez pas accès a cette page ');
         }

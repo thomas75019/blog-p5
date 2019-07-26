@@ -45,14 +45,11 @@ class ArticleController extends Controller
      */
     public function getAll()
     {
-        $articles = $this->entityManager->getRepository(Article::class)->findAll();
+        $articles = $this->entityManager->getRepository(Article::class)
+            ->findBy([], ['date' => 'DESC']);
 
-        echo $this->twig->render(
-            'front/index.html.twig',
-            [
-                'articles' => $articles
-            ]
-        );
+        return $articles;
+
     }
 
     /**
@@ -62,14 +59,28 @@ class ArticleController extends Controller
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function getList()
+    public function getListAdmin()
     {
-        $articles = $this->entityManager->getRepository(Article::class)->findAll();
-
         echo $this->twig->render(
             'back/articles.html.twig',
             [
-                'articles' => $articles
+                'articles' => $this->getAll()
+            ]
+        );
+    }
+
+    /**
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function getListFront()
+    {
+
+        echo $this->twig->render(
+            'front/index.html.twig',
+            [
+                'articles' => $this->getAll()
             ]
         );
     }
@@ -88,8 +99,8 @@ class ArticleController extends Controller
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->findOneBy(
             [
-                    'slug' => $slug
-                ]
+                'slug' => $slug
+            ]
         );
 
         $commentaireRepo = $this->entityManager->getRepository(Commentaire::class);
