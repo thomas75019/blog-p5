@@ -12,6 +12,7 @@ use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 use Blog\Service\Chapo;
 use Blog\Service\Slug;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ArticleController extends Controller
 {
@@ -50,12 +51,11 @@ class ArticleController extends Controller
         $this->slugger = new Slug();
     }
 
+
     /**
-     * Render the index page
+     * Get all articles
      *
-     * @throws \Twig\Error\LoaderError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\SyntaxError
+     * @return array|object[]
      */
     public function getAll()
     {
