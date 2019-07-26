@@ -58,13 +58,22 @@ class Doctrine
     public $entityManager;
 
     /**
+     * @var DbConfig
+     */
+    public $config;
+
+    /**
      * Doctrine constructor.
      *
      * @throws \Doctrine\ORM\ORMException
      */
     public function __construct()
     {
-        $this->_params = DbConfig::DbInfo();
+        if (!isset($this->config)) {
+            $this->config = new DbConfig();
+        }
+
+        $this->_params = $this->config->DbInfo();
 
         $this->_config = Setup::createAnnotationMetadataConfiguration(
             $this->_entitiesPath,
