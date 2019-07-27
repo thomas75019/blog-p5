@@ -1,42 +1,32 @@
 <?php
-
+/**
+ * Instantiate anf get flash message for dependency injection
+ */
 namespace Blog\Dependencies;
 
 use Plasticbrain\FlashMessages\FlashMessages;
 
-/**
- * Class FlashMessage
- *
- * Set Up flashMessages
- *
- * @package Blog\Dependencies
- */
 class FlashMessage
 {
+
     /**
-     * @var FlashMessages
+     * @var FlashMessages Object FlashMessage
      */
-    public $flashMessage;
+    public $flash;
 
     /**
      * FlashMessage constructor.
      */
     public function __construct()
     {
-        //$this->flashMessage = new FlashMessages();
-
-        /*if(isset($_SESSION['flash_messages']))
-        {
-            $this->flashMessage->setMsgWrapper("<div class='%s'>%s</div>");
-            $this->flashMessage->display();
-        }*/
+        $this->flash = new FlashMessages();
     }
 
     /**
      * @return FlashMessages
      */
-    public function getFlashMessage()
+    public function getFlash()
     {
-        return $this->flashMessage;
+        return $this->flash;
     }
 }

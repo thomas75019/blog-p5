@@ -2,6 +2,7 @@
 
 namespace Blog\Controller;
 
+use Blog\Dependencies\Twig;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Controller\Controller;
@@ -12,7 +13,7 @@ class CommentaireController extends Controller
     const ERR_ADD = 'Erreur lors de l\'ajout du commentaire';
 
     /**
-     * Render the page with the list of comments
+     * Render the page with all comments
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
@@ -21,9 +22,9 @@ class CommentaireController extends Controller
     public function getAll()
     {
         $commentRepo = $this->entityManager->getRepository(Commentaire::class);
-        $comments = $commentRepo->findAll();
+        $comments = $commentRepo->findBy([], ['date' => 'DESC']);
 
-        echo $this->twig->render(
+        return $this->twig->render(
             'back/viewAllComments.html.twig',
             [
                 'commentaires' => $comments
@@ -48,18 +49,21 @@ class CommentaireController extends Controller
 
         try {
             $commentaire = new Commentaire();
-            $commentaire->hydrate($contenu);
+            $commentaire->setContenu($contenu);
             $commentaire->setArticle($article);
             $commentaire->setAuteur($auteur);
 
             $this->entityManager->persist($commentaire);
             $this->entityManager->flush();
-            //$this->flashMessage->success('Commentaire ajouté');
-
-            return $this->redirect('/read/' . $article->getSlug());
+            $this->flashMessage->success(
+                'Commentaire ajouté',
+                '/'
+            );
         } catch (\Exception $e) {
-            //$this->flashMessage->error(self::ERR_ADD);
-            return $this->redirect('/read/' . $article->getslug());
+            $this->flashMessage->error(
+                self::ERR_ADD,
+                '/create/article'
+            );
         }
     }
 
@@ -79,9 +83,10 @@ class CommentaireController extends Controller
 
         $this->entityManager->flush();
 
-        $this->flashMessage->success('Commentaire validé');
-
-        return $this->redirect('/admin/comments');
+        $this->flashMessage->success(
+            'Commentaire validé',
+            '/admin/comments'
+        );
     }
 
     /**
@@ -99,13 +104,16 @@ class CommentaireController extends Controller
 
             $this->entityManager->flush();
 
-            $this->flashMessage->success('Commentaire invalidé');
-
-            return $this->redirect('/admin/comments');
+            $this->flashMessage->success(
+                'Commentaire invalidé',
+                '/admin/comments'
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_GENERIC . $msg);
-            return $this->redirect('/admin/comments');
+            $this->flashMessage->error(
+                self::ERR_GENERIC . $msg,
+                '/admin/comments'
+            );
         }
     }
 
@@ -132,13 +140,16 @@ class CommentaireController extends Controller
             $this->entityManager->remove($comment);
             $this->entityManager->flush();
 
-            //$this->flashMessage->success('commentaire supprimé');
-
-            return $this->redirect("/admin/comments");
+            $this->flashMessage->success(
+                'commentaire supprimé',
+                '/admin/comments'
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            //$this->flashMessage->error(self::ERR_GENERIC . $msg);
-            throw new \Exception($msg);
+            $this->flashMessage->error(
+                self::ERR_GENERIC . $msg,
+                '/admin/comments'
+            );
         }
     }
 }

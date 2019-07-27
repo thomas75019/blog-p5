@@ -13,6 +13,7 @@ use Blog\Entity\Utilisateur;
 use Blog\Service\Chapo;
 use Blog\Service\Slug;
 use Doctrine\Common\Collections\ArrayCollection;
+use Plasticbrain\FlashMessages\FlashMessages;
 
 class ArticleController extends Controller
 {
@@ -63,7 +64,6 @@ class ArticleController extends Controller
             ->findBy([], ['date' => 'DESC']);
 
         return $articles;
-
     }
 
     /**
@@ -84,13 +84,14 @@ class ArticleController extends Controller
     }
 
     /**
+     * render list of articles page
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
     public function getListFront()
     {
-
         echo $this->twig->render(
             'front/index.html.twig',
             [
@@ -165,13 +166,16 @@ class ArticleController extends Controller
 
             $this->entityManager->persist($article);
             $this->entityManager->flush();
-            //$this->flashMessage->success('L\'article a bien été ajouté');
-
-            return $this->redirect('/list/article');
+            $this->flashMessage->success(
+                'L\'article a bien été ajouté',
+                '/list/article'
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_ADD . $msg);
-            return $this->redirect('/create/article');
+            $this->flashMessage->error(
+                self::ERR_ADD . $msg,
+                '/create/article'
+            );
         }
     }
 
@@ -213,14 +217,16 @@ class ArticleController extends Controller
         try {
             $article->hydrate($data, $this->slugger, $this->chapo);
             $this->entityManager->flush();
-            //$this->flashMessage->success('L\'article a été mis à jour');
-
-            return $this->redirect('/read/' . $article->getSlug());
+            $this->flashMessage->success(
+                'L\'article a été mis à jour',
+                '/read/' . $article->getSlug()
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_UPDATE . $msg);
-
-            return $this->redirect('/update/article');
+            $this->flashMessage->error(
+                self::ERR_UPDATE . $msg,
+                '/update/article'
+            );
         }
     }
 
@@ -239,19 +245,24 @@ class ArticleController extends Controller
         $article = $articleRepo->find($article_id);
 
         if ($token !== $this->CrsfToken) {
-            throw new \Exception('Something went wrong, please retry or try to reconnect');
+            throw new \Exception(
+                'Something went wrong, please retry or try to reconnect'
+            );
         }
 
         try {
             $this->entityManager->remove($article);
             $this->entityManager->flush();
-            //$this->flashMessage->success('L\'article a bien été supprimé');
-
-            return $this->redirect('/list/article');
+            $this->flashMessage->success(
+                'L\'article a bien été supprimé',
+                '/list/article'
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_DEL . $msg);
-            return $this->redirect('/list/article');
+            $this->flashMessage->error(
+                self::ERR_DEL . $msg,
+                '/list/article'
+            );
         }
     }
 }

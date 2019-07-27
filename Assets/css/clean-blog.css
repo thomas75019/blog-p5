@@ -5,6 +5,7 @@
  */
 
 body {
+  width: 100%;
   font-size: 20px;
   color: #212529;
   font-family: 'Lora', 'Times New Roman', serif;
@@ -417,4 +418,9 @@ footer .copyright {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
+}
+
+.alert
+{
+  background-color: transparent;
 }

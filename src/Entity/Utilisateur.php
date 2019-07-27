@@ -135,6 +135,14 @@ class Utilisateur
     }
 
     /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * Hydrate the object
      *
      * @param array $data Data

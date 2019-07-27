@@ -88,28 +88,30 @@ class UtilisateurController extends Controller
                     'pseudo' => $data['pseudo']
                 ]
             );
+            if (!is_null($user)) {
+                if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
+                    //Avoid that password being stored in session
+                    $user->setMotDePasse(null);
+                    $session->set($user);
 
-            if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
-                //Avoid that password being stored in session
-                $user->setMotDePasse(null);
-                $session->set($user);
+                    if ($user->isAdmin()) {
+                        $token = new CrsfToken();
+                        $token->store();
+                    }
 
-                if ($user->isAdmin()) {
-                    $token = new CrsfToken();
-                    $token->store();
+                    $this->flashMessage->success(
+                        'Bienvenue, ' . $user->getPseudo(),
+                        '/'
+                    );
                 }
-
-                return $this->redirect('/');
-
-                //$this->flashMessage->success('Bienvenue, ' . $user->getPseudo(), '/');
-                //$this->flashMessage->display();
             }
 
-            //$this->flashMessage->error('Mauvais pseudo ou mot de passe');
-            $this->redirect('/login');
-        }
 
-        return $this->redirect('/');
+            $this->flashMessage->error(
+                'Mauvais pseudo ou mot de passe',
+                '/login'
+            );
+        }
     }
 
     /**

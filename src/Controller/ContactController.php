@@ -58,12 +58,16 @@ class ContactController extends Controller
     {
         try {
             $this->mail->sendSmtp($data['message'], $data['email']);
-            //$this->flashMessage->success('Le message à bien été envoyé');
-            return $this->redirect('/contact');
+            $this->flashMessage->success(
+                'Le message à bien été envoyé',
+                '/contact'
+            );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
-            $this->flashMessage->error(self::ERR_GENERIC . $msg);
-            return $this->redirect('/contact');
+            $this->flashMessage->error(
+                self::ERR_GENERIC . $msg,
+                '/contact'
+            );
         }
     }
 }

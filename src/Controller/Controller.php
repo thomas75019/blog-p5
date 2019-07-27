@@ -47,15 +47,9 @@ class Controller
 
         $this->entityManager = $entityManager->getEm();
 
-        $this->flashMessage = $flash->getFlashMessage();
+        $this->flashMessage = $flash->getFlash();
 
         $this->CrsfToken = $token->getStoredToken();
-
-        /*if (isset($flash->flashMessage))
-        {
-
-            $this->flashMessage->display();
-        }*/
     }
 
     /**

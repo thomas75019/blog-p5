@@ -9,7 +9,12 @@ use Blog\Service\ControllerFactory;
 $session = new \Blog\Service\UserSession();
 $session->start();
 
-$user = $session->get();
+if ($session->isStored()) {
+    $user = $session->get();
+} else {
+    $user = new \Blog\Entity\Utilisateur();
+}
+
 
 
 // create a server request object
@@ -17,7 +22,6 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_GET,
     $_POST
 );
-
 
 // create the router container and get the routing map
 $routerContainer = new Aura\Router\RouterContainer();
@@ -104,11 +108,9 @@ $map->get(
     'article.create',
     '/create/article',
     function () use ($user) {
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() && $user !== null) {
             $controller = ControllerFactory::newController('article');
             $controller->create();
-        } else {
-            throw new Exception('Vous n\'avez pas accès a cette page ');
         }
     }
 );
@@ -292,8 +294,6 @@ $map->get(
             $token = $request->getAttribute('token');
 
             $controller->delete($commentaire_id, $token);
-        } else {
-            throw new Exception('Vous n\'ête pas autorisé à effectuer cette action');
         }
     }
 );
