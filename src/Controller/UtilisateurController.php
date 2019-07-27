@@ -88,7 +88,7 @@ class UtilisateurController extends Controller
                     'pseudo' => $data['pseudo']
                 ]
             );
-            if (!is_null($user)) {
+            if ($user !== null) {
                 if (password_verify($data['motDePasse'], $user->getMotDePasse())) {
                     //Avoid that password being stored in session
                     $user->setMotDePasse(null);
