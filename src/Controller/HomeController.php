@@ -1,7 +1,6 @@
 <?php
 namespace Blog\Controller;
 
-use Blog\Controller\Controller;
 use Blog\Dependencies\Twig;
 
 class HomeController

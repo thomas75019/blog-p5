@@ -9,12 +9,10 @@ use Blog\Dependencies\FlashMessage;
 use Blog\Dependencies\Twig;
 use Blog\Service\Mail;
 use Blog\Service\UserSession;
-use Twig\Token;
-
 class ContactController extends Controller
 {
     /**
-     * @var Mail
+     * @var string Mail
      */
     private $mail;
 

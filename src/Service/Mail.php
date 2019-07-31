@@ -35,12 +35,12 @@ class Mail
         $mail->SMTPSecure = 'tls';
         $mail->Host = 'smtp.gmail.com';
         $mail->Port = 587;
-        $mail->Username = 'rousslazga@gmail.com';
+        $mail->Username = MailConfig::$_mail;
         $mail->Password = MailConfig::$_password;
 
         $mail->setFrom($contactEmail);
         $mail->Subject = 'Nouvelle demande de contact';
-        $mail->addAddress('tlarousse3@gmail.com', 'Thomas Larousse');
+        $mail->addAddress('Youremail@gmail.com', 'Your Name');
         $mail->msgHTML($message);
 
         if (!$mail->Send()) {

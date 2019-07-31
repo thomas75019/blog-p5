@@ -2,7 +2,6 @@
 
 namespace Blog\Controller;
 
-use Blog\Dependencies\Twig;
 use Blog\Entity\Article;
 use Blog\Entity\Commentaire;
 use Blog\Controller\Controller;
@@ -24,7 +23,7 @@ class CommentaireController extends Controller
         $commentRepo = $this->entityManager->getRepository(Commentaire::class);
         $comments = $commentRepo->findBy([], ['date' => 'DESC']);
 
-        return $this->twig->render(
+        echo $this->twig->render(
             'back/viewAllComments.html.twig',
             [
                 'commentaires' => $comments
@@ -37,9 +36,9 @@ class CommentaireController extends Controller
      *
      * @param int         $article_id Article ID
      * @param Utilisateur $auteur     Auteur
-     * @param string      $contenu    Contenu
+     * @param array       Data        Datas
      */
-    public function save($article_id, $auteur, $contenu)
+    public function save($article_id, $auteur, $data)
     {
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->find($article_id);
@@ -49,7 +48,7 @@ class CommentaireController extends Controller
 
         try {
             $commentaire = new Commentaire();
-            $commentaire->setContenu($contenu);
+            $commentaire->hydrate($data);
             $commentaire->setArticle($article);
             $commentaire->setAuteur($auteur);
 
@@ -85,7 +84,7 @@ class CommentaireController extends Controller
 
         $this->flashMessage->success(
             'Commentaire validé',
-            '/admin/comments'
+            '/list/comments'
         );
     }
 
@@ -106,13 +105,13 @@ class CommentaireController extends Controller
 
             $this->flashMessage->success(
                 'Commentaire invalidé',
-                '/admin/comments'
+                '/list/comments'
             );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
             $this->flashMessage->error(
                 self::ERR_GENERIC . $msg,
-                '/admin/comments'
+                '/list/comments'
             );
         }
     }
@@ -142,13 +141,13 @@ class CommentaireController extends Controller
 
             $this->flashMessage->success(
                 'commentaire supprimé',
-                '/admin/comments'
+                '/list/comments'
             );
         } catch (\Exception $e) {
             $msg = $e->getMessage();
             $this->flashMessage->error(
                 self::ERR_GENERIC . $msg,
-                '/admin/comments'
+                '/list/comments'
             );
         }
     }

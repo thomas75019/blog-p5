@@ -20,6 +20,6 @@ class Slug
      */
     public function slugger($titre)
     {
-        return str_replace(' ', '-', $titre);
+        return str_replace(' ', '-', strtolower($titre));
     }
 }

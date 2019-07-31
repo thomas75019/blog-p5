@@ -51,10 +51,10 @@ class UserSession
     }
 
     /**
-     *
+     * Unset User session
      */
     public function destroy()
     {
-        session_destroy();
+        unset($_SESSION['user']);
     }
 }

@@ -12,8 +12,6 @@ use Blog\Entity\Commentaire;
 use Blog\Entity\Utilisateur;
 use Blog\Service\Chapo;
 use Blog\Service\Slug;
-use Doctrine\Common\Collections\ArrayCollection;
-use Plasticbrain\FlashMessages\FlashMessages;
 
 class ArticleController extends Controller
 {
@@ -24,12 +22,12 @@ class ArticleController extends Controller
     const ERR_UPDATE = 'Erreur lors de la suppression de l\'article: ';
 
     /**
-     * @var Chapo
+     * @var string Chapo
      */
     public $chapo;
 
     /**
-     * @var Slug
+     * @var string Slug
      */
     public $slugger;
 

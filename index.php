@@ -246,10 +246,10 @@ $map->post(
     function ($request) use ($user) {
         $articleId = $request->getAttribute('article_id');
         $auteur = $user;
-        $contenu = $request->getParsedBody();
+        $datas = $request->getParsedBody();
         $controller = ControllerFactory::newController('commentaire');
 
-        $controller->save($articleId, $auteur, $contenu);
+        $controller->save($articleId, $auteur, $datas);
     }
 );
 //Valide comment

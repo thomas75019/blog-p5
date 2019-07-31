@@ -37,7 +37,7 @@
             </div>
         </div>
     </article>
-    <h2>Commentaires</h2>
+    <h2 style="text-align: center;">Commentaires</h2>
     {% for commentaire in commentaires %}
         <div class="container">
             <div class="row">
@@ -59,13 +59,19 @@
     {% endfor %}
 
     {% if user is defined %}
-        <form action="/save/comment/{{ article.id }}" method="post">
-            <div class="form-group">
-                <label for="contenu-commentaire" class="label">Poster un Commentaire</label>
-                <textarea class="form-control" name="contenu" id="contenu-commentaire" rows="5" cols="8"></textarea>
+        <div class="container">
+            <div class="row">
+                <div class="col-11">
+                    <form action="/save/comment/{{ article.id }}" method="post">
+                        <div class="form-group">
+                            <label for="contenu-commentaire" class="label">Poster un Commentaire</label>
+                            <textarea class="form-control" name="contenu" id="contenu-commentaire" rows="5" cols="8"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Envoyer</button>
+                    </form>
+                </div>
             </div>
-            <button class="btn btn-primary" type="submit">Envoyer</button>
-        </form>
+        </div>
     {% else %}
         <p><a href="/login">Connectez vous</a> ou <a href="/register">inscrivez-vous</a> pour pouvoir poster un commentaire </p>
     {% endif %}
