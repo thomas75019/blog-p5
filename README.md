@@ -32,6 +32,14 @@ See [Doctrine Documentation](https://www.doctrine-project.org/projects/doctrine-
    
     $ php -S 127.0.0.1
     
+# Improvement Ideas
+
+* More Refractoring
+
+* Create an anti-spam system
+
+* Improve the register system with a confirmation email
+
 # Contact
 
 * On Github
