@@ -28,9 +28,15 @@ To create database's schema
 
 See [Doctrine Documentation](https://www.doctrine-project.org/projects/doctrine-orm/en/current/tutorials/getting-started.html)
 
-To launch the project 
+## To launch the project 
    
     $ php -S 127.0.0.1
+    
+# Contact
+
+* On Github
+
+* Via [Mail](tlarousse3@gmail.com)
     
 
     
