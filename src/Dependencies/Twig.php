@@ -32,6 +32,9 @@ class Twig
     public $token;
 
 
+    /**
+     * @var FlashMessages
+     */
     public $flash;
 
     /**

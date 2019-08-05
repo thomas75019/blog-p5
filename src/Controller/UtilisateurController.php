@@ -97,6 +97,10 @@ class UtilisateurController extends Controller
                     if ($user->isAdmin()) {
                         $token = new CrsfToken();
                         $token->store();
+                        $this->flashMessage->success(
+                            'Bienvenue, ' . $user->getPseudo(),
+                            '/admin'
+                        );
                     }
 
                     $this->flashMessage->success(
