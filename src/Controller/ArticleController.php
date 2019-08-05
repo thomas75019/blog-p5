@@ -61,6 +61,7 @@ class ArticleController extends Controller
         $articles = $this->entityManager->getRepository(Article::class)
             ->findBy([], ['date' => 'DESC']);
 
+
         return $articles;
     }
 
