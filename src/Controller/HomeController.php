@@ -3,22 +3,8 @@ namespace Blog\Controller;
 
 use Blog\Dependencies\Twig;
 
-class HomeController
+class HomeController extends Controller
 {
-    /**
-     * @var \Twig\Environment
-     */
-    private $twig;
-
-    /**
-     * HomeController constructor.
-     *
-     * @param Twig $twig Twig depedency
-     */
-    public function __construct(Twig $twig)
-    {
-        $this->twig = $twig->getTwig();
-    }
 
     /**
      * Render the homepage
@@ -29,7 +15,7 @@ class HomeController
      */
     public function homePage()
     {
-        echo $this->twig->render('front/home.html.twig');
+        $this->render('front/home.html.twig');
     }
 
     /**
@@ -39,6 +25,6 @@ class HomeController
      */
     public function homeAdmin()
     {
-        echo $this->twig->render('back/adminHome.html.twig');
+        $this->render('back/adminHome.html.twig');
     }
 }

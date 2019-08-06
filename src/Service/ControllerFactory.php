@@ -55,7 +55,7 @@ class ControllerFactory
                 $controller = new ContactController($mail);
                 break;
             case 'home':
-                $controller = new HomeController($twig);
+                $controller = new HomeController($twig, $entityManager, $flash, $token);
                 break;
             default:
                 throw new \Exception('Unkown controller');

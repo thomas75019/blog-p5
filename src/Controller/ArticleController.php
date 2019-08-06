@@ -91,7 +91,7 @@ class ArticleController extends Controller
      */
     public function getListFront()
     {
-        echo $this->twig->render(
+        $this->render(
             'front/index.html.twig',
             [
                 'articles' => $this->getAll()
@@ -125,7 +125,7 @@ class ArticleController extends Controller
             ]
         );
 
-        echo $this->twig->render(
+        $this->render(
             'front/viewOne.html.twig',
             [
                 'article' => $article,
@@ -143,7 +143,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        echo $this->twig->render('forms/createArticle.html.twig');
+        $this->render('forms/createArticle.html.twig');
     }
 
     /**
@@ -192,7 +192,7 @@ class ArticleController extends Controller
         $articleRep = $this->entityManager->getRepository(Article::class);
         $article = $articleRep->find($article_id);
 
-        echo $this->twig->render(
+        $this->render(
             'forms/updateArticle.html.twig',
             [
                 'article' => $article

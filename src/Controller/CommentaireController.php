@@ -23,7 +23,7 @@ class CommentaireController extends Controller
         $commentRepo = $this->entityManager->getRepository(Commentaire::class);
         $comments = $commentRepo->findBy([], ['date' => 'DESC']);
 
-        echo $this->twig->render(
+        $this->render(
             'back/viewAllComments.html.twig',
             [
                 'commentaires' => $comments

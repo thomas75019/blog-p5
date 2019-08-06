@@ -18,7 +18,7 @@ class UtilisateurController extends Controller
      */
     public function register()
     {
-        echo $this->twig->render('forms/register.html.twig');
+        $this->render('forms/register.html.twig');
     }
 
     /**
@@ -41,7 +41,7 @@ class UtilisateurController extends Controller
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->redirect('/');
+        $this->redirect('/');
     }
 
     /**
@@ -70,7 +70,7 @@ class UtilisateurController extends Controller
      */
     public function loginPage()
     {
-        echo $this->twig->render('/forms/login.html.twig');
+        $this->render('/forms/login.html.twig');
     }
 
     /**
@@ -127,9 +127,9 @@ class UtilisateurController extends Controller
     {
         if ($session->isStored()) {
             $session->destroy();
-            return $this->redirect('/');
+            $this->redirect('/');
         }
 
-        return $this->redirect('/');
+        $this->redirect('/');
     }
 }

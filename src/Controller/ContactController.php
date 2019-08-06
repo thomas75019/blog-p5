@@ -44,7 +44,7 @@ class ContactController extends Controller
      */
     public function contactPage()
     {
-        echo $this->twig->render('front/contactPage.html.twig');
+        $this->render('front/contactPage.html.twig');
     }
 
     /**

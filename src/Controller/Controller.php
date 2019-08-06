@@ -62,4 +62,19 @@ class Controller
     {
         header('Location: ' . $url, true, $statusCode);
     }
+
+    /**
+     * @param string $path    Template path
+     * @param array  $options Options
+     *
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     *
+     * @return void
+     */
+    protected function render($path, array $options = [])
+    {
+        echo $this->twig->render($path, $options);
+    }
 }
