@@ -40,7 +40,7 @@ class Mail
 
         $mail->setFrom($contactEmail);
         $mail->Subject = 'Nouvelle demande de contact';
-        $mail->addAddress('Youremail@gmail.com', 'Your Name');
+        $mail->addAddress(MailConfig::$_mail, 'Your Name');
         $mail->msgHTML($message);
 
         if (!$mail->Send()) {
