@@ -44,7 +44,7 @@ class Twig
      */
     public function __construct(UserSession $session)
     {
-        $this->loader = new FilesystemLoader('/Users/thomaslarousse/Desktop/Projet5/src/View');
+        $this->loader = new FilesystemLoader('src/View');
 
         $this->twig = new \Twig\Environment(
             $this->loader,

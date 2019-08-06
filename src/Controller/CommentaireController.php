@@ -43,6 +43,7 @@ class CommentaireController extends Controller
         $articleRepo = $this->entityManager->getRepository(Article::class);
         $article = $articleRepo->find($article_id);
 
+
         $auteurRepo = $this->entityManager->getRepository(Utilisateur::class);
         $auteur = $auteurRepo->find($auteur->getId());
 
@@ -56,7 +57,7 @@ class CommentaireController extends Controller
             $this->entityManager->flush();
             $this->flashMessage->success(
                 'Commentaire ajouté',
-                '/'
+                '/read/' . $article->getSlug()
             );
         } catch (\Exception $e) {
             $this->flashMessage->error(

@@ -7,12 +7,12 @@ Descritpion
 Blog created my degree.
 This blog only PHP, Object Oriented Programming concepts, and MVC Architecture. 
 Some externals library has been used such as: 
-* Twig For the templates
-* Aura/Router for the router
-* Doctrine for the ORM 
-* Zend/Diactoros for the psr7 implementation
-* plasticbrain/php-flash-messages for flash messages
-* PhpMailer for the mailer service 
+    * Twig For the templates
+    * Aura/Router for the router
+    * Doctrine for the ORM 
+    * Zend/Diactoros for the psr7 implementation
+    * plasticbrain/php-flash-messages for flash messages
+    * PhpMailer for the mailer service 
 
 # Installation
 
@@ -34,11 +34,11 @@ See [Doctrine Documentation](https://www.doctrine-project.org/projects/doctrine-
     
 # Improvement Ideas
 
-* More Refractoring
+   * More Refractoring
 
-* Create an anti-spam system
+   * Create an anti-spam system
 
-* Improve the register system with a confirmation email
+   * Improve the register system with a confirmation email
 
 # Contact
 
