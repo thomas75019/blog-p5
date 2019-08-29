@@ -82,7 +82,7 @@ $map->get(
     'admin.home',
     '/admin',
     function () use ($user) {
-        if ($user->isAdmin() && $user->isAdmin() !== null) {
+        if ($user->isAdmin()) {
             $controller = ControllerFactory::newController('home');
             $controller->homeAdmin();
         } else {

@@ -11,7 +11,7 @@ namespace Blog\Config;
  */
 class MailConfig
 {
-    public static $_password = 'Your Password';
+    public static $_password = 'Kirsten75019';
 
-    public static $_mail = 'Your Email';
+    public static $_mail = 'tlarousse3@gmail.com';
 }
