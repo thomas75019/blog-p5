@@ -17,8 +17,8 @@ class DbConfig
             'driver' => 'pdo_mysql',
             'host' => 'localhost',
             'charset' => 'utf8',
-            'user' => 'root',
-            'password' => 'root',
+            'user' => 'thomas',
+            'password' => 'Kirsten75019',
             'dbname' => 'projet_5',
         ];
     }

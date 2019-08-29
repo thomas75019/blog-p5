@@ -122,6 +122,9 @@ class ArticleController extends Controller
             [
                 'article' => $article,
                 'valide' => true
+            ],
+            [
+                'date' => 'DESC'
             ]
         );
 
